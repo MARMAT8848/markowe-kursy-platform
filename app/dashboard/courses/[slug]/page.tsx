@@ -91,8 +91,29 @@ export default async function CoursePanelPage({
   const allLessons = modules.flatMap((m) => m.lessons);
   const total = allLessons.length;
   const completed = allLessons.filter((l) => done.has(l.id)).length;
-  const pct = total ? Math.round((completed / total) * 100) : 0;
   const firstAvailable = allLessons.find((l) => l.content_path);
+
+  // procent ze źródła prawdy (API complete utrzymuje course_progress);
+  // fallback: wyliczenie z lekcji
+  const { data: courseProgress } = await supabase
+    .from("course_progress")
+    .select("progress_percent, status")
+    .eq("course_id", access.courseId)
+    .maybeSingle();
+  const pct =
+    courseProgress != null
+      ? Math.round(Number(courseProgress.progress_percent))
+      : total
+        ? Math.round((completed / total) * 100)
+        : 0;
+
+  // certyfikat (jeśli już wygenerowany) — link w karcie postępu
+  const { data: certificate } = await supabase
+    .from("certificates")
+    .select("id")
+    .eq("course_id", access.courseId)
+    .eq("status", "generated")
+    .maybeSingle();
 
   const tTitle = (
     tr: { title: string; language: string }[] | undefined,
@@ -172,6 +193,22 @@ export default async function CoursePanelPage({
               </svg>
               {completed === 0 ? "Rozpocznij naukę" : "Kontynuuj naukę"}
             </a>
+            {certificate && (
+              <a
+                href={`/api/certificates/${certificate.id}/download`}
+                style={{
+                  display: "block",
+                  marginTop: 12,
+                  textAlign: "center",
+                  font: "600 12.5px var(--sans)",
+                  color: "#fff",
+                  textDecoration: "underline",
+                  textUnderlineOffset: 3,
+                }}
+              >
+                Pobierz certyfikat (PDF)
+              </a>
+            )}
           </div>
         </div>
       </section>

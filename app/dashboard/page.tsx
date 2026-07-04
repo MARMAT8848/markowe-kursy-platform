@@ -167,6 +167,19 @@ export default async function DashboardPage() {
               ))}
             </div>
           )}
+
+          <p style={{ margin: "22px 0 0" }}>
+            <Link
+              href="/dashboard/certificates"
+              style={{
+                font: "600 13px var(--sans)",
+                color: "var(--ink)",
+                textDecoration: "none",
+              }}
+            >
+              Twoje certyfikaty →
+            </Link>
+          </p>
         </div>
       </section>
 
