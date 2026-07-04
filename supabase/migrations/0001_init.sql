@@ -125,6 +125,7 @@ create table public.lessons (
   estimated_minutes integer,
   content_source text, -- np. 'static_html' | 'rich_text' | 'video'
   content_path text,   -- np. 'lessons/bla-110/kolano-90.html'
+  thumbnail_url text,  -- miniatura wiersza lekcji w panelu
   video_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
@@ -549,3 +550,12 @@ create policy payment_events_admin on public.payment_provider_events
   for select using (public.is_admin());
 create policy email_outbox_admin on public.email_outbox
   for select using (public.is_admin());
+
+-- ------------------------------------------------------------
+-- Backfill: profile dla kont założonych PRZED wgraniem migracji
+-- (trigger on_auth_user_created działa tylko dla nowych rejestracji)
+-- ------------------------------------------------------------
+insert into public.profiles (id, email, full_name)
+select u.id, u.email, coalesce(u.raw_user_meta_data->>'full_name', '')
+from auth.users u
+on conflict (id) do nothing;

@@ -6,17 +6,17 @@ import {
   type ConsentFlags,
 } from "@/lib/legal/consents";
 import { stripeConfigured, getStripeProvider } from "@/lib/payments/stripe";
+import { createSupabaseServer } from "@/lib/supabase/server";
+import { createSupabaseAdmin } from "@/lib/supabase/admin";
 
 /**
  * POST /api/checkout/create
  *
  * Twarde reguły (wymogi prawne właściciela):
- * 1. Zakup NIE przechodzi bez kompletu 4 zgód — walidacja tutaj,
- *    niezależnie od blokady przycisku na froncie.
- * 2. Zgody + wersje dokumentów + IP + user-agent + pełny snapshot
- *    trafiają do orders (insert w Fazie 2, struktura budowana już teraz).
- * 3. Dostęp do kursu aktywuje WYŁĄCZNIE webhook operatora płatności
- *    (/api/webhooks/stripe) — nigdy powrót na /checkout/success.
+ * 1. Zakup wymaga zalogowania — user_id WYŁĄCZNIE z sesji.
+ * 2. Zakup NIE przechodzi bez kompletu 4 zgód (walidacja server-side).
+ * 3. Zgody + wersje dokumentów + IP + user-agent + snapshot → orders.
+ * 4. Dostęp aktywuje WYŁĄCZNIE webhook operatora (nigdy /checkout/success).
  */
 export async function POST(req: Request) {
   let body: { courseSlug?: string; consents?: Partial<ConsentFlags> };
@@ -46,7 +46,22 @@ export async function POST(req: Request) {
     );
   }
 
-  // --- walidacja zgód server-side (nigdy nie ufamy frontendowi) ---
+  // --- 1. użytkownik z sesji ---
+  const supabase = await createSupabaseServer();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json(
+      {
+        error: "AUTH_REQUIRED",
+        message: "Zaloguj się, aby kupić kurs.",
+      },
+      { status: 401 }
+    );
+  }
+
+  // --- 2. walidacja zgód (nigdy nie ufamy frontendowi) ---
   if (!allConsentsGiven(body.consents)) {
     return NextResponse.json(
       {
@@ -58,7 +73,49 @@ export async function POST(req: Request) {
     );
   }
 
-  // --- dane dowodowe zgody: IP + user-agent + snapshot treści i wersji ---
+  if (!stripeConfigured()) {
+    return NextResponse.json(
+      {
+        error: "PAYMENTS_NOT_CONFIGURED",
+        message:
+          "Płatności nie są jeszcze uruchomione — sklep wystartuje wkrótce.",
+      },
+      { status: 503 }
+    );
+  }
+
+  // --- 3. kurs i cena z bazy (nigdy z frontendu) ---
+  const admin = createSupabaseAdmin();
+  const { data: dbCourse, error: courseErr } = await admin
+    .from("courses")
+    .select("id, status")
+    .eq("slug", course.slug)
+    .maybeSingle();
+  if (courseErr || !dbCourse || dbCourse.status !== "published") {
+    return NextResponse.json(
+      {
+        error: "DB_NOT_READY",
+        message: "Sklep jest w trakcie konfiguracji. Spróbuj później.",
+      },
+      { status: 503 }
+    );
+  }
+  const { data: price } = await admin
+    .from("course_prices")
+    .select("id, provider_price_id, currency, amount")
+    .eq("course_id", dbCourse.id)
+    .eq("currency", "PLN")
+    .eq("active", true)
+    .limit(1)
+    .maybeSingle();
+  if (!price) {
+    return NextResponse.json(
+      { error: "PRICE_NOT_FOUND", message: "Brak aktywnej ceny kursu." },
+      { status: 503 }
+    );
+  }
+
+  // --- 4. zamówienie pending + PEŁNY zapis zgód (dowód prawny) ---
   const userIp =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     req.headers.get("x-real-ip") ||
@@ -70,44 +127,62 @@ export async function POST(req: Request) {
     userAgent,
   });
 
-  // TODO (Faza 2 — Supabase):
-  //   1. Pobierz usera z sesji (auth.uid) — user_id NIGDY z frontendu;
-  //      brak sesji → 401 i redirect na /login.
-  //   2. INSERT do orders: user_id, course_id, provider='stripe',
-  //      status='pending', amount=course.priceCents, currency,
-  //      ...consentColumns  ← zapis wszystkich zgód wraz ze snapshotem.
-  // TODO (Faza 4 — Stripe):
-  //   3. provider.createCheckoutSession({ internalOrderId, ... })
-  //   4. UPDATE orders SET provider_checkout_session_id
-  //   5. return { checkoutUrl }
-
-  if (!stripeConfigured()) {
-    console.log(
-      "[checkout] zgody zebrane i zwalidowane (oczekuje na Supabase/Stripe):",
-      JSON.stringify({
-        course: course.slug,
-        snapshot: consentColumns.checkout_legal_snapshot_json,
-      })
-    );
+  const { data: order, error: orderErr } = await admin
+    .from("orders")
+    .insert({
+      user_id: user.id,
+      course_id: dbCourse.id,
+      provider: "stripe",
+      status: "pending",
+      amount: price.amount,
+      currency: price.currency,
+      customer_email: user.email,
+      ...consentColumns,
+    })
+    .select("id")
+    .single();
+  if (orderErr || !order) {
+    console.error("[checkout] order insert failed:", orderErr?.message);
     return NextResponse.json(
-      {
-        error: "PLATFORM_NOT_CONFIGURED",
-        message:
-          "Zgody zostały przyjęte, ale płatności nie są jeszcze uruchomione — platforma czeka na podłączenie operatora płatności. Spróbuj po starcie sprzedaży.",
-      },
-      { status: 503 }
+      { error: "ORDER_FAILED", message: "Nie udało się utworzyć zamówienia." },
+      { status: 500 }
     );
   }
 
-  // Ta gałąź zostanie dokończona w Fazie 4 (wymaga orders w Supabase,
-  // aby internalOrderId był prawdziwym ID zamówienia z zapisanymi zgodami).
-  void getStripeProvider;
-  return NextResponse.json(
-    {
-      error: "NOT_IMPLEMENTED",
-      message:
-        "Płatności zostaną włączone po podłączeniu bazy danych (Faza 2/4).",
-    },
-    { status: 503 }
-  );
+  // --- 5. sesja płatności u operatora ---
+  const site = process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin;
+  try {
+    const session = await getStripeProvider().createCheckoutSession({
+      internalOrderId: order.id,
+      userId: user.id,
+      courseId: dbCourse.id,
+      courseTitle: course.title,
+      providerPriceId: price.provider_price_id ?? undefined,
+      amount: price.amount,
+      currency: price.currency as "PLN",
+      customerEmail: user.email ?? "",
+      accessMonths: 12,
+      language: "pl",
+      successUrl: `${site}/checkout/success`,
+      cancelUrl: `${site}/checkout/cancel`,
+    });
+    await admin
+      .from("orders")
+      .update({ provider_checkout_session_id: session.providerCheckoutSessionId })
+      .eq("id", order.id);
+    return NextResponse.json({ checkoutUrl: session.checkoutUrl });
+  } catch (e) {
+    console.error("[checkout] stripe session failed:", e);
+    await admin
+      .from("orders")
+      .update({ status: "failed" })
+      .eq("id", order.id);
+    return NextResponse.json(
+      {
+        error: "PROVIDER_ERROR",
+        message: "Operator płatności nie odpowiada. Spróbuj za chwilę.",
+      },
+      { status: 502 }
+    );
+  }
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import AuthCard from "@/components/auth/AuthCard";
 
@@ -18,7 +19,9 @@ export default function AuthPage({ mode }: { mode: "login" | "register" }) {
         <img src="/assets/logo.png" alt="MARKOWE KURSY" />
       </div>
       <div className="login-card-wrap">
-        <AuthCard mode={mode} />
+        <Suspense>
+          <AuthCard mode={mode} />
+        </Suspense>
       </div>
     </div>
   );

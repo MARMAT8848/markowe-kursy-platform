@@ -46,6 +46,10 @@ export default function CheckoutConsents({
         window.location.href = data.checkoutUrl;
         return;
       }
+      if (res.status === 401) {
+        window.location.href = `/login?next=${encodeURIComponent(`/checkout/${courseSlug}`)}`;
+        return;
+      }
       setNotice(
         data.message ||
           "Nie udało się rozpocząć płatności. Spróbuj ponownie za chwilę."
