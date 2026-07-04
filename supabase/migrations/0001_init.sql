@@ -163,12 +163,67 @@ create table public.course_prices (
 create index idx_course_prices_lookup on public.course_prices (course_id, currency, active);
 
 -- ------------------------------------------------------------
+-- ŚCIEŻKI KARIERY (pakiety kursów)
+-- Zakup ścieżki = jedno zamówienie → enrollment dla każdego kursu.
+-- ------------------------------------------------------------
+create table public.bundles (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  status text not null default 'coming_soon'
+    check (status in ('draft', 'coming_soon', 'published', 'archived')),
+  level text,
+  sort_order integer not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+create trigger trg_bundles_updated before update on public.bundles
+  for each row execute function public.set_updated_at();
+
+create table public.bundle_translations (
+  id uuid primary key default gen_random_uuid(),
+  bundle_id uuid not null references public.bundles(id) on delete cascade,
+  language text not null,
+  name text not null,
+  teaser text,
+  description text,
+  unique (bundle_id, language)
+);
+
+create table public.bundle_courses (
+  bundle_id uuid not null references public.bundles(id) on delete cascade,
+  course_id uuid not null references public.courses(id) on delete cascade,
+  primary key (bundle_id, course_id)
+);
+
+create table public.bundle_prices (
+  id uuid primary key default gen_random_uuid(),
+  bundle_id uuid not null references public.bundles(id) on delete cascade,
+  provider text not null default 'stripe',
+  provider_price_id text,
+  currency text not null default 'PLN',
+  amount integer not null check (amount >= 0), -- grosze
+  compare_at_amount integer, -- suma cen kursów osobno (przekreślona)
+  country text,
+  language text,
+  tax_behavior text,
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+create index idx_bundle_prices_lookup on public.bundle_prices (bundle_id, currency, active);
+
+-- ------------------------------------------------------------
 -- ZAMÓWIENIA I PŁATNOŚCI
 -- ------------------------------------------------------------
 create table public.orders (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id),
-  course_id uuid not null references public.courses(id),
+  -- produkt: kurs pojedynczy LUB ścieżka (dokładnie jedno wypełnione)
+  course_id uuid references public.courses(id),
+  bundle_id uuid references public.bundles(id),
+  constraint chk_orders_product check (
+    (course_id is not null and bundle_id is null)
+    or (course_id is null and bundle_id is not null)
+  ),
   provider text not null,
   provider_checkout_session_id text,
   status text not null default 'pending'
@@ -208,7 +263,8 @@ create table public.payments (
   id uuid primary key default gen_random_uuid(),
   order_id uuid not null references public.orders(id),
   user_id uuid not null references public.profiles(id),
-  course_id uuid not null references public.courses(id),
+  course_id uuid references public.courses(id), -- null przy zakupie ścieżki
+  bundle_id uuid references public.bundles(id),
   provider text not null,
   provider_payment_id text,
   provider_payment_intent_id text,
@@ -357,6 +413,10 @@ alter table public.module_translations enable row level security;
 alter table public.lessons enable row level security;
 alter table public.lesson_translations enable row level security;
 alter table public.course_prices enable row level security;
+alter table public.bundles enable row level security;
+alter table public.bundle_translations enable row level security;
+alter table public.bundle_courses enable row level security;
+alter table public.bundle_prices enable row level security;
 alter table public.orders enable row level security;
 alter table public.payments enable row level security;
 alter table public.enrollments enable row level security;
@@ -431,6 +491,26 @@ create policy lesson_translations_select on public.lesson_translations
 
 -- ceny: publicznie tylko aktywne
 create policy course_prices_select on public.course_prices
+  for select using (active or public.is_admin());
+
+-- ścieżki kariery: publicznie widoczne opublikowane/zapowiedzi
+create policy bundles_select on public.bundles
+  for select using (status in ('published', 'coming_soon') or public.is_admin());
+create policy bundles_admin_all on public.bundles
+  for all using (public.is_admin());
+create policy bundle_translations_select on public.bundle_translations
+  for select using (
+    exists (select 1 from public.bundles b
+            where b.id = bundle_id and b.status in ('published', 'coming_soon'))
+    or public.is_admin()
+  );
+create policy bundle_courses_select on public.bundle_courses
+  for select using (
+    exists (select 1 from public.bundles b
+            where b.id = bundle_id and b.status in ('published', 'coming_soon'))
+    or public.is_admin()
+  );
+create policy bundle_prices_select on public.bundle_prices
   for select using (active or public.is_admin());
 
 -- zamówienia / płatności / enrollmenty / certyfikaty: tylko własne (zapis: service role)

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "MARKOWE KURSY — Akademia techniczna izolacji przemysłowych",
   description:
-    "Szkolenia online dla specjalistów izolacji przemysłowych — kursy oparte na realnych projektach przemysłowych. Obmiarowanie, prefabrykacja, dokumentacja techniczna.",
+    "Ścieżki kariery dla specjalistów izolacji przemysłowych — szkolenia oparte na realnych projektach i wymaganiach standardu NORSOK. Obmiarowanie, prefabrykacja, dokumentacja ISO/P&ID.",
   icons: { icon: "/assets/logo.png" },
 };
 

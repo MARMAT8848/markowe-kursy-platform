@@ -40,6 +40,8 @@ export async function POST(req: Request) {
   //       access_start_at = paid_at,
   //       access_expires_at = paid_at + 12 miesięcy,
   //       (unique constraint chroni przed duplikatem),
+  //     - zamówienie ze ścieżką (orders.bundle_id) → enrollment dla
+  //       KAŻDEGO kursu ścieżki (bundle_courses), każdy na 12 miesięcy,
   //     - kolejkuj e-mail 'purchase_confirmation' (email_outbox) z:
   //       nazwą kursu, ceną, walutą, datą zakupu, okresem dostępu 12 mies.,
   //       potwierdzeniem zgody na natychmiastowe dostarczenie treści cyfrowej

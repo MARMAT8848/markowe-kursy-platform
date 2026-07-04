@@ -139,6 +139,73 @@ export default async function CoursePage({
 
             <h2 className="kurs-h2 kurs-forwhom-h2">Dla kogo jest ten kurs</h2>
             <p className="kurs-forwhom">{course.forWhom}</p>
+
+            {/* Pozycjonowanie: projekty norweskie / NORSOK / rotacja */}
+            <div
+              style={{
+                marginTop: 22,
+                display: "flex",
+                flexDirection: "column",
+                gap: 14,
+                padding: 18,
+                border: "1px solid var(--border)",
+                borderRadius: 13,
+                background: "var(--bg-off)",
+                maxWidth: 600,
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 10,
+                    letterSpacing: ".1em",
+                    color: "var(--accent)",
+                    marginBottom: 6,
+                  }}
+                >
+                  DOKUMENTACJA DWUJĘZYCZNA PL/EN
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 13,
+                    lineHeight: 1.6,
+                    color: "var(--sub)",
+                  }}
+                >
+                  Poznajesz terminologię polską i angielską stosowaną w
+                  dokumentacji technicznej na projektach norweskich — te same
+                  pojęcia, którymi posługują się inżynier, brygadzista i dział
+                  QA.
+                </p>
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 10,
+                    letterSpacing: ".1em",
+                    color: "var(--accent)",
+                    marginBottom: 6,
+                  }}
+                >
+                  PRACA W SYSTEMIE ROTACYJNYM
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 13,
+                    lineHeight: 1.6,
+                    color: "var(--sub)",
+                  }}
+                >
+                  Kurs online dopasowany do rotacji: uczysz się między
+                  wyjazdami, we własnym tempie, z dostępem przez 12 miesięcy —
+                  bez sztywnych terminów i zjazdów.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="kurs-card d-only">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import CareerPaths from "@/components/home/CareerPaths";
 import FeaturedCourses from "@/components/home/FeaturedCourses";
 import Faq from "@/components/home/Faq";
 
@@ -30,9 +31,10 @@ export default function HomePage() {
                 <span className="m-only">AKADEMIA TECHNICZNA</span>
               </span>
             </div>
-            <h1>Rozwijaj kompetencje zawodowe</h1>
+            <h1>Zbuduj karierę w izolacjach. Standard NORSOK.</h1>
             <p className="hero-para">
-              Szkolenia oparte na realnych projektach przemysłowych.
+              Wybierz jedną z 5 ścieżek kariery — od pierwszego montażu po
+              samodzielne obmiary na projektach w Norwegii.
             </p>
             <div className="hero-btns">
               <Link className="btn btn-primary-lg" href="/courses">
@@ -65,6 +67,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ŚCIEŻKI KARIERY — główny blok ofertowy */}
+      <CareerPaths />
 
       {/* POLECANE SZKOLENIA */}
       <FeaturedCourses />
