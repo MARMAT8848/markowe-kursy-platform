@@ -55,6 +55,9 @@ export async function GET(
     'href="panel-kursu.html"',
     `href="/dashboard/courses/${courseSlug}"`
   );
+  // Względne ścieżki zasobów (assets/...) → absolutne (/assets/...),
+  // bo lekcja jest serwowana spod /learn/[kurs]/[lekcja].
+  html = html.replaceAll('src="assets/', 'src="/assets/');
 
   return new NextResponse(html, {
     headers: {

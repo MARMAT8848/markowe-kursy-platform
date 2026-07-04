@@ -552,6 +552,20 @@ create policy email_outbox_admin on public.email_outbox
   for select using (public.is_admin());
 
 -- ------------------------------------------------------------
+-- GRANTY dla ról Supabase (anon / authenticated / service_role).
+-- Wiersze i tak chroni RLS; service_role ma pełny dostęp (serwer).
+-- ------------------------------------------------------------
+grant usage on schema public to anon, authenticated, service_role;
+grant all privileges on all tables in schema public to service_role;
+grant select, insert, update, delete on all tables in schema public to anon, authenticated;
+grant usage, select on all sequences in schema public to anon, authenticated, service_role;
+grant execute on all functions in schema public to anon, authenticated, service_role;
+alter default privileges in schema public grant all on tables to service_role;
+alter default privileges in schema public grant select, insert, update, delete on tables to anon, authenticated;
+alter default privileges in schema public grant usage, select on sequences to anon, authenticated, service_role;
+alter default privileges in schema public grant execute on functions to anon, authenticated, service_role;
+
+-- ------------------------------------------------------------
 -- Backfill: profile dla kont założonych PRZED wgraniem migracji
 -- (trigger on_auth_user_created działa tylko dla nowych rejestracji)
 -- ------------------------------------------------------------
