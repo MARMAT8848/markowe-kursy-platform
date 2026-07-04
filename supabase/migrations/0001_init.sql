@@ -180,6 +180,20 @@ create table public.orders (
   tax_amount integer,
   tax_rate numeric,
   customer_tax_id text,
+  -- ---- zgody prawne przy checkout (wymóg: zakup niemożliwy bez kompletu zgód) ----
+  terms_accepted_at timestamptz,
+  privacy_policy_accepted_at timestamptz,
+  refund_policy_accepted_at timestamptz,
+  digital_content_consent_at timestamptz,
+  withdrawal_loss_acknowledged_at timestamptz,
+  accepted_terms_version text,
+  accepted_privacy_policy_version text,
+  accepted_refund_policy_version text,
+  accepted_cookie_policy_version text,
+  user_ip text,
+  user_agent text,
+  -- dokładna treść zaakceptowanych zgód + wersje i daty dokumentów w chwili zakupu
+  checkout_legal_snapshot_json jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

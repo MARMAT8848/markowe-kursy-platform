@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 
 type NavKey = "kursy" | "dla-firm" | "o-nas" | "kontakt";
 
-const NAV_ITEMS: { key: NavKey; label: string; href: string }[] = [
-  { key: "kursy", label: "Kursy", href: "/courses" },
-  { key: "dla-firm", label: "Dla firm", href: "/dla-firm" },
-  { key: "o-nas", label: "O nas", href: "/o-nas" },
-  { key: "kontakt", label: "Kontakt", href: "/kontakt" },
-];
-
-export default function SiteHeader({ active }: { active?: NavKey }) {
+export default function SiteHeader({
+  active,
+  variant = "default",
+  showLogin = true,
+}: {
+  active?: NavKey;
+  /** 'catalog' — wyższy nagłówek katalogu z lupką i CTA „Załóż konto". */
+  variant?: "default" | "catalog";
+  /** false — bez linku „Zaloguj" (strona logowania). */
+  showLogin?: boolean;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -23,8 +26,18 @@ export default function SiteHeader({ active }: { active?: NavKey }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isCatalog = variant === "catalog";
+  const navItems: { key: NavKey; label: string; href: string }[] = [
+    { key: "kursy", label: isCatalog ? "Katalog" : "Kursy", href: "/courses" },
+    { key: "dla-firm", label: "Dla firm", href: "/dla-firm" },
+    { key: "o-nas", label: "O nas", href: "/o-nas" },
+    { key: "kontakt", label: "Kontakt", href: "/kontakt" },
+  ];
+
   return (
-    <header className={`site-header${scrolled ? " scrolled" : ""}`}>
+    <header
+      className={`site-header${isCatalog ? " header-catalog" : ""}${scrolled ? " scrolled" : ""}`}
+    >
       <div className="header-inner">
         <Link className="logo-link" href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -34,7 +47,7 @@ export default function SiteHeader({ active }: { active?: NavKey }) {
           MARKOWE <span>KURSY</span>
         </Link>
         <nav className="main-nav">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.key}
               className={active === item.key ? "active" : undefined}
@@ -45,12 +58,35 @@ export default function SiteHeader({ active }: { active?: NavKey }) {
           ))}
         </nav>
         <div className="header-spacer"></div>
-        <Link className="login-link" href="/login">
-          Zaloguj
-        </Link>
-        <Link className="btn btn-primary" href="/courses">
-          Zobacz kursy
-        </Link>
+        {isCatalog && (
+          <button className="search-btn" aria-label="Szukaj">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#E1121A"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+          </button>
+        )}
+        {showLogin && (
+          <Link className="login-link" href="/login">
+            Zaloguj
+          </Link>
+        )}
+        {isCatalog ? (
+          <Link className="btn btn-primary" href="/register">
+            Załóż konto
+          </Link>
+        ) : (
+          <Link className="btn btn-primary" href="/courses">
+            Zobacz kursy
+          </Link>
+        )}
         <button
           className="hamburger"
           aria-label="Menu"
@@ -61,14 +97,16 @@ export default function SiteHeader({ active }: { active?: NavKey }) {
         </button>
       </div>
       <nav className={`mobile-nav${menuOpen ? " open" : ""}`}>
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <Link key={item.key} href={item.href}>
             {item.label}
           </Link>
         ))}
-        <Link className="mnav-login" href="/login">
-          Zaloguj
-        </Link>
+        {showLogin && (
+          <Link className="mnav-login" href="/login">
+            Zaloguj
+          </Link>
+        )}
       </nav>
     </header>
   );

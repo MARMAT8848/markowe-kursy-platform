@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import FeaturedCourses from "@/components/home/FeaturedCourses";
 import Faq from "@/components/home/Faq";
 
@@ -173,6 +174,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <SiteFooter />
     </>
   );
 }

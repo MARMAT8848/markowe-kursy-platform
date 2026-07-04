@@ -23,8 +23,11 @@ export interface CreateCheckoutSessionInput {
   internalOrderId: string;
   userId: string;
   courseId: string;
+  /** Nazwa kursu pokazywana w checkoutcie operatora. */
+  courseTitle: string;
+  /** Opcjonalne ID ceny u operatora; brak → cena ad-hoc z amount/currency. */
+  providerPriceId?: string;
   /** Cena z course_prices — nigdy z frontendu. Kwota w jednostkach minor (grosze). */
-  providerPriceId: string;
   amount: number;
   currency: SupportedCurrency;
   customerEmail: string;
