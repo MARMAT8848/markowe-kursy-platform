@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import CheckoutConsents from "@/components/checkout/CheckoutConsents";
 import { getCourse, isPurchasable } from "@/lib/courses";
+import { getUserCourseStates } from "@/lib/enrollment-state";
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,9 @@ export default async function CheckoutPage({
   if (!course) notFound();
   if (!isPurchasable(course)) redirect(`/courses/${course.slug}`);
 
-  // TODO (Faza 2): wymagaj zalogowania — niezalogowany → /login?next=/checkout/[slug]
+  // Kto ma aktywny dostęp, nie kupuje ponownie — do panelu kursu.
+  const state = (await getUserCourseStates())[slug];
+  if (state === "active") redirect(`/dashboard/courses/${slug}`);
 
   return (
     <>

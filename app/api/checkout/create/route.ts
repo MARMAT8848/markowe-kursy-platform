@@ -8,6 +8,7 @@ import {
 import { stripeConfigured, getStripeProvider } from "@/lib/payments/stripe";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { getUserCourseStates } from "@/lib/enrollment-state";
 
 /**
  * POST /api/checkout/create
@@ -58,6 +59,18 @@ export async function POST(req: Request) {
         message: "Zaloguj się, aby kupić kurs.",
       },
       { status: 401 }
+    );
+  }
+
+  // --- 1b. blokada podwójnego zakupu aktywnego kursu (server-side) ---
+  const states = await getUserCourseStates();
+  if (states[course.slug] === "active") {
+    return NextResponse.json(
+      {
+        error: "ALREADY_OWNED",
+        message: "Masz już aktywny dostęp do tego kursu.",
+      },
+      { status: 409 }
     );
   }
 

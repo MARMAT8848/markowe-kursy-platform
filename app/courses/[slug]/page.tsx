@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ModulesAccordion from "@/components/course/ModulesAccordion";
 import { CAT_BREADCRUMB, getCourse, isPurchasable } from "@/lib/courses";
+import { getUserCourseStates, type OwnState } from "@/lib/enrollment-state";
 
 export async function generateMetadata({
   params,
@@ -24,19 +25,34 @@ export async function generateMetadata({
 /**
  * Logika przycisku (ETAP 5 specyfikacji):
  * - kurs coming_soon → „Wkrótce dostępny" (nieklikalne),
- * - kurs published → „Kup kurs" → /checkout/[slug] (zgody prawne),
- * - TODO Faza 2/4: zalogowany z aktywnym dostępem → „Przejdź do kursu";
- *   z wygasłym → „Odnów dostęp"; admin → „Edytuj kurs".
+ * - aktywny dostęp → „Przejdź do kursu" (nie da się kupić ponownie),
+ * - dostęp wygasł → „Odnów dostęp" → checkout,
+ * - w pozostałych → „Kup kurs" → /checkout/[slug] (zgody prawne).
  */
 function BuyButton({
   slug,
   purchasable,
+  state,
   block,
 }: {
   slug: string;
   purchasable: boolean;
+  state?: OwnState;
   block?: boolean;
 }) {
+  const blockStyle = block ? { display: "block" as const } : undefined;
+
+  if (state === "active") {
+    return (
+      <Link
+        className="kurs-enroll"
+        href={`/dashboard/courses/${slug}`}
+        style={{ ...blockStyle, background: "#2E7D46" }}
+      >
+        Przejdź do kursu
+      </Link>
+    );
+  }
   if (!purchasable) {
     return (
       <span
@@ -54,12 +70,8 @@ function BuyButton({
     );
   }
   return (
-    <Link
-      className="kurs-enroll"
-      href={`/checkout/${slug}`}
-      style={block ? { display: "block" } : undefined}
-    >
-      Kup kurs
+    <Link className="kurs-enroll" href={`/checkout/${slug}`} style={blockStyle}>
+      {state === "expired" ? "Odnów dostęp" : "Kup kurs"}
     </Link>
   );
 }
@@ -73,6 +85,7 @@ export default async function CoursePage({
   const course = getCourse(slug);
   if (!course) notFound();
   const purchasable = isPurchasable(course);
+  const state = (await getUserCourseStates())[slug];
 
   return (
     <>
@@ -100,6 +113,29 @@ export default async function CoursePage({
             <div className="kurs-cat">{course.catLabel}</div>
             <h1>{course.title}</h1>
             <p className="kurs-desc">{course.desc}</p>
+            {state === "active" && (
+              <div
+                className="form-confirm"
+                style={{
+                  maxWidth: 600,
+                  margin: "0 0 20px",
+                  background: "#EAF3EC",
+                  color: "#2E7D46",
+                }}
+              >
+                Masz aktywny dostęp do tego kursu. Przejdź do niego w panelu
+                kursanta.
+              </div>
+            )}
+            {state === "expired" && (
+              <div
+                className="form-confirm"
+                style={{ maxWidth: 600, margin: "0 0 20px" }}
+              >
+                Twój dostęp do tego kursu wygasł. Odnów dostęp, aby wrócić do
+                nauki (kolejne 12 miesięcy).
+              </div>
+            )}
             <div className="kurs-meta">
               <span>
                 <i></i>
@@ -121,7 +157,12 @@ export default async function CoursePage({
             {/* Mobilny blok ceny */}
             <div className="kurs-pricebox-mobile m-only">
               <div className="kurs-price">{course.priceLabel}</div>
-              <BuyButton slug={course.slug} purchasable={purchasable} block />
+              <BuyButton
+                slug={course.slug}
+                purchasable={purchasable}
+                state={state}
+                block
+              />
             </div>
 
             <h2 className="kurs-h2">Czego się nauczysz</h2>
@@ -217,7 +258,11 @@ export default async function CoursePage({
             ></div>
             <div className="kurs-card-body">
               <div className="kurs-price">{course.priceLabel}</div>
-              <BuyButton slug={course.slug} purchasable={purchasable} />
+              <BuyButton
+                slug={course.slug}
+                purchasable={purchasable}
+                state={state}
+              />
               <div className="kurs-card-checks">
                 <span>
                   <b>✓</b>Dostęp przez 12 miesięcy

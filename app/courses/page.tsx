@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import CatalogGrid from "@/components/course/CatalogGrid";
+import { getUserCourseStates } from "@/lib/enrollment-state";
 
 export const metadata: Metadata = {
   title: "Katalog szkoleń — MARKOWE KURSY",
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
     "Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru, prefabrykacji płaszczy ochronnych oraz dokumentacji technicznej.",
 };
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  const states = await getUserCourseStates();
   return (
     <>
       <SiteHeader variant="catalog" active="kursy" />
@@ -35,7 +37,7 @@ export default function CoursesPage() {
               </span>
             </p>
           </div>
-          <CatalogGrid />
+          <CatalogGrid states={states} />
         </div>
       </main>
       <SiteFooter />

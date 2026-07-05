@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createSupabaseBrowser } from "@/lib/supabase/client";
 
 type NavKey = "kursy" | "dla-firm" | "o-nas" | "kontakt";
 
@@ -18,12 +19,22 @@ export default function SiteHeader({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [authed, setAuthed] = useState<boolean | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const supabase = createSupabaseBrowser();
+    supabase.auth.getUser().then(({ data }) => setAuthed(!!data.user));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
+      setAuthed(!!session?.user)
+    );
+    return () => sub.subscription.unsubscribe();
   }, []);
 
   const isCatalog = variant === "catalog";
@@ -73,19 +84,32 @@ export default function SiteHeader({
             </svg>
           </button>
         )}
-        {showLogin && (
-          <Link className="login-link" href="/login">
-            Zaloguj
-          </Link>
-        )}
-        {isCatalog ? (
-          <Link className="btn btn-primary" href="/register">
-            Załóż konto
-          </Link>
+        {authed ? (
+          <>
+            <Link className="login-link" href="/dashboard">
+              Panel kursanta
+            </Link>
+            <Link className="btn btn-primary" href="/courses">
+              Zobacz kursy
+            </Link>
+          </>
         ) : (
-          <Link className="btn btn-primary" href="/courses">
-            Zobacz kursy
-          </Link>
+          <>
+            {showLogin && (
+              <Link className="login-link" href="/login">
+                Zaloguj
+              </Link>
+            )}
+            {isCatalog ? (
+              <Link className="btn btn-primary" href="/register">
+                Załóż konto
+              </Link>
+            ) : (
+              <Link className="btn btn-primary" href="/courses">
+                Zobacz kursy
+              </Link>
+            )}
+          </>
         )}
         <button
           className="hamburger"
@@ -102,10 +126,16 @@ export default function SiteHeader({
             {item.label}
           </Link>
         ))}
-        {showLogin && (
-          <Link className="mnav-login" href="/login">
-            Zaloguj
+        {authed ? (
+          <Link className="mnav-login" href="/dashboard">
+            Panel kursanta
           </Link>
+        ) : (
+          showLogin && (
+            <Link className="mnav-login" href="/login">
+              Zaloguj
+            </Link>
+          )
         )}
       </nav>
     </header>
