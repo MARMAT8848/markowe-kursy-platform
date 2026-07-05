@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { generateCertificate } from "@/lib/certificates/generate";
+import { queueAndSend } from "@/lib/emails";
 
 /**
  * POST /api/lessons/[lessonId]/complete  (ETAP 16)
@@ -15,7 +16,7 @@ import { generateCertificate } from "@/lib/certificates/generate";
  *   → automatyczna, idempotentna generacja certyfikatu PDF.
  */
 export async function POST(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ lessonId: string }> }
 ) {
   const { lessonId } = await params;
@@ -139,6 +140,22 @@ export async function POST(
         courseTitle: courseTr?.title || "Kurs",
       });
       certificateId = cert.id;
+
+      // e-mail o wydanym certyfikacie (outbox; wysyłka gdy Resend gotowy)
+      if (user.email) {
+        const site =
+          process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin;
+        await queueAndSend(
+          "certificate_issued",
+          user.email,
+          {
+            courseTitle: courseTr?.title || "Kurs",
+            certificateNumber: cert.certificateNumber,
+            verifyUrl: `${site}/verify-certificate/${cert.verificationSlug}`,
+          },
+          { userId: user.id }
+        );
+      }
     } catch (e) {
       // ukończenie kursu zapisane; certyfikat można dogenerować ponownie
       console.error("[complete] certyfikat:", e);
