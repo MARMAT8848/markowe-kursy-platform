@@ -10,11 +10,12 @@ Zwroty bezpośrednie („Ty"). Bez obietnic zatrudnienia i uprawnień
 
 ### H1 (WDROŻONE)
 
-> **Zbuduj karierę w izolacjach. Standard NORSOK.**
+> **Zbuduj karierę jako ekspert izolacji zgodnie z NORSOK Standard**
 
-Uwaga techniczna: H1 w hero mieści maks. 2 linie (~52 znaki przy 44px).
-Warianty zapasowe (zweryfikowane — za długie do hero, dobre np. do reklam):
-- „Kariera w izolacjach przemysłowych według standardu NORSOK"
+Uwaga techniczna: dłuższy nagłówek → `.hero h1` zmniejszone do 37px/1.12
+(desktop), żeby zmieścić się w 2 liniach nad checklistą; mobile ma osobną
+regułę 26px. Warianty zapasowe (krótsze, dobre do reklam):
+- „Zbuduj karierę w izolacjach. Standard NORSOK."
 - „Kompetencje na projekty norweskie. Standard NORSOK."
 
 ### Podtytuł hero — 3 warianty (wariant 1 WDROŻONY)

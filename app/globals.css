@@ -277,11 +277,12 @@ button { font-family: var(--sans); }
   color: #fff;
 }
 .hero h1 {
-  margin: 0 0 18px;
-  font: 600 44px/1.05 var(--sans);
-  letter-spacing: -.035em;
+  margin: 0 0 14px;
+  font: 600 37px/1.12 var(--sans);
+  letter-spacing: -.03em;
   color: #fff;
   text-wrap: balance;
+  max-width: 620px;
 }
 .hero-para {
   margin: 0 0 26px;

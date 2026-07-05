@@ -31,7 +31,7 @@ export default function HomePage() {
                 <span className="m-only">AKADEMIA TECHNICZNA</span>
               </span>
             </div>
-            <h1>Zbuduj karierę w izolacjach. Standard NORSOK.</h1>
+            <h1>Zbuduj karierę jako ekspert izolacji zgodnie z NORSOK Standard</h1>
             <p className="hero-para">
               Wybierz jedną z 5 ścieżek kariery — od pierwszego montażu po
               samodzielne obmiary na projektach w Norwegii.

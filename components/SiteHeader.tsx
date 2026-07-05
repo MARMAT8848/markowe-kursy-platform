@@ -39,7 +39,7 @@ export default function SiteHeader({
 
   const isCatalog = variant === "catalog";
   const navItems: { key: NavKey; label: string; href: string }[] = [
-    { key: "kursy", label: isCatalog ? "Katalog" : "Kursy", href: "/courses" },
+    { key: "kursy", label: "Katalog kursów", href: "/courses" },
     { key: "dla-firm", label: "Dla firm", href: "/dla-firm" },
     { key: "o-nas", label: "O nas", href: "/o-nas" },
     { key: "kontakt", label: "Kontakt", href: "/kontakt" },
