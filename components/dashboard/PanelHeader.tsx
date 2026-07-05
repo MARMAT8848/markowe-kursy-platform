@@ -11,11 +11,13 @@ export default function PanelHeader({
   leaveHref = "/",
   leaveLabel = "Opuść kurs",
   showSignOut = false,
+  isAdmin = false,
 }: {
   fullName: string;
   leaveHref?: string;
   leaveLabel?: string;
   showSignOut?: boolean;
+  isAdmin?: boolean;
 }) {
   const initials =
     fullName
@@ -38,6 +40,15 @@ export default function PanelHeader({
         MARKOWE <span>KURSY</span>
       </Link>
       <div className="header-spacer"></div>
+      {isAdmin && (
+        <Link
+          href="/admin"
+          className="leave-course"
+          style={{ borderColor: "var(--ink)" }}
+        >
+          Panel admina
+        </Link>
+      )}
       <span className="account-chip">
         <span className="account-avatar">{initials}</span>
         <span className="account-name">{fullName || "Moje konto"}</span>

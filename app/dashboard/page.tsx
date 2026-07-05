@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import PanelHeader from "@/components/dashboard/PanelHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { createSupabaseServer } from "@/lib/supabase/server";
+import { isCurrentUserAdmin } from "@/lib/admin";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
@@ -71,6 +72,7 @@ export default async function DashboardPage() {
     .maybeSingle();
   const fullName =
     profile?.full_name || (user.user_metadata?.full_name as string) || "";
+  const admin = await isCurrentUserAdmin();
 
   const nowIso = new Date().toISOString();
   const { data: enrollments, error } = await supabase
@@ -125,7 +127,7 @@ export default async function DashboardPage() {
 
   return (
     <>
-      <PanelHeader fullName={fullName} showSignOut />
+      <PanelHeader fullName={fullName} showSignOut isAdmin={admin} />
 
       <section style={{ padding: "34px 0 44px", minHeight: "55vh" }}>
         <div className="wrap">
