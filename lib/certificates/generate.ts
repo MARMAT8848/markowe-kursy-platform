@@ -101,26 +101,33 @@ export async function generateCertificate(input: {
     borderColor: rgb(0.906, 0.902, 0.894), borderWidth: 1,
   });
 
-  // nagłówek: logo + wordmark, numer po prawej
-  const logoH = 46;
-  const logoW = (logoPng.width / logoPng.height) * logoH;
-  page.drawImage(logoPng, { x: M, y: height - M - logoH + 6, width: logoW, height: logoH });
-  page.drawText("MARKOWE", { x: M + logoW + 12, y: height - M - 14, size: 17, font: sansSemi, color: INK });
-  const mkW = sansSemi.widthOfTextAtSize("MARKOWE ", 17);
-  page.drawText("KURSY", { x: M + logoW + 12 + mkW, y: height - M - 14, size: 17, font: sansSemi, color: ACCENT });
-  page.drawText("AKADEMIA TECHNICZNA", { x: M + logoW + 12, y: height - M - 30, size: 8, font: mono, color: MUTED });
+  // nagłówek (letterhead): wordmark po lewej, numer po prawej
+  page.drawText("MARKOWE", { x: M, y: height - M - 6, size: 15, font: sansSemi, color: INK });
+  const mkW = sansSemi.widthOfTextAtSize("MARKOWE ", 15);
+  page.drawText("KURSY", { x: M + mkW, y: height - M - 6, size: 15, font: sansSemi, color: ACCENT });
+  page.drawText("AKADEMIA TECHNICZNA", { x: M, y: height - M - 20, size: 7.5, font: mono, color: MUTED });
 
   const numLabel = `CERTYFIKAT NR ${certificateNumber}`;
   const numW = monoSemi.widthOfTextAtSize(numLabel, 10);
-  page.drawText(numLabel, { x: width - M - numW, y: height - M - 14, size: 10, font: monoSemi, color: INK });
+  page.drawText(numLabel, { x: width - M - numW, y: height - M - 6, size: 10, font: monoSemi, color: INK });
 
   const center = (text: string, y: number, size: number, font: typeof sans, color = INK) => {
     const w = font.widthOfTextAtSize(text, size);
     page.drawText(text, { x: (width - w) / 2, y, size, font, color });
   };
 
+  // wyeksponowane logo — emblemat wyśrodkowany nad tytułem
+  const embH = 62;
+  const embW = (logoPng.width / logoPng.height) * embH;
+  page.drawImage(logoPng, {
+    x: (width - embW) / 2,
+    y: 452,
+    width: embW,
+    height: embH,
+  });
+
   // treść centralna
-  center("CERTYFIKAT UKOŃCZENIA KURSU", 418, 13, monoSemi, ACCENT);
+  center("CERTYFIKAT UKOŃCZENIA KURSU", 424, 13, monoSemi, ACCENT);
   center("Zaświadcza się, że", 380, 13, sans, MUTED);
   center(input.fullName, 330, 38, sansSemi, INK);
   page.drawRectangle({ x: (width - 64) / 2, y: 312, width: 64, height: 3, color: ACCENT });

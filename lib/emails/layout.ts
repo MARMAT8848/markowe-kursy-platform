@@ -21,9 +21,16 @@ ${opts.preheader ? `<div style="display:none;max-height:0;overflow:hidden;opacit
 <tr><td align="center">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:92%;background:#fff;border:1px solid #E7E6E4;border-radius:14px;overflow:hidden">
   <tr><td style="height:6px;background:${ACCENT}"></td></tr>
-  <tr><td style="padding:26px 32px 8px">
-    <div style="font-weight:700;font-size:17px;letter-spacing:-.02em">MARKOWE <span style="color:${ACCENT}">KURSY</span></div>
-    <div style="font-size:11px;letter-spacing:.14em;color:#9C9B98;margin-top:2px">AKADEMIA TECHNICZNA</div>
+  <tr><td style="padding:24px 32px 8px">
+    <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+      <td style="vertical-align:middle;padding-right:12px">
+        <img src="${SITE}/assets/logo.png" width="46" height="46" alt="MARKOWE KURSY" style="display:block;width:46px;height:46px">
+      </td>
+      <td style="vertical-align:middle">
+        <div style="font-weight:700;font-size:17px;letter-spacing:-.02em">MARKOWE <span style="color:${ACCENT}">KURSY</span></div>
+        <div style="font-size:11px;letter-spacing:.14em;color:#9C9B98;margin-top:2px">AKADEMIA TECHNICZNA</div>
+      </td>
+    </tr></table>
   </td></tr>
   <tr><td style="padding:12px 32px 4px">
     <h1 style="margin:0 0 12px;font-size:20px;line-height:1.25;letter-spacing:-.02em;color:${INK}">${opts.heading}</h1>
