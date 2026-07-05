@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ModulesAccordion from "@/components/course/ModulesAccordion";
+import ProgramAccordion from "@/components/course/ProgramAccordion";
 import { CAT_BREADCRUMB, getCourse, isPurchasable } from "@/lib/courses";
+import { getCourseProgramBySlug } from "@/lib/course-program";
 import { getUserCourseStates, type OwnState } from "@/lib/enrollment-state";
 
 export async function generateMetadata({
@@ -86,6 +88,8 @@ export default async function CoursePage({
   if (!course) notFound();
   const purchasable = isPurchasable(course);
   const state = (await getUserCourseStates())[slug];
+  // rzeczywisty program z bazy (BLA-110); dla kursów bez treści → zarys statyczny
+  const program = await getCourseProgramBySlug(slug);
 
   return (
     <>
@@ -176,7 +180,11 @@ export default async function CoursePage({
             </div>
 
             <h2 className="kurs-h2">Program kursu</h2>
-            <ModulesAccordion modules={course.modules} />
+            {program ? (
+              <ProgramAccordion modules={program} />
+            ) : (
+              <ModulesAccordion modules={course.modules} />
+            )}
 
             <h2 className="kurs-h2 kurs-forwhom-h2">Dla kogo jest ten kurs</h2>
             <p className="kurs-forwhom">{course.forWhom}</p>
@@ -231,7 +239,7 @@ export default async function CoursePage({
                     marginBottom: 6,
                   }}
                 >
-                  PRACA W SYSTEMIE ROTACYJNYM
+                  UCZ SIĘ, GDZIEKOLWIEK JESTEŚ
                 </div>
                 <p
                   style={{
@@ -241,9 +249,11 @@ export default async function CoursePage({
                     color: "var(--sub)",
                   }}
                 >
-                  Kurs online dopasowany do rotacji: uczysz się między
-                  wyjazdami, we własnym tempie, z dostępem przez 12 miesięcy —
-                  bez sztywnych terminów i zjazdów.
+                  Kurs jest w 100% online, więc uczysz się z dowolnego miejsca —
+                  na kwaterze podczas rotacji, w delegacji czy w domu. Wystarczy
+                  telefon, tablet lub komputer z internetem. Masz dostęp przez 12
+                  miesięcy i realizujesz materiał we własnym tempie, bez
+                  sztywnych terminów i zjazdów.
                 </p>
               </div>
             </div>

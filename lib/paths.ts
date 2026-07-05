@@ -104,3 +104,17 @@ export function pathCoursesCountLabel(n: number): string {
   if (n >= 2 && n <= 4) return `${n} KURSY`;
   return `${n} KURSÓW`;
 }
+
+export function getCareerPath(slug: string): CareerPath | undefined {
+  return CAREER_PATHS.find((p) => p.slug === slug);
+}
+
+/** Największa oszczędność wśród ścieżek — do nagłówka sekcji. */
+export function maxSavingsLabel(): string {
+  const max = Math.max(
+    ...CAREER_PATHS.map((p) =>
+      p.compareAtCents ? p.compareAtCents - p.priceCents : 0
+    )
+  );
+  return `${Math.round(max / 100)} zł`;
+}

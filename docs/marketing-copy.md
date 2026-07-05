@@ -46,10 +46,12 @@ Warianty 2 i 3 → do testów A/B po starcie (pole `heroHeadline` w konfiguracji
 > norweskich — te same pojęcia, którymi posługują się inżynier,
 > brygadzista i dział QA.
 
-**Hasło zbijające obiekcję „nie mam czasu, jestem na rotacji":**
-> PRACA W SYSTEMIE ROTACYJNYM — Kurs online dopasowany do rotacji:
-> uczysz się między wyjazdami, we własnym tempie, z dostępem przez
-> 12 miesięcy — bez sztywnych terminów i zjazdów.
+**Hasło zbijające obiekcję „nie mam czasu, jestem na rotacji" (nauka skądkolwiek):**
+> UCZ SIĘ, GDZIEKOLWIEK JESTEŚ — Kurs jest w 100% online, więc uczysz
+> się z dowolnego miejsca: na kwaterze podczas rotacji, w delegacji czy
+> w domu. Wystarczy telefon, tablet lub komputer z internetem. Masz
+> dostęp przez 12 miesięcy i realizujesz materiał we własnym tempie, bez
+> sztywnych terminów i zjazdów.
 
 ## 3. Cennik (WDROŻONY w lib/courses.ts + lib/paths.ts)
 
