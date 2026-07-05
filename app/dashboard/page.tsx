@@ -281,7 +281,7 @@ export default async function DashboardPage() {
             </div>
           )}
 
-          <p style={{ margin: "22px 0 0" }}>
+          <p style={{ margin: "22px 0 0", display: "flex", gap: 24 }}>
             <Link
               href="/dashboard/certificates"
               style={{
@@ -291,6 +291,16 @@ export default async function DashboardPage() {
               }}
             >
               Twoje certyfikaty →
+            </Link>
+            <Link
+              href="/dashboard/settings"
+              style={{
+                font: "600 13px var(--sans)",
+                color: "var(--ink)",
+                textDecoration: "none",
+              }}
+            >
+              Ustawienia konta →
             </Link>
           </p>
         </div>

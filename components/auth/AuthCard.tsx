@@ -122,7 +122,7 @@ export default function AuthCard({ mode }: { mode: "login" | "register" }) {
               />
             </label>
             <div className="login-forgot-row">
-              <a href="#">Zapomniałeś hasła?</a>
+              <Link href="/forgot-password">Zapomniałeś hasła?</Link>
             </div>
             {notice && <div className="form-confirm">{notice}</div>}
             <button className="login-submit" type="submit" disabled={busy}>
