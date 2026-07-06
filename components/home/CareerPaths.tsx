@@ -64,14 +64,24 @@ export default function CareerPaths() {
               >
                 <div
                   className="cc-head"
-                  style={{
-                    background: "linear-gradient(158deg,#FAFAF9,#E2E1DD)",
-                  }}
+                  style={
+                    p.imageUrl
+                      ? {
+                          background: `#fff url('${p.imageUrl}') center / cover no-repeat`,
+                        }
+                      : { background: "linear-gradient(158deg,#FAFAF9,#E2E1DD)" }
+                  }
                 >
-                  <span className="cc-watermark" style={{ fontSize: 18 }}>
-                    {p.name.toUpperCase()}
-                  </span>
-                  {p.badge && <span className="cc-badge">{p.badge}</span>}
+                  {!p.imageUrl && (
+                    <span className="cc-watermark" style={{ fontSize: 18 }}>
+                      {p.name.toUpperCase()}
+                    </span>
+                  )}
+                  {/* badge tylko dla kafelków bez obrazka — obecne ilustracje
+                      mają plakietkę wtopioną */}
+                  {p.badge && !p.imageUrl && (
+                    <span className="cc-badge">{p.badge}</span>
+                  )}
                 </div>
                 <div className="cc-body">
                   <div className="cc-cat">{p.levelLabel}</div>

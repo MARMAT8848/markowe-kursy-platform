@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import PanelHeader from "@/components/dashboard/PanelHeader";
-import SiteFooter from "@/components/SiteFooter";
+import PanelShell from "@/components/dashboard/PanelShell";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { isCurrentUserAdmin } from "@/lib/admin";
 import { getCourse } from "@/lib/courses";
@@ -126,10 +126,10 @@ export default async function DashboardPage() {
   const expiredRows = rows.filter((r) => !r.activeNow && !r.completed);
 
   return (
-    <>
+    <PanelShell>
       <PanelHeader fullName={fullName} showSignOut isAdmin={admin} />
 
-      <section style={{ padding: "34px 0 44px", minHeight: "55vh" }}>
+      <section style={{ padding: "34px 0 44px" }}>
         <div className="wrap">
           <div className="kicker-row">
             <span className="kicker-line"></span>
@@ -307,8 +307,6 @@ export default async function DashboardPage() {
           </p>
         </div>
       </section>
-
-      <SiteFooter />
-    </>
+    </PanelShell>
   );
 }

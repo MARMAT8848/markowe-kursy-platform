@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import PanelHeader from "@/components/dashboard/PanelHeader";
-import SiteFooter from "@/components/SiteFooter";
+import PanelShell from "@/components/dashboard/PanelShell";
 import ProfileSettings from "@/components/dashboard/ProfileSettings";
 import { createSupabaseServer } from "@/lib/supabase/server";
 
@@ -23,13 +23,13 @@ export default async function SettingsPage() {
     .maybeSingle();
 
   return (
-    <>
+    <PanelShell>
       <PanelHeader
         fullName={profile?.full_name ?? ""}
         leaveHref="/dashboard"
         leaveLabel="Wróć do panelu"
       />
-      <section style={{ padding: "34px 0 44px", minHeight: "55vh" }}>
+      <section style={{ padding: "34px 0 44px" }}>
         <div className="wrap">
           <div className="kicker-row">
             <span className="kicker-line"></span>
@@ -51,7 +51,6 @@ export default async function SettingsPage() {
           />
         </div>
       </section>
-      <SiteFooter />
-    </>
+    </PanelShell>
   );
 }
