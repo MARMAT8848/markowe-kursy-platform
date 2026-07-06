@@ -24,8 +24,8 @@ export interface CareerPath {
   compareAtLabel?: string;
   savingsLabel?: string;
   badge?: string;
-  /** Ilustracja kafelka. Gdy ustawiona — zastępuje gradient z watermarkiem.
-   *  (Obecne obrazki mają wtopione plakietki, więc nakładkę badge pomijamy.) */
+  /** Ilustracja kafelka (HQ, bez wtopionych plakietek). Gdy ustawiona —
+   *  zastępuje gradient z watermarkiem; plakietka badge nakładana osobno. */
   imageUrl?: string;
   status: "published" | "coming_soon";
 }
@@ -34,7 +34,7 @@ export const CAREER_PATHS: CareerPath[] = [
   {
     slug: "izoler",
     name: "Izoler",
-    imageUrl: "/assets/path-izoler.png",
+    imageUrl: "/assets/path-izoler.jpg",
     levelLabel: "POZIOM PODSTAWOWY",
     teaser:
       "Pewny start w zawodzie — podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż.",
@@ -46,7 +46,7 @@ export const CAREER_PATHS: CareerPath[] = [
   {
     slug: "warsztatowiec",
     name: "Warsztatowiec",
-    imageUrl: "/assets/path-warsztatowiec.png",
+    imageUrl: "/assets/path-warsztatowiec.jpg",
     levelLabel: "POZIOM ŚREDNIO ZAAWANSOWANY",
     teaser:
       "Prefabrykacja i płaszcze ochronne — czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista.",
@@ -61,7 +61,7 @@ export const CAREER_PATHS: CareerPath[] = [
   {
     slug: "obmiarowiec",
     name: "Obmiarowiec",
-    imageUrl: "/assets/path-obmiarowiec.png",
+    imageUrl: "/assets/path-obmiarowiec.jpg",
     levelLabel: "POZIOM ZAAWANSOWANY",
     teaser:
       "Przygotowanie do roli Insulation Surveyor — izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej.",
@@ -77,7 +77,7 @@ export const CAREER_PATHS: CareerPath[] = [
   {
     slug: "brygadzista",
     name: "Brygadzista",
-    imageUrl: "/assets/path-brygadzista.png",
+    imageUrl: "/assets/path-brygadzista.jpg",
     levelLabel: "POZIOM ZAAWANSOWANY",
     teaser:
       "Kompetencje do nadzorowania robót — od dokumentacji ISO/P&ID, przez blacharkę, po kontrolę obmiaru wykonawczego.",
@@ -92,7 +92,7 @@ export const CAREER_PATHS: CareerPath[] = [
   {
     slug: "pelna-akademia",
     name: "Pełna Akademia",
-    imageUrl: "/assets/path-pelna-akademia.png",
+    imageUrl: "/assets/path-pelna-akademia.jpg",
     levelLabel: "KOMPLET",
     teaser:
       "Cała wiedza ekspercka w jednym pakiecie — najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego.",

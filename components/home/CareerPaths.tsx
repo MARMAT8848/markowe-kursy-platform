@@ -77,11 +77,7 @@ export default function CareerPaths() {
                       {p.name.toUpperCase()}
                     </span>
                   )}
-                  {/* badge tylko dla kafelków bez obrazka — obecne ilustracje
-                      mają plakietkę wtopioną */}
-                  {p.badge && !p.imageUrl && (
-                    <span className="cc-badge">{p.badge}</span>
-                  )}
+                  {p.badge && <span className="cc-badge">{p.badge}</span>}
                 </div>
                 <div className="cc-body">
                   <div className="cc-cat">{p.levelLabel}</div>
