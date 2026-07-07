@@ -46,9 +46,11 @@ Ustaw dla środowiska **Production** (i Preview):
 - (Migracje/seed są już wgrane — ta sama baza obsłuży produkcję.)
 
 ## 5. Cron (Vercel)
-`vercel.json` już definiuje dwa zadania (lifecycle dziennie 6:00,
-process-outbox co 15 min). Vercel wykryje je automatycznie i zabezpieczy
-`CRON_SECRET`. Nic więcej nie trzeba.
+`vercel.json` definiuje dwa zadania, oba raz dziennie — plan Hobby
+pozwala na cron maksymalnie raz na dobę (częstsze, np. co 15 minut,
+odrzuca deploy): lifecycle o 6:00, process-outbox o 6:30. Vercel wykryje
+je automatycznie i zabezpieczy `CRON_SECRET`. Przy przejściu na plan Pro
+można process-outbox przywrócić do częstszego interwału (np. co 15 min).
 
 ## 6. Domena markowekursy.pl (Kru.pl)
 1. Vercel → Settings → Domains → dodaj `markowekursy.pl` i `www`.
