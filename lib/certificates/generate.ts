@@ -45,6 +45,11 @@ export async function generateCertificate(input: {
   enrollmentId: string;
   fullName: string;
   courseTitle: string;
+  /** Adres serwisu do zakodowania w QR/linku weryfikacyjnym. Przekazywany
+   *  przez wywołującego z prawdziwego żądania (req origin) — nie polegamy
+   *  wyłącznie na zmiennej środowiskowej, żeby błędna/nieustawiona wartość
+   *  (np. localhost) nigdy nie trafiła na wydany certyfikat. */
+  siteUrl?: string;
 }): Promise<GeneratedCertificate> {
   const admin = createSupabaseAdmin();
 
@@ -73,7 +78,11 @@ export async function generateCertificate(input: {
   const verificationSlug = crypto.randomUUID().replaceAll("-", "");
   const issuedAt = new Date();
 
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://markowekursy.pl";
+  const envSite = process.env.NEXT_PUBLIC_SITE_URL;
+  const site =
+    input.siteUrl ||
+    (envSite && !envSite.includes("localhost") ? envSite : null) ||
+    "https://markowekursy.pl";
   const verifyUrl = `${site}/verify-certificate/${verificationSlug}`;
 
   // ---------- PDF (A4 poziomo, typografia IBM Plex jak na stronie) ----------

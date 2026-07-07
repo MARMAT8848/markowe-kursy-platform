@@ -8,7 +8,9 @@ import { emailLayout, button, infoRow } from "./layout";
  * UWAGA: potwierdzenie rejestracji i reset hasła obsługuje wbudowana
  * poczta Supabase Auth — nie dublujemy ich tutaj.
  */
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://markowekursy.pl";
+const envSite = process.env.NEXT_PUBLIC_SITE_URL;
+const SITE =
+  envSite && !envSite.includes("localhost") ? envSite : "https://markowekursy.pl";
 
 export type TemplateKey =
   | "purchase_confirmation"

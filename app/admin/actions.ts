@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin";
 import {
@@ -8,6 +9,16 @@ import {
   revokeAccess,
 } from "@/lib/enrollments";
 import { generateCertificate } from "@/lib/certificates/generate";
+
+/** Adres serwisu z nagłówków realnego żądania administratora — pomija
+ *  błędnie ustawioną zmienną środowiskową (np. localhost). */
+async function currentSiteUrl(): Promise<string | undefined> {
+  const h = await headers();
+  const host = h.get("host");
+  if (!host || host.includes("localhost")) return undefined;
+  const proto = h.get("x-forwarded-proto") || "https";
+  return `${proto}://${host}`;
+}
 
 /**
  * Akcje panelu admina. KAŻDA na wejściu wywołuje requireAdmin() —
@@ -105,6 +116,7 @@ export async function regenerateCertificateAction(formData: FormData) {
       enrollmentId: cert.enrollment_id,
       fullName: profile?.full_name || "Kursant",
       courseTitle: courseTr?.title || "Kurs",
+      siteUrl: await currentSiteUrl(),
     });
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Błąd generacji." };

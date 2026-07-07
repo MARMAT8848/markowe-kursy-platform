@@ -3,6 +3,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import CareerPaths from "@/components/home/CareerPaths";
 import FeaturedCourses from "@/components/home/FeaturedCourses";
+import LearnAnywhere from "@/components/home/LearnAnywhere";
 import Faq from "@/components/home/Faq";
 
 /* eslint-disable @next/next/no-img-element */
@@ -73,6 +74,9 @@ export default function HomePage() {
 
       {/* POLECANE SZKOLENIA */}
       <FeaturedCourses />
+
+      {/* UCZ SIĘ, GDZIEKOLWIEK JESTEŚ — zbicie obiekcji (rotacja/delegacja) */}
+      <LearnAnywhere />
 
       {/* SEPARATOR: AKADEMIA TECHNICZNA */}
       <section className="separator">

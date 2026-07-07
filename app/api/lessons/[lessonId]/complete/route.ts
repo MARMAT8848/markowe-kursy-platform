@@ -123,6 +123,15 @@ export async function POST(
   } | null;
   if (courseCompleted && courseMeta?.certificate_enabled !== false) {
     try {
+      // Adres realnego żądania jako pierwszeństwo — jeśli zmienna
+      // środowiskowa jest błędnie ustawiona (np. na localhost), certyfikat
+      // i e-mail i tak dostaną poprawny, żywy adres produkcji.
+      const envSite = process.env.NEXT_PUBLIC_SITE_URL;
+      const site =
+        envSite && !envSite.includes("localhost")
+          ? envSite
+          : new URL(req.url).origin;
+
       const [{ data: profile }, { data: courseTr }] = await Promise.all([
         admin.from("profiles").select("full_name").eq("id", user.id).single(),
         admin
@@ -138,13 +147,12 @@ export async function POST(
         enrollmentId: enrollment.id,
         fullName: profile?.full_name || "Kursant",
         courseTitle: courseTr?.title || "Kurs",
+        siteUrl: site,
       });
       certificateId = cert.id;
 
       // e-mail o wydanym certyfikacie (outbox; wysyłka gdy Resend gotowy)
       if (user.email) {
-        const site =
-          process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin;
         await queueAndSend(
           "certificate_issued",
           user.email,

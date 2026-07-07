@@ -3,7 +3,11 @@
  * kompatybilne z klientami pocztowymi). Marka: czerwień + czysta
  * typografia systemowa (fonty webowe nie są pewne w e-mailu).
  */
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://markowekursy.pl";
+// Odrzucamy localhost, gdyby zmienna była błędnie ustawiona — e-mail
+// wysyłany do klienta nigdy nie może zawierać lokalnego adresu.
+const envSite = process.env.NEXT_PUBLIC_SITE_URL;
+const SITE =
+  envSite && !envSite.includes("localhost") ? envSite : "https://markowekursy.pl";
 const ACCENT = "#E1121A";
 const INK = "#161616";
 

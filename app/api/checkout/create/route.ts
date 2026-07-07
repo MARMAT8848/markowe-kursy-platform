@@ -163,7 +163,13 @@ export async function POST(req: Request) {
   }
 
   // --- 5. sesja płatności u operatora ---
-  const site = process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin;
+  // Adres realnego żądania ma pierwszeństwo — błędnie ustawiona zmienna
+  // środowiskowa (np. localhost) nie może trafić do URL-i powrotu Stripe.
+  const envSiteChk = process.env.NEXT_PUBLIC_SITE_URL;
+  const site =
+    envSiteChk && !envSiteChk.includes("localhost")
+      ? envSiteChk
+      : new URL(req.url).origin;
   try {
     const session = await getStripeProvider().createCheckoutSession({
       internalOrderId: order.id,
