@@ -92,6 +92,8 @@ export default async function CoursePanelPage({
   const total = allLessons.length;
   const completed = allLessons.filter((l) => done.has(l.id)).length;
   const firstAvailable = allLessons.find((l) => l.content_path);
+  // globalna numeracja lekcji (bez mutacji podczas renderu)
+  const lessonNumById = new Map(allLessons.map((l, i) => [l.id, i + 1]));
 
   // procent ze źródła prawdy (API complete utrzymuje course_progress);
   // fallback: wyliczenie z lekcji
@@ -119,8 +121,6 @@ export default async function CoursePanelPage({
     tr: { title: string; language: string }[] | undefined,
     fallback: string
   ) => tr?.find((t) => t.language === "pl")?.title ?? tr?.[0]?.title ?? fallback;
-
-  let lessonNo = 0;
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
@@ -241,8 +241,10 @@ export default async function CoursePanelPage({
                 </div>
                 <div className="module-lessons">
                   {m.lessons.map((l) => {
-                    lessonNo += 1;
-                    const num = String(lessonNo).padStart(2, "0");
+                    const num = String(lessonNumById.get(l.id) ?? 0).padStart(
+                      2,
+                      "0"
+                    );
                     const available = !!l.content_path;
                     const isDone = done.has(l.id);
                     const row = (

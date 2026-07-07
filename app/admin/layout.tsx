@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin";
 
-/* eslint-disable @next/next/no-img-element */
-
 const NAV = [
   { href: "/admin", label: "Przegląd" },
   { href: "/admin/enrollments", label: "Dostępy" },

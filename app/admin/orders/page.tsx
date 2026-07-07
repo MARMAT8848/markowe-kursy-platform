@@ -29,7 +29,7 @@ export default async function AdminOrdersPage() {
       <p style={{ margin: "0 0 20px", fontSize: 13.5, color: "var(--sub)", maxWidth: 660 }}>
         Widok tylko do odczytu. Zamówienia pojawią się po uruchomieniu płatności
         (Stripe). Każde zawiera zapis zgód prawnych (data akceptacji Regulaminu
-        w kolumnie „Zgody").
+        w kolumnie „Zgody”).
       </p>
       <Table
         head={["Data", "Kursant", "Kurs", "Kwota", "Status", "Zgody"]}
