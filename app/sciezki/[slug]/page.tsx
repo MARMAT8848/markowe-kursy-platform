@@ -138,6 +138,15 @@ export default async function CareerPathPage({
               overflow: "hidden",
             }}
           >
+            {path.imageUrl && (
+              <div
+                style={{
+                  height: 170,
+                  background: `#fff url('${path.imageUrl}') center / cover no-repeat`,
+                  borderBottom: "1px solid var(--border)",
+                }}
+              ></div>
+            )}
             <div className="kurs-card-body">
               {hasSavings && (
                 <div

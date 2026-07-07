@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function SiteFooter() {
   return (
     <footer
+      className="site-footer"
       style={{
         background: "var(--bg-dark)",
         borderTop: "1px solid #2A2A2A",

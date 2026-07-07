@@ -60,8 +60,10 @@ export async function GET(
   // bo lekcja jest serwowana spod /learn/[kurs]/[lekcja].
   html = html.replaceAll('src="assets/', 'src="/assets/');
 
-  // Przycisk „UKOŃCZ LEKCJĘ" (zalogowani z enrollmentem; nie w preview) —
-  // zapisuje postęp przez POST /api/lessons/[id]/complete i wraca do panelu.
+  // Przycisk „UKOŃCZ LEKCJĘ" (zalogowani z enrollmentem; nie w preview).
+  // Desktop: w nagłówku. Mobile (≤560px, gdzie nagłówek jest ciasny i nie
+  // zawija się): w pasku transportu, który zawija się poprawnie. Oba
+  // wariantami widoczności CSS — nigdy nie przepełniają układu.
   if (!access.isPreview && access.userId) {
     const supabase = await createSupabaseServer();
     const { data: progress } = await supabase
@@ -72,13 +74,41 @@ export async function GET(
       .maybeSingle();
     const isDone = progress?.status === "completed";
 
-    const btn = isDone
-      ? `<span class="hbtn" style="pointer-events:none;opacity:.65;background:#EAF3EC;color:#2E7D46;border-color:#CDE6D3">✓ LEKCJA UKOŃCZONA</span>`
-      : `<button class="hbtn" id="mkCompleteBtn" type="button" title="Oznacz lekcję jako ukończoną">✓ UKOŃCZ LEKCJĘ</button>`;
-    html = html.replace('<a class="hbtn" href="/dashboard/courses', `${btn}<a class="hbtn" href="/dashboard/courses`);
+    const style = `<style>
+      @media(max-width:560px){ .hdr .mk-complete{display:none!important} }
+      @media(min-width:561px){ .transport .mk-complete{display:none!important} }
+      .transport .mk-complete{border-color:#2E7D46;background:#2E7D46;color:#fff}
+      .transport .mk-complete.done{background:#EAF3EC;color:#2E7D46;border-color:#CDE6D3;pointer-events:none}
+      @media(max-width:560px){ .transport .mk-complete{flex:1 1 auto} }
+    </style>`;
+
+    const hdrBtn = isDone
+      ? `<span class="hbtn mk-complete done" style="pointer-events:none;opacity:.7;background:#EAF3EC;color:#2E7D46;border-color:#CDE6D3">✓ UKOŃCZONA</span>`
+      : `<button class="hbtn mk-complete mk-complete-btn" type="button" title="Oznacz lekcję jako ukończoną">✓ UKOŃCZ LEKCJĘ</button>`;
+    const trBtn = isDone
+      ? `<button class="pbtn mk-complete done" type="button">✓ Ukończona</button>`
+      : `<button class="pbtn mk-complete mk-complete-btn" type="button"><span class="lbl">✓ Ukończ lekcję</span></button>`;
+
+    html = html
+      .replace("</head>", style + "</head>")
+      .replace(
+        '<a class="hbtn" href="/dashboard/courses',
+        `${hdrBtn}<a class="hbtn" href="/dashboard/courses`
+      )
+      .replace('<div class="tl-col">', `${trBtn}<div class="tl-col">`);
 
     if (!isDone) {
-      const script = `<script>(function(){var b=document.getElementById('mkCompleteBtn');if(!b)return;b.addEventListener('click',function(){b.disabled=true;b.textContent='Zapisywanie…';fetch('/api/lessons/${access.lessonId}/complete',{method:'POST'}).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});}).then(function(x){if(x.ok){window.location='/dashboard/courses/${courseSlug}';}else{b.disabled=false;b.textContent='✓ UKOŃCZ LEKCJĘ';alert(x.d.message||'Nie udało się zapisać. Spróbuj ponownie.');}}).catch(function(){b.disabled=false;b.textContent='✓ UKOŃCZ LEKCJĘ';});});})();</script>`;
+      const script = `<script>(function(){
+        var back='/dashboard/courses/${courseSlug}';
+        function run(btn){
+          btn.disabled=true; var t=btn.querySelector('.lbl')||btn; var o=t.textContent; t.textContent='Zapisywanie…';
+          fetch('/api/lessons/${access.lessonId}/complete',{method:'POST'})
+            .then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});})
+            .then(function(x){ if(x.ok){window.location=back;} else { btn.disabled=false; t.textContent=o; alert((x.d&&x.d.message)||'Nie udało się zapisać. Spróbuj ponownie.'); } })
+            .catch(function(){ btn.disabled=false; t.textContent=o; });
+        }
+        document.querySelectorAll('.mk-complete-btn').forEach(function(b){ b.addEventListener('click',function(){run(b);}); });
+      })();</script>`;
       html = html.replace("</body>", script + "</body>");
     }
   }

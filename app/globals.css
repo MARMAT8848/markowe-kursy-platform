@@ -29,7 +29,13 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  /* sticky footer: treść na górze, stopka zawsze na dole okna */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
+/* stopka spychana do dołu przy krótkiej treści */
+.site-footer { margin-top: auto; }
 
 img { display: block; }
 button { font-family: var(--sans); }
