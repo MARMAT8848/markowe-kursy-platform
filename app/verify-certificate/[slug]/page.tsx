@@ -5,14 +5,14 @@ import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Weryfikacja certyfikatu — MARKOWE KURSY",
+  title: "Weryfikacja certyfikatu - MARKOWE KURSY",
   description:
     "Publiczna weryfikacja autentyczności certyfikatów platformy Markowe Kursy.",
   robots: { index: false },
 };
 
 const fmtDate = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString("pl-PL") : "—";
+  iso ? new Date(iso).toLocaleDateString("pl-PL") : "-";
 
 /**
  * Publiczna weryfikacja certyfikatu (ETAP 17) — pokazuje WYŁĄCZNIE
@@ -112,8 +112,8 @@ export default async function VerifyCertificatePage({
               >
                 {[
                   ["NUMER CERTYFIKATU", cert.certificate_number],
-                  ["IMIĘ I NAZWISKO", fullName ?? "—"],
-                  ["KURS", courseTitle ?? "—"],
+                  ["IMIĘ I NAZWISKO", fullName ?? "-"],
+                  ["KURS", courseTitle ?? "-"],
                   ["DATA UKOŃCZENIA", fmtDate(cert.issued_at)],
                   ...(active
                     ? []

@@ -111,25 +111,25 @@ Dane osobowe przetwarzamy w następujących celach:
 
 Dane są przetwarzane w celu utworzenia konta, logowania, zarządzania kontem oraz zapewnienia użytkownikowi dostępu do funkcji platformy.
 
-Podstawa prawna: art. 6 ust. 1 lit. b RODO — wykonanie umowy lub podjęcie działań przed jej zawarciem.
+Podstawa prawna: art. 6 ust. 1 lit. b RODO - wykonanie umowy lub podjęcie działań przed jej zawarciem.
 
 ### 4.2. Sprzedaż i udostępnienie kursu
 
 Dane są przetwarzane w celu przyjęcia zamówienia, obsługi płatności, nadania dostępu do kursu, utrzymania dostępu przez okres 12 miesięcy oraz obsługi konta kursanta.
 
-Podstawa prawna: art. 6 ust. 1 lit. b RODO — wykonanie umowy.
+Podstawa prawna: art. 6 ust. 1 lit. b RODO - wykonanie umowy.
 
 ### 4.3. Rozliczenia, księgowość i obowiązki podatkowe
 
 Dane są przetwarzane w celu wystawienia dokumentów sprzedaży, prowadzenia księgowości oraz realizacji obowiązków podatkowych i rachunkowych.
 
-Podstawa prawna: art. 6 ust. 1 lit. c RODO — obowiązek prawny ciążący na Administratorze.
+Podstawa prawna: art. 6 ust. 1 lit. c RODO - obowiązek prawny ciążący na Administratorze.
 
 ### 4.4. Generowanie i weryfikacja certyfikatów
 
 Dane są przetwarzane w celu wygenerowania certyfikatu ukończenia kursu, zapisania informacji o certyfikacie oraz umożliwienia jego weryfikacji.
 
-Podstawa prawna: art. 6 ust. 1 lit. b RODO — wykonanie umowy, a także art. 6 ust. 1 lit. f RODO — prawnie uzasadniony interes Administratora polegający na zapewnieniu wiarygodności wydawanych certyfikatów.
+Podstawa prawna: art. 6 ust. 1 lit. b RODO - wykonanie umowy, a także art. 6 ust. 1 lit. f RODO - prawnie uzasadniony interes Administratora polegający na zapewnieniu wiarygodności wydawanych certyfikatów.
 
 Publiczna strona weryfikacji certyfikatu może pokazywać ograniczony zakres danych: imię i nazwisko kursanta, nazwę kursu, numer certyfikatu, datę wydania oraz status certyfikatu.
 
@@ -143,13 +143,13 @@ Podstawa prawna: art. 6 ust. 1 lit. b, c oraz f RODO.
 
 Dane są przetwarzane w celu odpowiedzi na wiadomość przesłaną przez formularz kontaktowy, e-mail lub inny kanał komunikacji.
 
-Podstawa prawna: art. 6 ust. 1 lit. f RODO — prawnie uzasadniony interes Administratora polegający na prowadzeniu korespondencji.
+Podstawa prawna: art. 6 ust. 1 lit. f RODO - prawnie uzasadniony interes Administratora polegający na prowadzeniu korespondencji.
 
 ### 4.7. Newsletter i komunikacja marketingowa
 
 Jeżeli użytkownik zapisze się do newslettera lub wyrazi zgodę na otrzymywanie informacji marketingowych, dane będą przetwarzane w celu przesyłania takich informacji.
 
-Podstawa prawna: art. 6 ust. 1 lit. a RODO — zgoda użytkownika.
+Podstawa prawna: art. 6 ust. 1 lit. a RODO - zgoda użytkownika.
 
 Zgodę można wycofać w każdej chwili, bez wpływu na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem.
 
@@ -157,7 +157,7 @@ Zgodę można wycofać w każdej chwili, bez wpływu na zgodność z prawem prze
 
 Dane techniczne i logi serwera mogą być przetwarzane w celu zapewnienia bezpieczeństwa platformy, wykrywania nadużyć, diagnozowania błędów i utrzymania prawidłowego działania strony.
 
-Podstawa prawna: art. 6 ust. 1 lit. f RODO — prawnie uzasadniony interes Administratora.
+Podstawa prawna: art. 6 ust. 1 lit. f RODO - prawnie uzasadniony interes Administratora.
 
 ## 5. Operatorzy i odbiorcy danych
 
@@ -175,11 +175,11 @@ i. podmiotom uprawnionym na podstawie przepisów prawa.
 
 Planowani lub przykładowi dostawcy technologiczni platformy mogą obejmować:
 
-a. Supabase — baza danych, autoryzacja, przechowywanie plików,
-b. Stripe — obsługa płatności online,
-c. Vercel — hosting aplikacji,
-d. Resend lub podobny dostawca — e-maile transakcyjne,
-e. Google Analytics lub inne narzędzie analityczne — jeżeli zostanie wdrożone.
+a. Supabase - baza danych, autoryzacja, przechowywanie plików,
+b. Stripe - obsługa płatności online,
+c. Vercel - hosting aplikacji,
+d. Resend lub podobny dostawca - e-maile transakcyjne,
+e. Google Analytics lub inne narzędzie analityczne - jeżeli zostanie wdrożone.
 
 Zakres faktycznie wykorzystywanych dostawców powinien odpowiadać aktualnej konfiguracji technicznej platformy.
 
@@ -195,13 +195,13 @@ Dane przechowujemy przez okres niezbędny do realizacji celów, dla których zos
 
 W szczególności:
 
-a. dane konta użytkownika — przez okres posiadania konta, a następnie przez okres wymagany do obsługi roszczeń lub obowiązków prawnych,
-b. dane dotyczące zakupów i płatności — przez okres wymagany przepisami podatkowymi i rachunkowymi,
-c. dane dotyczące dostępu do kursu — przez okres trwania dostępu oraz okres potrzebny do obsługi roszczeń,
-d. dane dotyczące certyfikatów — przez okres potrzebny do umożliwienia weryfikacji certyfikatu, chyba że certyfikat zostanie unieważniony lub przepisy wymagają innego okresu,
-e. dane kontaktowe — przez okres potrzebny do obsługi korespondencji i ewentualnych roszczeń,
-f. dane przetwarzane na podstawie zgody — do czasu jej wycofania,
-g. logi techniczne — przez okres potrzebny do zapewnienia bezpieczeństwa i prawidłowego działania platformy.
+a. dane konta użytkownika - przez okres posiadania konta, a następnie przez okres wymagany do obsługi roszczeń lub obowiązków prawnych,
+b. dane dotyczące zakupów i płatności - przez okres wymagany przepisami podatkowymi i rachunkowymi,
+c. dane dotyczące dostępu do kursu - przez okres trwania dostępu oraz okres potrzebny do obsługi roszczeń,
+d. dane dotyczące certyfikatów - przez okres potrzebny do umożliwienia weryfikacji certyfikatu, chyba że certyfikat zostanie unieważniony lub przepisy wymagają innego okresu,
+e. dane kontaktowe - przez okres potrzebny do obsługi korespondencji i ewentualnych roszczeń,
+f. dane przetwarzane na podstawie zgody - do czasu jej wycofania,
+g. logi techniczne - przez okres potrzebny do zapewnienia bezpieczeństwa i prawidłowego działania platformy.
 
 ## 8. Prawa użytkownika
 

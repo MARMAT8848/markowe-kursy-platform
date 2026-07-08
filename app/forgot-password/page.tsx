@@ -3,7 +3,7 @@ import AuthShell from "@/components/auth/AuthShell";
 import ForgotPasswordCard from "@/components/auth/ForgotPasswordCard";
 
 export const metadata: Metadata = {
-  title: "Reset hasła — MARKOWE KURSY",
+  title: "Reset hasła - MARKOWE KURSY",
   robots: { index: false },
 };
 

@@ -44,7 +44,7 @@ export class StripePaymentProvider implements PaymentProvider {
     const secret = process.env.STRIPE_WEBHOOK_SECRET;
     if (!key || !secret) {
       throw new Error(
-        "Stripe nie jest skonfigurowany — uzupełnij STRIPE_SECRET_KEY i STRIPE_WEBHOOK_SECRET w .env.local"
+        "Stripe nie jest skonfigurowany - uzupełnij STRIPE_SECRET_KEY i STRIPE_WEBHOOK_SECRET w .env.local"
       );
     }
     this.stripe = new Stripe(key);

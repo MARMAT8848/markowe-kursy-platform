@@ -34,35 +34,35 @@ dalej: „Usługodawca" lub „Sprzedawca".
 
 ## 2. Definicje
 
-1. Platforma — serwis internetowy Markowe Kursy dostępny pod adresem markowekursy.pl.
+1. Platforma - serwis internetowy Markowe Kursy dostępny pod adresem markowekursy.pl.
 
-2. Usługodawca — podmiot prowadzący platformę Markowe Kursy.
+2. Usługodawca - podmiot prowadzący platformę Markowe Kursy.
 
-3. Użytkownik — osoba korzystająca z platformy, niezależnie od tego, czy posiada konto.
+3. Użytkownik - osoba korzystająca z platformy, niezależnie od tego, czy posiada konto.
 
-4. Kursant — Użytkownik posiadający konto na platformie i dostęp do co najmniej jednego kursu.
+4. Kursant - Użytkownik posiadający konto na platformie i dostęp do co najmniej jednego kursu.
 
-5. Konto — indywidualne konto Użytkownika na platformie, umożliwiające dostęp do zakupionych kursów, historii zakupów, postępów oraz certyfikatów.
+5. Konto - indywidualne konto Użytkownika na platformie, umożliwiające dostęp do zakupionych kursów, historii zakupów, postępów oraz certyfikatów.
 
-6. Kurs — uporządkowany zestaw materiałów edukacyjnych udostępnianych online, składający się w szczególności z modułów, lekcji, grafik, ćwiczeń, materiałów tekstowych, materiałów technicznych, testów lub innych treści.
+6. Kurs - uporządkowany zestaw materiałów edukacyjnych udostępnianych online, składający się w szczególności z modułów, lekcji, grafik, ćwiczeń, materiałów tekstowych, materiałów technicznych, testów lub innych treści.
 
-7. Lekcja — pojedyncza część kursu udostępniana w ramach platformy.
+7. Lekcja - pojedyncza część kursu udostępniana w ramach platformy.
 
-8. Treść cyfrowa — dane wytwarzane i dostarczane w postaci cyfrowej, w szczególności lekcje online, materiały szkoleniowe, grafiki, pliki, nagrania, ćwiczenia i certyfikaty.
+8. Treść cyfrowa - dane wytwarzane i dostarczane w postaci cyfrowej, w szczególności lekcje online, materiały szkoleniowe, grafiki, pliki, nagrania, ćwiczenia i certyfikaty.
 
-9. Usługa cyfrowa — usługa umożliwiająca Użytkownikowi korzystanie z treści cyfrowych w ramach platformy.
+9. Usługa cyfrowa - usługa umożliwiająca Użytkownikowi korzystanie z treści cyfrowych w ramach platformy.
 
-10. Dostęp do kursu — uprawnienie Kursanta do korzystania z określonego kursu przez czas wskazany w ofercie, standardowo przez 12 miesięcy od daty aktywacji dostępu.
+10. Dostęp do kursu - uprawnienie Kursanta do korzystania z określonego kursu przez czas wskazany w ofercie, standardowo przez 12 miesięcy od daty aktywacji dostępu.
 
-11. Panel kursanta — część platformy dostępna po zalogowaniu, umożliwiająca korzystanie z zakupionych kursów, śledzenie postępów i pobieranie certyfikatów.
+11. Panel kursanta - część platformy dostępna po zalogowaniu, umożliwiająca korzystanie z zakupionych kursów, śledzenie postępów i pobieranie certyfikatów.
 
-12. Certyfikat — dokument w formie cyfrowej, potwierdzający ukończenie kursu na platformie.
+12. Certyfikat - dokument w formie cyfrowej, potwierdzający ukończenie kursu na platformie.
 
-13. Konsument — osoba fizyczna dokonująca czynności prawnej niezwiązanej bezpośrednio z jej działalnością gospodarczą lub zawodową.
+13. Konsument - osoba fizyczna dokonująca czynności prawnej niezwiązanej bezpośrednio z jej działalnością gospodarczą lub zawodową.
 
-14. Przedsiębiorca na prawach konsumenta — osoba fizyczna zawierająca umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści umowy wynika, że nie ma ona dla tej osoby charakteru zawodowego.
+14. Przedsiębiorca na prawach konsumenta - osoba fizyczna zawierająca umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści umowy wynika, że nie ma ona dla tej osoby charakteru zawodowego.
 
-15. Operator płatności — zewnętrzny podmiot obsługujący płatności online, np. Stripe lub inny dostawca płatności wdrożony na platformie.
+15. Operator płatności - zewnętrzny podmiot obsługujący płatności online, np. Stripe lub inny dostawca płatności wdrożony na platformie.
 
 ## 3. Zakres usług świadczonych drogą elektroniczną
 
@@ -332,7 +332,7 @@ g. potrzeby usunięcia błędów lub niejasności.
 
 5. Aktualna wersja Regulaminu jest dostępna na stronie platformy markowekursy.pl.
 
-## Załącznik nr 1 — Wzór formularza odstąpienia od umowy
+## Załącznik nr 1 - Wzór formularza odstąpienia od umowy
 
 Adresat:
 
@@ -349,6 +349,6 @@ Adres e-mail konta: [ADRES E-MAIL]
 
 Data: [DATA]
 
-Podpis konsumenta: [PODPIS — jeżeli formularz jest przesyłany w wersji papierowej]
+Podpis konsumenta: [PODPIS - jeżeli formularz jest przesyłany w wersji papierowej]
 `,
 };

@@ -19,7 +19,8 @@ export type TemplateKey =
   | "access_expired"
   | "certificate_issued"
   | "newsletter_confirm"
-  | "newsletter_campaign";
+  | "newsletter_campaign"
+  | "contact_message";
 
 export interface RenderedEmail {
   subject: string;
@@ -39,10 +40,10 @@ const PL: Record<TemplateKey, Renderer> = {
     const currency = String(p.currency ?? "PLN");
     const purchaseDate = String(p.purchaseDate ?? "");
     return {
-      subject: `Potwierdzenie zakupu — ${courseTitle}`,
+      subject: `Potwierdzenie zakupu - ${courseTitle}`,
       html: emailLayout({
         heading: "Dziękujemy za zakup",
-        preheader: `Zakup kursu ${courseTitle} — dostęp na 12 miesięcy.`,
+        preheader: `Zakup kursu ${courseTitle} - dostęp na 12 miesięcy.`,
         bodyHtml: `
           <p style="margin:0 0 16px">Potwierdzamy zakup kursu na platformie Markowe Kursy.</p>
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px">
@@ -72,12 +73,12 @@ const PL: Record<TemplateKey, Renderer> = {
     const courseTitle = String(p.courseTitle ?? "kurs");
     const expires = String(p.accessExpires ?? "");
     return {
-      subject: `Dostęp aktywny — ${courseTitle}`,
+      subject: `Dostęp aktywny - ${courseTitle}`,
       html: emailLayout({
         heading: "Twój kurs jest już dostępny",
         preheader: `Masz dostęp do kursu ${courseTitle}.`,
         bodyHtml: `
-          <p style="margin:0 0 16px">Płatność została potwierdzona — masz teraz pełny dostęp do kursu <strong>${courseTitle}</strong>.</p>
+          <p style="margin:0 0 16px">Płatność została potwierdzona - masz teraz pełny dostęp do kursu <strong>${courseTitle}</strong>.</p>
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px">
             ${infoRow("Dostęp aktywny do", expires)}
           </table>
@@ -93,10 +94,10 @@ const PL: Record<TemplateKey, Renderer> = {
     const courseTitle = String(p.courseTitle ?? "kurs");
     const slug = String(p.courseSlug ?? "");
     return {
-      subject: `Dostęp wygasł — ${courseTitle}`,
+      subject: `Dostęp wygasł - ${courseTitle}`,
       html: emailLayout({
         heading: "Twój dostęp do kursu wygasł",
-        preheader: `Dostęp do ${courseTitle} wygasł — możesz go odnowić.`,
+        preheader: `Dostęp do ${courseTitle} wygasł - możesz go odnowić.`,
         bodyHtml: `
           <p style="margin:0 0 16px">Twój 12-miesięczny dostęp do kursu <strong>${courseTitle}</strong> właśnie się zakończył. Historia zakupu oraz wydane certyfikaty pozostają dostępne w Twoim panelu.</p>
           <p style="margin:0 0 22px">${button(`${SITE}/courses/${slug}`, "Odnów dostęp")}</p>`,
@@ -109,7 +110,7 @@ const PL: Record<TemplateKey, Renderer> = {
     const number = String(p.certificateNumber ?? "");
     const verifyUrl = String(p.verifyUrl ?? `${SITE}`);
     return {
-      subject: `Certyfikat ukończenia — ${courseTitle}`,
+      subject: `Certyfikat ukończenia - ${courseTitle}`,
       html: emailLayout({
         heading: "Gratulacje! Ukończyłeś/aś kurs",
         preheader: `Twój certyfikat (${number}) jest gotowy.`,
@@ -136,6 +137,36 @@ const PL: Record<TemplateKey, Renderer> = {
           <p style="margin:0 0 16px">Ktoś (mamy nadzieję, że Ty) zapisał ten adres do newslettera Markowe Kursy - informacji o nowych kursach, lekcjach i promocjach.</p>
           <p style="margin:0 0 22px">${button(confirmUrl, "Potwierdzam zapis")}</p>
           <p style="margin:0;font-size:12px;color:#9C9B98">Jeśli to nie Ty - po prostu zignoruj tę wiadomość. Bez potwierdzenia nie wyślemy żadnego newslettera, a adres zostanie nieaktywny.</p>`,
+      }),
+    };
+  },
+
+  // Powiadomienie dla admina o wiadomości z formularza kontaktowego.
+  // Wiadomość jest też zapisana w bazie (contact_messages) - mail to
+  // tylko sygnał; treść od klienta zawsze escapowana.
+  contact_message: (p) => {
+    const name = String(p.name ?? "");
+    const email = String(p.email ?? "");
+    const topic = String(p.topic ?? "Inne");
+    const message = String(p.message ?? "");
+    const esc = (s: string) =>
+      s
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    return {
+      subject: `Wiadomość z formularza: ${topic} - ${name}`,
+      html: emailLayout({
+        heading: "Nowa wiadomość z formularza kontaktowego",
+        preheader: `${name} (${email}) - ${topic}`,
+        bodyHtml: `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px">
+            ${infoRow("Od", `${esc(name)} &lt;${esc(email)}&gt;`)}
+            ${infoRow("Temat", esc(topic))}
+          </table>
+          <div style="background:#FBFBFA;border:1px solid #EFEEEB;border-radius:10px;padding:14px 16px;margin:0 0 18px;font-size:13.5px;line-height:1.65;white-space:pre-wrap">${esc(message)}</div>
+          <p style="margin:0 0 22px">${button(`${SITE}/admin/messages`, "Otwórz w panelu admina")}</p>
+          <p style="margin:0;font-size:12px;color:#9C9B98">Odpowiadasz bezpośrednio na adres nadawcy - wystarczy „Odpowiedz" w programie pocztowym${email ? ` (${esc(email)})` : ""}.</p>`,
       }),
     };
   },
@@ -167,7 +198,7 @@ function reminder(p: Record<string, unknown>, days: number): RenderedEmail {
   const expires = String(p.accessExpires ?? "");
   const slug = String(p.courseSlug ?? "");
   return {
-    subject: `Dostęp wygaśnie za ${days} dni — ${courseTitle}`,
+    subject: `Dostęp wygaśnie za ${days} dni - ${courseTitle}`,
     html: emailLayout({
       heading: `Twój dostęp wygasa za ${days} dni`,
       preheader: `Dostęp do ${courseTitle} wygasa ${expires}.`,

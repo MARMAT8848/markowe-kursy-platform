@@ -8,11 +8,11 @@ import { isCurrentUserAdmin } from "@/lib/admin";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Panel kursanta — MARKOWE KURSY",
+  title: "Panel kursanta - MARKOWE KURSY",
 };
 
 const fmtDate = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString("pl-PL") : "—";
+  iso ? new Date(iso).toLocaleDateString("pl-PL") : "-";
 
 interface Row {
   id: string;
@@ -175,7 +175,7 @@ export default async function DashboardPage() {
                   color: "var(--sub)",
                 }}
               >
-                Nie masz jeszcze żadnego kursu. Wybierz szkolenie z katalogu —
+                Nie masz jeszcze żadnego kursu. Wybierz szkolenie z katalogu -
                 dostęp aktywuje się automatycznie po opłaceniu.
               </p>
               <Link className="btn btn-primary" href="/courses">

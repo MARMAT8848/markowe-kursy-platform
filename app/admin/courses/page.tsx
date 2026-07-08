@@ -6,7 +6,7 @@ import { toggleCourseStatusAction } from "@/app/admin/actions";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Kursy — Panel admina",
+  title: "Kursy - Panel admina",
   robots: { index: false },
 };
 
@@ -35,7 +35,7 @@ export default async function AdminCoursesPage() {
     <>
       <AdminH1>Kursy</AdminH1>
       <p style={{ margin: "0 0 20px", fontSize: 13.5, color: "var(--sub)", maxWidth: 640 }}>
-        Publikuj kurs dopiero, gdy ma gotową treść — status „publikowany”
+        Publikuj kurs dopiero, gdy ma gotową treść - status „publikowany”
         oznacza, że kurs jest widoczny w katalogu i kupowalny.
       </p>
       <Table head={["Kod", "Kurs", "Lekcje (gotowe/wsz.)", "Status", "Akcja"]}>

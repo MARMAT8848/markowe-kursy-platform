@@ -4,7 +4,7 @@ import { requireAdmin } from "@/lib/admin";
 import { AdminH1, StatCard } from "@/components/admin/ui";
 
 export const metadata: Metadata = {
-  title: "Panel admina — MARKOWE KURSY",
+  title: "Panel admina - MARKOWE KURSY",
   robots: { index: false },
 };
 
@@ -62,31 +62,31 @@ export default async function AdminOverviewPage() {
             <Link href="/admin/stats" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Statystyki
             </Link>{" "}
-            — przychód, wzrost, wyniki kursów i sprawy wymagające uwagi.
+            - przychód, wzrost, wyniki kursów i sprawy wymagające uwagi.
           </li>
           <li>
             <Link href="/admin/enrollments" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Dostępy
             </Link>{" "}
-            — nadaj, przedłuż o 12 miesięcy lub cofnij dostęp do kursu.
+            - nadaj, przedłuż o 12 miesięcy lub cofnij dostęp do kursu.
           </li>
           <li>
             <Link href="/admin/users" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Użytkownicy
             </Link>{" "}
-            — nadaj komuś dostęp ręcznie (np. płatność offline).
+            - nadaj komuś dostęp ręcznie (np. płatność offline).
           </li>
           <li>
             <Link href="/admin/courses" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Kursy
             </Link>{" "}
-            — przełącz status publikacji (publikowany / wkrótce).
+            - przełącz status publikacji (publikowany / wkrótce).
           </li>
           <li>
             <Link href="/admin/certificates" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Certyfikaty
             </Link>{" "}
-            — unieważnij lub wygeneruj ponownie.
+            - unieważnij lub wygeneruj ponownie.
           </li>
         </ul>
       </div>

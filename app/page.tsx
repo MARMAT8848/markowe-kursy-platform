@@ -69,13 +69,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ŚCIEŻKI KARIERY — główny blok ofertowy */}
+      {/* ŚCIEŻKI KARIERY - główny blok ofertowy */}
       <CareerPaths />
 
       {/* POLECANE SZKOLENIA */}
       <FeaturedCourses />
 
-      {/* UCZ SIĘ, GDZIEKOLWIEK JESTEŚ — zbicie obiekcji (rotacja/delegacja) */}
+      {/* UCZ SIĘ, GDZIEKOLWIEK JESTEŚ - zbicie obiekcji (rotacja/delegacja) */}
       <LearnAnywhere />
 
       {/* SEPARATOR: AKADEMIA TECHNICZNA */}

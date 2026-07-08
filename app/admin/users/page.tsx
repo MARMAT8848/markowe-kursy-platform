@@ -6,12 +6,12 @@ import { grantAccessAction } from "@/app/admin/actions";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Użytkownicy — Panel admina",
+  title: "Użytkownicy - Panel admina",
   robots: { index: false },
 };
 
 const fmt = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString("pl-PL") : "—";
+  iso ? new Date(iso).toLocaleDateString("pl-PL") : "-";
 
 export default async function AdminUsersPage() {
   const { admin } = await requireAdmin();
@@ -59,7 +59,7 @@ export default async function AdminUsersPage() {
           return (
             <tr key={p.id as string}>
               <Td>
-                <div style={{ fontWeight: 600 }}>{p.full_name || "—"}</div>
+                <div style={{ fontWeight: 600 }}>{p.full_name || "-"}</div>
                 <div style={{ fontSize: 11, color: "var(--muted)" }}>
                   {p.email}
                 </div>

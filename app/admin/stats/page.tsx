@@ -247,7 +247,7 @@ export default async function AdminStatsPage() {
         />
       </div>
 
-      {/* Wymagają uwagi — status zawsze z etykietą, nigdy sam kolor */}
+      {/* Wymagają uwagi - status zawsze z etykietą, nigdy sam kolor */}
       <h2
         style={{
           margin: "0 0 12px",
@@ -295,7 +295,7 @@ export default async function AdminStatsPage() {
         </div>
       )}
 
-      {/* Wyniki per kurs — tabela, bo 5 klas niosących znaczenie */}
+      {/* Wyniki per kurs - tabela, bo 5 klas niosących znaczenie */}
       <h2
         style={{
           margin: "0 0 12px",

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const fmt = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleString("pl-PL") : "—";
+  iso ? new Date(iso).toLocaleString("pl-PL") : "-";
 
 export default async function AdminNewsletterPage() {
   const { admin } = await requireAdmin();
@@ -93,7 +93,7 @@ export default async function AdminNewsletterPage() {
                 <Td>
                   <StatusPill status={c.status as string} />
                 </Td>
-                <Td mono>{(c.recipients_count as number) || "—"}</Td>
+                <Td mono>{(c.recipients_count as number) || "-"}</Td>
                 <Td mono>{fmt(c.created_at as string)}</Td>
                 <Td mono>{fmt(c.sent_at as string)}</Td>
               </tr>

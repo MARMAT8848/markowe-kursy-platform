@@ -15,8 +15,8 @@ export async function generateMetadata({
   const course = getCourse(slug);
   return {
     title: course
-      ? `Zamówienie: ${course.title} — MARKOWE KURSY`
-      : "Zamówienie — MARKOWE KURSY",
+      ? `Zamówienie: ${course.title} - MARKOWE KURSY`
+      : "Zamówienie - MARKOWE KURSY",
   };
 }
 
@@ -64,7 +64,7 @@ export default async function CheckoutPage({
           >
             Kupujesz treść cyfrową z natychmiastowym dostępem. Przepisy
             wymagają, abyś przed płatnością świadomie zaakceptował/a poniższe
-            oświadczenia — żadne nie jest zaznaczone z góry.
+            oświadczenia - żadne nie jest zaznaczone z góry.
           </p>
         </div>
       </section>

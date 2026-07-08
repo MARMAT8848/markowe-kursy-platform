@@ -6,12 +6,12 @@ import { extendAccessAction, revokeAccessAction } from "@/app/admin/actions";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Dostępy — Panel admina",
+  title: "Dostępy - Panel admina",
   robots: { index: false },
 };
 
 const fmt = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString("pl-PL") : "—";
+  iso ? new Date(iso).toLocaleDateString("pl-PL") : "-";
 
 export default async function AdminEnrollmentsPage() {
   const { admin } = await requireAdmin();
@@ -65,7 +65,7 @@ export default async function AdminEnrollmentsPage() {
           return (
             <tr key={e.id}>
               <Td>
-                <div style={{ fontWeight: 600 }}>{prof?.full_name || "—"}</div>
+                <div style={{ fontWeight: 600 }}>{prof?.full_name || "-"}</div>
                 <div style={{ fontSize: 11, color: "var(--muted)" }}>
                   {prof?.email}
                 </div>

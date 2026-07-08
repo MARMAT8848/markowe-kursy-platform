@@ -75,11 +75,11 @@ Użytkownik może zarządzać plikami cookies także z poziomu ustawień swojej 
 
 Platforma może korzystać z narzędzi dostawców zewnętrznych, takich jak:
 
-a. Supabase — autoryzacja i działanie konta,
-b. Stripe — obsługa płatności,
-c. Vercel — hosting,
-d. Resend lub podobny dostawca — e-maile transakcyjne,
-e. Google Analytics lub inne narzędzie analityczne — jeżeli zostanie wdrożone.
+a. Supabase - autoryzacja i działanie konta,
+b. Stripe - obsługa płatności,
+c. Vercel - hosting,
+d. Resend lub podobny dostawca - e-maile transakcyjne,
+e. Google Analytics lub inne narzędzie analityczne - jeżeli zostanie wdrożone.
 
 Aktualna lista narzędzi powinna odpowiadać faktycznej konfiguracji platformy.
 

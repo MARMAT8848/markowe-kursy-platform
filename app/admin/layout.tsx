@@ -10,6 +10,7 @@ const NAV = [
   { href: "/admin/certificates", label: "Certyfikaty" },
   { href: "/admin/orders", label: "Zamówienia" },
   { href: "/admin/newsletter", label: "Newsletter" },
+  { href: "/admin/messages", label: "Wiadomości" },
 ];
 
 export default async function AdminLayout({

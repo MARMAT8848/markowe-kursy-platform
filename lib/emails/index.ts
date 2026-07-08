@@ -27,12 +27,19 @@ function getResend(): Resend {
 function marketingHeaders(
   payload: Record<string, unknown> | null
 ): Record<string, string> | undefined {
+  const headers: Record<string, string> = {};
   const url = payload?.unsubscribeUrl;
-  if (typeof url !== "string" || !url.startsWith("http")) return undefined;
-  return {
-    "List-Unsubscribe": `<${url}>`,
-    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-  };
+  if (typeof url === "string" && url.startsWith("http")) {
+    headers["List-Unsubscribe"] = `<${url}>`;
+    headers["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click";
+  }
+  // Reply-To — np. powiadomienie z formularza kontaktowego: "Odpowiedz"
+  // w programie pocztowym trafia do klienta, nie na adres nadawczy.
+  const replyTo = payload?.replyTo;
+  if (typeof replyTo === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo)) {
+    headers["Reply-To"] = replyTo;
+  }
+  return Object.keys(headers).length > 0 ? headers : undefined;
 }
 
 async function deliver(

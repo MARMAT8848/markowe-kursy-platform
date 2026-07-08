@@ -4,12 +4,12 @@ import { AdminH1, Table, Td, StatusPill } from "@/components/admin/ui";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Zamówienia — Panel admina",
+  title: "Zamówienia - Panel admina",
   robots: { index: false },
 };
 
 const fmtDateTime = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleString("pl-PL") : "—";
+  iso ? new Date(iso).toLocaleString("pl-PL") : "-";
 const zl = (grosze: number) => `${(grosze / 100).toFixed(2)} zł`;
 
 export default async function AdminOrdersPage() {
@@ -42,7 +42,7 @@ export default async function AdminOrdersPage() {
             <tr key={o.id as string}>
               <Td mono>{fmtDateTime(o.created_at as string)}</Td>
               <Td>
-                <div style={{ fontWeight: 600 }}>{prof?.full_name || "—"}</div>
+                <div style={{ fontWeight: 600 }}>{prof?.full_name || "-"}</div>
                 <div style={{ fontSize: 11, color: "var(--muted)" }}>
                   {o.customer_email}
                 </div>
@@ -53,7 +53,7 @@ export default async function AdminOrdersPage() {
                 <StatusPill status={o.status as string} />
               </Td>
               <Td mono color={o.terms_accepted_at ? "#2E7D46" : "var(--muted)"}>
-                {o.terms_accepted_at ? "✓ zapisane" : "—"}
+                {o.terms_accepted_at ? "✓ zapisane" : "-"}
               </Td>
             </tr>
           );

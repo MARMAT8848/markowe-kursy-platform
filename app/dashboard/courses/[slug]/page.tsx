@@ -17,8 +17,8 @@ export async function generateMetadata({
   const course = getCourse(slug);
   return {
     title: course
-      ? `${course.title} — Panel kursu — MARKOWE KURSY`
-      : "Panel kursu — MARKOWE KURSY",
+      ? `${course.title} - Panel kursu - MARKOWE KURSY`
+      : "Panel kursu - MARKOWE KURSY",
   };
 }
 
@@ -177,7 +177,7 @@ export default async function CoursePanelPage({
             </div>
             <div className="progress-text">
               {completed === 0
-                ? "Nie rozpoczęto — zacznij od pierwszej lekcji."
+                ? "Nie rozpoczęto - zacznij od pierwszej lekcji."
                 : `${completed} z ${total} lekcji ukończonych`}
             </div>
             <a

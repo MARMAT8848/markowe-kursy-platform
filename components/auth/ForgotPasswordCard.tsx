@@ -51,7 +51,7 @@ export default function ForgotPasswordCard() {
             color: "var(--sub)",
           }}
         >
-          Podaj adres e-mail przypisany do konta — wyślemy link do ustawienia
+          Podaj adres e-mail przypisany do konta - wyślemy link do ustawienia
           nowego hasła.
         </p>
         {sent ? (

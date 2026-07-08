@@ -91,7 +91,7 @@ export async function POST(req: Request) {
       {
         error: "PAYMENTS_NOT_CONFIGURED",
         message:
-          "Płatności nie są jeszcze uruchomione — sklep wystartuje wkrótce.",
+          "Płatności nie są jeszcze uruchomione - sklep wystartuje wkrótce.",
       },
       { status: 503 }
     );

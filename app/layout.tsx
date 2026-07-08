@@ -20,7 +20,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "MARKOWE KURSY - Akademia techniczna izolacji przemysłowych",
   description:
-    "Ścieżki kariery dla specjalistów izolacji przemysłowych — szkolenia oparte na realnych projektach i wymaganiach standardu NORSOK. Obmiarowanie, prefabrykacja, dokumentacja ISO/P&ID.",
+    "Ścieżki kariery dla specjalistów izolacji przemysłowych - szkolenia oparte na realnych projektach i wymaganiach standardu NORSOK. Obmiarowanie, prefabrykacja, dokumentacja ISO/P&ID.",
   icons: { icon: "/assets/logo.png" },
 };
 
@@ -28,7 +28,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pl" className={`${plexSans.variable} ${plexMono.variable}`}>
+    <html
+      lang="pl"
+      data-scroll-behavior="smooth"
+      className={`${plexSans.variable} ${plexMono.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

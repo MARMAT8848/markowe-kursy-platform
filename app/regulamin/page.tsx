@@ -3,7 +3,7 @@ import LegalDoc from "@/components/LegalDoc";
 import { REGULAMIN } from "@/lib/legal/regulamin";
 
 export const metadata: Metadata = {
-  title: "Regulamin — MARKOWE KURSY",
+  title: "Regulamin - MARKOWE KURSY",
   description: "Regulamin platformy Markowe Kursy (markowekursy.pl).",
 };
 

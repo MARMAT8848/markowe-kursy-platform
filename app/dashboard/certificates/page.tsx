@@ -7,7 +7,7 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Twoje certyfikaty — MARKOWE KURSY",
+  title: "Twoje certyfikaty - MARKOWE KURSY",
 };
 
 export default async function CertificatesPage() {
@@ -35,7 +35,7 @@ export default async function CertificatesPage() {
       active: c.status === "generated",
       issued: c.issued_at
         ? new Date(c.issued_at).toLocaleDateString("pl-PL")
-        : "—",
+        : "-",
       title: getCourse(slug)?.title ?? slug.toUpperCase(),
       verifySlug: c.verification_slug as string,
     };
@@ -76,7 +76,7 @@ export default async function CertificatesPage() {
               }}
             >
               Nie masz jeszcze żadnego certyfikatu. Certyfikat generuje się
-              automatycznie po ukończeniu wszystkich lekcji kursu — znajdziesz
+              automatycznie po ukończeniu wszystkich lekcji kursu - znajdziesz
               go tutaj i pobierzesz jako PDF.
             </p>
           ) : (

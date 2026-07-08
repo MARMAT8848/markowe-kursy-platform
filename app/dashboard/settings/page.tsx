@@ -6,7 +6,7 @@ import ProfileSettings from "@/components/dashboard/ProfileSettings";
 import { createSupabaseServer } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Ustawienia konta — MARKOWE KURSY",
+  title: "Ustawienia konta - MARKOWE KURSY",
 };
 
 export default async function SettingsPage() {

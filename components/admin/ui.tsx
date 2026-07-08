@@ -162,7 +162,7 @@ export function StatCard({
       >
         {label}
       </div>
-      {/* wartość: proporcjonalne cyfry (bez tabular-nums) — to liczba
+      {/* wartość: proporcjonalne cyfry (bez tabular-nums) - to liczba
           samodzielna, nie kolumna */}
       <div style={{ font: "600 26px var(--sans)", color: "var(--ink)" }}>
         {value}

@@ -37,7 +37,7 @@ export default function ResetPasswordCard() {
       setNotice(
         error.message.toLowerCase().includes("should be at least")
           ? "Hasło musi mieć co najmniej 8 znaków."
-          : "Nie udało się zmienić hasła. Link mógł wygasnąć — poproś o nowy."
+          : "Nie udało się zmienić hasła. Link mógł wygasnąć - poproś o nowy."
       );
       return;
     }

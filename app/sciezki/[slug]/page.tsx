@@ -82,7 +82,7 @@ export default async function CareerPathPage({
         </div>
       </section>
 
-      {/* Zawartość + wycena (układ responsywny — collapse na mobile) */}
+      {/* Zawartość + wycena (układ responsywny - collapse na mobile) */}
       <section style={{ padding: "8px 0 56px" }}>
         <div className="wrap">
           <div className="kurs-layout" style={{ paddingTop: 20 }}>

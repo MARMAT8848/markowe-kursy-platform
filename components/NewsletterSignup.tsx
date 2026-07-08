@@ -62,7 +62,7 @@ export default function NewsletterSignup() {
             onSubmit={onSubmit}
             style={{ display: "flex", gap: 8, marginTop: 8 }}
           >
-            {/* honeypot — niewidoczne dla ludzi, wypełniają je boty */}
+            {/* honeypot - niewidoczne dla ludzi, wypełniają je boty */}
             <input
               type="text"
               name="website"

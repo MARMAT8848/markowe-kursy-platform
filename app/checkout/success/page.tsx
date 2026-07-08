@@ -4,7 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Dziękujemy za zamówienie — MARKOWE KURSY",
+  title: "Dziękujemy za zamówienie - MARKOWE KURSY",
 };
 
 /**
@@ -41,7 +41,7 @@ export default function CheckoutSuccessPage() {
             }}
           >
             Płatność jest przetwarzana. Dostęp do kursu pojawi się na Twoim
-            koncie automatycznie po potwierdzeniu płatności przez operatora —
+            koncie automatycznie po potwierdzeniu płatności przez operatora -
             zwykle w ciągu kilku minut. Potwierdzenie zakupu wraz ze złożonymi
             zgodami wyślemy na Twój adres e-mail.
           </p>
