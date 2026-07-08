@@ -19,8 +19,8 @@ export async function generateMetadata({
   const path = getCareerPath(slug);
   return {
     title: path
-      ? `Ścieżka: ${path.name} — MARKOWE KURSY`
-      : "Ścieżka kariery — MARKOWE KURSY",
+      ? `Ścieżka: ${path.name} - MARKOWE KURSY`
+      : "Ścieżka kariery - MARKOWE KURSY",
     description: path?.teaser,
   };
 }
@@ -209,7 +209,7 @@ export default async function CareerPathPage({
                   color: "var(--sub)",
                 }}
               >
-                Do premiery pakietu możesz kupić dostępne kursy pojedynczo —
+                Do premiery pakietu możesz kupić dostępne kursy pojedynczo -
                 wybierz je z listy obok. Dostęp do każdego kursu: 12 miesięcy.
               </p>
               <div className="kurs-card-checks">

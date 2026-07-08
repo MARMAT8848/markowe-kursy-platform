@@ -18,7 +18,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MARKOWE KURSY — Akademia techniczna izolacji przemysłowych",
+  title: "MARKOWE KURSY - Akademia techniczna izolacji przemysłowych",
   description:
     "Ścieżki kariery dla specjalistów izolacji przemysłowych — szkolenia oparte na realnych projektach i wymaganiach standardu NORSOK. Obmiarowanie, prefabrykacja, dokumentacja ISO/P&ID.",
   icons: { icon: "/assets/logo.png" },

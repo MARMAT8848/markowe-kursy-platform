@@ -20,7 +20,7 @@ regułę 26px. Warianty zapasowe (krótsze, dobre do reklam):
 
 ### Podtytuł hero — 3 warianty (wariant 1 WDROŻONY)
 
-1. **„Wybierz jedną z 5 ścieżek kariery — od pierwszego montażu po
+1. **„Wybierz jedną z 5 ścieżek kariery - od pierwszego montażu po
    samodzielne obmiary na projektach w Norwegii."**
 2. „5 ścieżek stanowiskowych: Izoler, Warsztatowiec, Obmiarowiec,
    Brygadzista lub Pełna Akademia. Ty decydujesz, dokąd zmierzasz."
@@ -33,26 +33,32 @@ Warianty 2 i 3 → do testów A/B po starcie (pole `heroHeadline` w konfiguracji
 
 | Ścieżka | Zajawka |
 |---|---|
-| Izoler (199 zł) | Pewny start w zawodzie — podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż. |
-| Warsztatowiec (599 zł) | Prefabrykacja i płaszcze ochronne — czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista. |
-| Obmiarowiec (749 zł, POLECANA) | Przygotowanie do roli Insulation Surveyor — izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej. |
-| Brygadzista (899 zł) | Kompetencje do nadzorowania robót — od dokumentacji ISO/P&ID, przez blacharkę, po kontrolę obmiaru wykonawczego. |
-| Pełna Akademia (1099 zł, NAJLEPSZA WARTOŚĆ) | Cała wiedza ekspercka w jednym pakiecie — najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego. |
+| Izoler (199 zł) | Pewny start w zawodzie - podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż. |
+| Warsztatowiec (599 zł) | Prefabrykacja i płaszcze ochronne - czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista. |
+| Obmiarowiec (749 zł, POLECANA) | Przygotowanie do roli Insulation Surveyor - izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej. |
+| Brygadzista (899 zł) | Kompetencje do nadzorowania robót - od dokumentacji ISO/P&ID, przez blacharkę, po kontrolę obmiaru wykonawczego. |
+| Pełna Akademia (1099 zł, NAJLEPSZA WARTOŚĆ) | Cała wiedza ekspercka w jednym pakiecie - najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego. |
 
 ## 2. Podstrony kursów (WDROŻONE — ramka pod „Dla kogo jest ten kurs")
 
 **Formuła „dokumentacja dwujęzyczna":**
-> DOKUMENTACJA DWUJĘZYCZNA PL/EN — Poznajesz terminologię polską
+> DOKUMENTACJA DWUJĘZYCZNA PL/EN - Poznajesz terminologię polską
 > i angielską stosowaną w dokumentacji technicznej na projektach
-> norweskich — te same pojęcia, którymi posługują się inżynier,
+> norweskich - te same pojęcia, którymi posługują się inżynier,
 > brygadzista i dział QA.
 
-**Hasło zbijające obiekcję „nie mam czasu, jestem na rotacji" (nauka skądkolwiek):**
-> UCZ SIĘ, GDZIEKOLWIEK JESTEŚ — Kurs jest w 100% online, więc uczysz
-> się z dowolnego miejsca: na kwaterze podczas rotacji, w delegacji czy
-> w domu. Wystarczy telefon, tablet lub komputer z internetem. Masz
-> dostęp przez 12 miesięcy i realizujesz materiał we własnym tempie, bez
-> sztywnych terminów i zjazdów.
+**Hasło zbijające obiekcję „nie mam czasu, jestem na rotacji" (nauka skądkolwiek).**
+Ta sama treść widnieje na stronie głównej (sekcja `LearnAnywhere`) i na
+każdej stronie kursu (ramka pod „Dla kogo jest ten kurs"):
+> UCZ SIĘ, GDZIEKOLWIEK JESTEŚ - Kurs jest w 100% online, więc możesz
+> uczyć się z dowolnego miejsca. Wystarczy telefon, tablet lub komputer
+> z dostępem do internetu. Otrzymujesz 12 miesięcy dostępu do
+> materiałów, dzięki czemu uczysz się we własnym tempie - bez sztywnych
+> terminów i konieczności uczestniczenia w zjazdach.
+>
+> Punkty: Dowolne urządzenie - telefon, tablet, komputer · 12 miesięcy
+> dostępu, bez sztywnych terminów · Materiały są zawsze pod ręką - ucz
+> się gdzie chcesz i kiedy chcesz.
 
 ## 3. Cennik (WDROŻONY w lib/courses.ts + lib/paths.ts)
 

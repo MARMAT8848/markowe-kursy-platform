@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 /* eslint-disable @next/next/no-img-element */
 
 export const metadata: Metadata = {
-  title: "Kontakt — MARKOWE KURSY",
+  title: "Kontakt - MARKOWE KURSY",
   description:
     "Napisz w sprawie kursu indywidualnego, oferty dla firmy lub współpracy. Odpowiadamy w ciągu 1 dnia roboczego.",
 };

@@ -5,7 +5,7 @@ import CatalogGrid from "@/components/course/CatalogGrid";
 import { getUserCourseStates } from "@/lib/enrollment-state";
 
 export const metadata: Metadata = {
-  title: "Katalog szkoleń — MARKOWE KURSY",
+  title: "Katalog szkoleń - MARKOWE KURSY",
   description:
     "Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru, prefabrykacji płaszczy ochronnych oraz dokumentacji technicznej.",
 };

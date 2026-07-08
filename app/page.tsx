@@ -34,7 +34,7 @@ export default function HomePage() {
             </div>
             <h1>Zbuduj karierę jako ekspert izolacji zgodnie z NORSOK Standard</h1>
             <p className="hero-para">
-              Wybierz jedną z 5 ścieżek kariery — od pierwszego montażu po
+              Wybierz jedną z 5 ścieżek kariery - od pierwszego montażu po
               samodzielne obmiary na projektach w Norwegii.
             </p>
             <div className="hero-btns">

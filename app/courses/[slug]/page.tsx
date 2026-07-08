@@ -18,8 +18,8 @@ export async function generateMetadata({
   const course = getCourse(slug);
   return {
     title: course
-      ? `${course.title} — MARKOWE KURSY`
-      : "Kurs — MARKOWE KURSY",
+      ? `${course.title} - MARKOWE KURSY`
+      : "Kurs - MARKOWE KURSY",
     description: course?.desc,
   };
 }
@@ -224,7 +224,7 @@ export default async function CoursePage({
                   }}
                 >
                   Poznajesz terminologię polską i angielską stosowaną w
-                  dokumentacji technicznej na projektach norweskich — te same
+                  dokumentacji technicznej na projektach norweskich - te same
                   pojęcia, którymi posługują się inżynier, brygadzista i dział
                   QA.
                 </p>
@@ -249,11 +249,12 @@ export default async function CoursePage({
                     color: "var(--sub)",
                   }}
                 >
-                  Kurs jest w 100% online, więc uczysz się z dowolnego miejsca —
-                  na kwaterze podczas rotacji, w delegacji czy w domu. Wystarczy
-                  telefon, tablet lub komputer z internetem. Masz dostęp przez 12
-                  miesięcy i realizujesz materiał we własnym tempie, bez
-                  sztywnych terminów i zjazdów.
+                  Kurs jest w 100% online, więc możesz uczyć się z dowolnego
+                  miejsca. Wystarczy telefon, tablet lub komputer z dostępem
+                  do internetu. Otrzymujesz 12 miesięcy dostępu do
+                  materiałów, dzięki czemu uczysz się we własnym tempie - bez
+                  sztywnych terminów i konieczności uczestniczenia w
+                  zjazdach.
                 </p>
               </div>
             </div>

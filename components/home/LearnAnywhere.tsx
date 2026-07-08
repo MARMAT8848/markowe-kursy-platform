@@ -60,7 +60,7 @@ export default function LearnAnywhere() {
               color: "var(--ink)",
             }}
           >
-            Rotacja, delegacja czy dom — Ty decydujesz, kiedy i skąd się
+            Rotacja, delegacja czy dom - Ty decydujesz, kiedy i skąd się
             uczysz
           </h2>
 
@@ -73,11 +73,11 @@ export default function LearnAnywhere() {
               color: "var(--sub)",
             }}
           >
-            Kurs jest w 100% online, więc uczysz się z dowolnego miejsca — na
-            kwaterze podczas rotacji, w delegacji czy w domu. Wystarczy
-            telefon, tablet lub komputer z internetem. Masz dostęp przez 12
-            miesięcy i realizujesz materiał we własnym tempie, bez sztywnych
-            terminów i zjazdów.
+            Kurs jest w 100% online, więc możesz uczyć się z dowolnego
+            miejsca. Wystarczy telefon, tablet lub komputer z dostępem do
+            internetu. Otrzymujesz 12 miesięcy dostępu do materiałów, dzięki
+            czemu uczysz się we własnym tempie - bez sztywnych terminów i
+            konieczności uczestniczenia w zjazdach.
           </p>
 
           <div
@@ -90,9 +90,9 @@ export default function LearnAnywhere() {
             }}
           >
             {[
-              "Dowolne urządzenie — telefon, tablet, komputer",
-              "12 miesięcy dostępu, zero sztywnych terminów",
-              "Materiały zostają z Tobą między wyjazdami",
+              "Dowolne urządzenie - telefon, tablet, komputer",
+              "12 miesięcy dostępu, bez sztywnych terminów",
+              "Materiały są zawsze pod ręką - ucz się gdzie chcesz i kiedy chcesz",
             ].map((t) => (
               <span
                 key={t}

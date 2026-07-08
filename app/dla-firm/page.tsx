@@ -6,7 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 /* eslint-disable @next/next/no-img-element */
 
 export const metadata: Metadata = {
-  title: "Dla firm — MARKOWE KURSY",
+  title: "Dla firm - MARKOWE KURSY",
   description:
     "Grupowe licencje, programy dopasowane do realizowanych projektów i faktury VAT dla firm wykonawczych. Podnieś kompetencje całego zespołu.",
 };

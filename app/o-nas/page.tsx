@@ -5,7 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 /* eslint-disable @next/next/no-img-element */
 
 export const metadata: Metadata = {
-  title: "O nas — MARKOWE KURSY",
+  title: "O nas - MARKOWE KURSY",
   description:
     "Akademia techniczna zbudowana przez praktyków branży izolacyjnej. Programy szkoleniowe powstają na bazie realnych projektów przemysłowych.",
 };

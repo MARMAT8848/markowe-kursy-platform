@@ -43,7 +43,7 @@ export default function CareerPaths() {
               }}
             >
               Ścieżka to zestaw kursów dla konkretnego stanowiska w jednej,
-              niższej cenie — oszczędzasz nawet {maxSavingsLabel()} względem
+              niższej cenie - oszczędzasz nawet {maxSavingsLabel()} względem
               kupowania kursów osobno.
             </p>
           </div>
