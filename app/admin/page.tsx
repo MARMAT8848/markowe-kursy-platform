@@ -59,6 +59,12 @@ export default async function AdminOverviewPage() {
           }}
         >
           <li>
+            <Link href="/admin/stats" style={{ color: "var(--accent)", fontWeight: 600 }}>
+              Statystyki
+            </Link>{" "}
+            — przychód, wzrost, wyniki kursów i sprawy wymagające uwagi.
+          </li>
+          <li>
             <Link href="/admin/enrollments" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Dostępy
             </Link>{" "}

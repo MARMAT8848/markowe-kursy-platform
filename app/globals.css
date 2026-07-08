@@ -539,7 +539,8 @@ button { font-family: var(--sans); }
   align-self: flex-start;
   padding: 13px 26px;
   background: var(--accent);
-  color: var(--ink);
+  color: #fff;
+  border-radius: 10px;
   font: 600 13px var(--sans);
   text-decoration: none;
   letter-spacing: .02em;
