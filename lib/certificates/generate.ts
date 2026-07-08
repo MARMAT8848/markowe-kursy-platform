@@ -5,6 +5,7 @@ import { PDFDocument, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
 import QRCode from "qrcode";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { publicSiteUrl } from "@/lib/site-url";
 
 /**
  * Certyfikaty PDF (ETAP 17).
@@ -78,11 +79,7 @@ export async function generateCertificate(input: {
   const verificationSlug = crypto.randomUUID().replaceAll("-", "");
   const issuedAt = new Date();
 
-  const envSite = process.env.NEXT_PUBLIC_SITE_URL;
-  const site =
-    input.siteUrl ||
-    (envSite && !envSite.includes("localhost") ? envSite : null) ||
-    "https://markowekursy.pl";
+  const site = input.siteUrl || publicSiteUrl();
   const verifyUrl = `${site}/verify-certificate/${verificationSlug}`;
 
   // ---------- PDF (A4 poziomo, typografia IBM Plex jak na stronie) ----------

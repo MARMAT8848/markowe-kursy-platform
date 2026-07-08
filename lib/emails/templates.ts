@@ -1,4 +1,5 @@
 import { emailLayout, button, infoRow } from "./layout";
+import { PUBLIC_SITE } from "@/lib/site-url";
 
 /**
  * Szablony e-maili. Każdy: template_key + language + funkcja renderująca
@@ -8,9 +9,7 @@ import { emailLayout, button, infoRow } from "./layout";
  * UWAGA: potwierdzenie rejestracji i reset hasła obsługuje wbudowana
  * poczta Supabase Auth — nie dublujemy ich tutaj.
  */
-const envSite = process.env.NEXT_PUBLIC_SITE_URL;
-const SITE =
-  envSite && !envSite.includes("localhost") ? envSite : "https://markowekursy.pl";
+const SITE = PUBLIC_SITE;
 
 export type TemplateKey =
   | "purchase_confirmation"

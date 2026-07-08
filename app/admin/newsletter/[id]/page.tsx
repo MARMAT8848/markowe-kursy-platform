@@ -6,6 +6,7 @@ import { AdminH1, StatCard, StatusPill } from "@/components/admin/ui";
 import ActionButton from "@/components/admin/ActionButton";
 import EmailPreviewFrame from "@/components/admin/EmailPreviewFrame";
 import { renderCampaignContent } from "@/lib/newsletter";
+import { PUBLIC_SITE } from "@/lib/site-url";
 import { renderEmail } from "@/lib/emails/templates";
 import {
   deleteCampaignAction,
@@ -53,7 +54,7 @@ export default async function CampaignDetailPage({
       c.cta_label as string | null,
       c.cta_url as string | null
     ),
-    unsubscribeUrl: "https://markowekursy.pl/newsletter/wypisano?status=ok",
+    unsubscribeUrl: `${PUBLIC_SITE}/newsletter/wypisano?status=ok`,
   });
 
   const isDraft = c.status === "draft";
