@@ -21,10 +21,25 @@ function getResend(): Resend {
   return new Resend(process.env.RESEND_API_KEY!);
 }
 
+/** Nagłówki wiadomości marketingowej: List-Unsubscribe (jednoklikowy
+ *  wypis na poziomie klienta pocztowego — wymóg Gmail/Yahoo dla nadawców
+ *  masowych). Wyliczane z payloadu, więc działają też przy ponowieniach. */
+function marketingHeaders(
+  payload: Record<string, unknown> | null
+): Record<string, string> | undefined {
+  const url = payload?.unsubscribeUrl;
+  if (typeof url !== "string" || !url.startsWith("http")) return undefined;
+  return {
+    "List-Unsubscribe": `<${url}>`,
+    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+  };
+}
+
 async function deliver(
   to: string,
   subject: string,
-  html: string
+  html: string,
+  headers?: Record<string, string>
 ): Promise<{ ok: boolean; id?: string; error?: string }> {
   if (!resendConfigured()) return { ok: false, error: "resend_not_configured" };
   try {
@@ -33,6 +48,7 @@ async function deliver(
       to,
       subject,
       html,
+      ...(headers ? { headers } : {}),
     });
     if (res.error) return { ok: false, error: res.error.message };
     return { ok: true, id: res.data?.id };
@@ -70,7 +86,7 @@ export async function queueAndSend(
     .select("id")
     .single();
 
-  const sent = await deliver(to, subject, html);
+  const sent = await deliver(to, subject, html, marketingHeaders(payload));
   if (!row) return;
   if (sent.ok) {
     await admin
@@ -109,7 +125,12 @@ export async function processOutbox(limit = 50): Promise<{ sent: number; failed:
       (r.payload as Record<string, unknown>) ?? {},
       (r.language as string) ?? "pl"
     );
-    const res = await deliver(r.email_to as string, subject, html);
+    const res = await deliver(
+      r.email_to as string,
+      subject,
+      html,
+      marketingHeaders(r.payload as Record<string, unknown> | null)
+    );
     if (res.ok) {
       await admin
         .from("email_outbox")
@@ -126,4 +147,39 @@ export async function processOutbox(limit = 50): Promise<{ sent: number; failed:
     }
   }
   return { sent, failed };
+}
+
+/**
+ * Masowe kolejkowanie kampanii newslettera: jeden wiersz outbox na
+ * odbiorcę (wstawiane paczkami), payload z osobistym linkiem wypisu.
+ * Faktyczną wysyłką zajmuje się processOutbox (wywołany zaraz po
+ * kolejkowaniu i ponawiany przez cron) — działa więc też "na sucho",
+ * zanim Resend zostanie podłączony.
+ */
+export async function enqueueCampaign(
+  campaignId: string,
+  subject: string,
+  recipients: { email: string; payload: Record<string, unknown> }[]
+): Promise<number> {
+  const admin = createSupabaseAdmin();
+  const CHUNK = 500;
+  let queued = 0;
+  for (let i = 0; i < recipients.length; i += CHUNK) {
+    const rows = recipients.slice(i, i + CHUNK).map((r) => ({
+      email_to: r.email,
+      template_key: "newsletter_campaign" as TemplateKey,
+      language: "pl",
+      subject,
+      payload: r.payload,
+      status: "queued",
+      provider: "resend",
+      campaign_id: campaignId,
+    }));
+    const { error, count } = await admin
+      .from("email_outbox")
+      .insert(rows, { count: "exact" });
+    if (error) throw new Error("Kolejkowanie kampanii nie powiodło się: " + error.message);
+    queued += count ?? rows.length;
+  }
+  return queued;
 }

@@ -18,7 +18,9 @@ export type TemplateKey =
   | "expiry_reminder_30"
   | "expiry_reminder_7"
   | "access_expired"
-  | "certificate_issued";
+  | "certificate_issued"
+  | "newsletter_confirm"
+  | "newsletter_campaign";
 
 export interface RenderedEmail {
   subject: string;
@@ -119,6 +121,43 @@ const PL: Record<TemplateKey, Renderer> = {
           </table>
           <p style="margin:0 0 18px">${button(`${SITE}/dashboard/certificates`, "Pobierz certyfikat")}</p>
           <p style="margin:0;font-size:12px;color:#9C9B98">Certyfikat możesz zweryfikować publicznie: <a href="${verifyUrl}" style="color:#6F6F6F">${verifyUrl}</a></p>`,
+      }),
+    };
+  },
+
+  // Double opt-in: potwierdzenie zapisu do newslettera (dowód zgody).
+  newsletter_confirm: (p) => {
+    const confirmUrl = String(p.confirmUrl ?? SITE);
+    return {
+      subject: "Potwierdź zapis do newslettera - Markowe Kursy",
+      html: emailLayout({
+        heading: "Potwierdź zapis do newslettera",
+        preheader: "Jedno kliknięcie i gotowe - bez potwierdzenia nic nie wyślemy.",
+        bodyHtml: `
+          <p style="margin:0 0 16px">Ktoś (mamy nadzieję, że Ty) zapisał ten adres do newslettera Markowe Kursy - informacji o nowych kursach, lekcjach i promocjach.</p>
+          <p style="margin:0 0 22px">${button(confirmUrl, "Potwierdzam zapis")}</p>
+          <p style="margin:0;font-size:12px;color:#9C9B98">Jeśli to nie Ty - po prostu zignoruj tę wiadomość. Bez potwierdzenia nie wyślemy żadnego newslettera, a adres zostanie nieaktywny.</p>`,
+      }),
+    };
+  },
+
+  // Kampania: temat i treść z panelu admina; stopka wypisu OBOWIĄZKOWA
+  // w każdej wiadomości marketingowej.
+  newsletter_campaign: (p) => {
+    const subject = String(p.subject ?? "Markowe Kursy");
+    const contentHtml = String(p.contentHtml ?? "");
+    const unsubscribeUrl = String(p.unsubscribeUrl ?? `${SITE}`);
+    const preheader = p.preheader ? String(p.preheader) : undefined;
+    return {
+      subject,
+      html: emailLayout({
+        heading: subject,
+        preheader,
+        bodyHtml: `${contentHtml}
+          <p style="margin:26px 0 0;padding-top:14px;border-top:1px solid #EFEEEB;font-size:11.5px;line-height:1.6;color:#9C9B98">
+            Otrzymujesz tę wiadomość, bo zapisałeś/aś się do newslettera Markowe Kursy i potwierdziłeś/aś zapis.
+            <a href="${unsubscribeUrl}" style="color:#6F6F6F">Wypisz się jednym kliknięciem</a>.
+          </p>`,
       }),
     };
   },

@@ -1,9 +1,11 @@
 import Link from "next/link";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 /**
  * Dyskretna stopka — jedyny celowy dodatek względem projektu 1:1.
  * Wymagana prawnie: dokumenty (regulamin, polityki) muszą być łatwo
  * dostępne z każdej strony; wymaga tego też Stripe.
+ * Górny rząd: zapis do newslettera (double opt-in).
  */
 export default function SiteFooter() {
   return (
@@ -16,12 +18,18 @@ export default function SiteFooter() {
     >
       <div
         className="wrap"
+        style={{ padding: "22px 34px 4px" }}
+      >
+        <NewsletterSignup />
+      </div>
+      <div
+        className="wrap"
         style={{
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
           gap: "10px 22px",
-          padding: "18px 34px",
+          padding: "14px 34px 18px",
         }}
       >
         <span
