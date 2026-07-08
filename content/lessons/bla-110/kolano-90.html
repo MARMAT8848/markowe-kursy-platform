@@ -128,8 +128,16 @@
   }
   @media(max-width:560px){
     .hdr{gap:10px;padding:9px 12px}
+    /* marka kurczy się zamiast wypływać pod przyciski: jedna linia + „…" */
+    .brand{flex:1 1 0;min-width:0}
+    .brand>div{min-width:0;overflow:hidden}
     .brand img{height:34px}
-    .brand .bk{font-size:9.5px;letter-spacing:.06em}
+    .brand .bk{font-size:9.5px;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    /* przyciski tylko z ikoną - tekst tytułu odzyskuje miejsce */
+    #helpBtn{font-size:0;gap:0;padding:0 9px}
+    #helpBtn .qm{font:700 11px var(--font)}
+    .hdr a.hbtn{font-size:0;gap:0;padding:0 11px}
+    .hdr a.hbtn svg{width:14px;height:14px}
     .mbtn{padding:8px 11px;font-size:11px}
     .capbar{margin:0 8px 7px;padding:9px 12px;gap:2px 10px;border-width:1px}
     .capbar .k{font-size:9px}
@@ -254,7 +262,7 @@
     <div class="tour-hole" id="tourHole"></div>
     <div class="tour-ring" id="tourRing"></div>
     <div class="tour-card" id="tourCard">
-      <div class="tour-badge" id="tourBadge">Jak korzystać z kursu</div>
+      <div class="tour-badge" id="tourBadge">Jak korzystać z kursu</div>
       <h3 id="tourTitle"></h3>
       <p id="tourText"></p>
       <div class="tour-foot">

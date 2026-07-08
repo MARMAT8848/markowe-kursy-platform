@@ -16,7 +16,7 @@ const fmtDate = (iso: string | null) =>
 
 /**
  * Publiczna weryfikacja certyfikatu (ETAP 17) — pokazuje WYŁĄCZNIE
- * minimalny zakres danych: status, numer, imię i nazwisko, kurs, datę.
+ * minimalny zakres danych: status, numer, imię i nazwisko, kurs, datę.
  */
 export default async function VerifyCertificatePage({
   params,
@@ -74,8 +74,8 @@ export default async function VerifyCertificatePage({
             }}
           >
             {cert
-              ? "Poniższe dane pochodzą bezpośrednio z rejestru certyfikatów platformy Markowe Kursy."
-              : "Sprawdź, czy link lub kod QR jest kompletny. Certyfikat o tym identyfikatorze nie istnieje w rejestrze."}
+              ? "Poniższe dane pochodzą bezpośrednio z rejestru certyfikatów platformy Markowe Kursy."
+              : "Sprawdź, czy link lub kod QR jest kompletny. Certyfikat o tym identyfikatorze nie istnieje w rejestrze."}
           </p>
         </div>
       </section>
@@ -112,7 +112,7 @@ export default async function VerifyCertificatePage({
               >
                 {[
                   ["NUMER CERTYFIKATU", cert.certificate_number],
-                  ["IMIĘ I NAZWISKO", fullName ?? "-"],
+                  ["IMIĘ I NAZWISKO", fullName ?? "-"],
                   ["KURS", courseTitle ?? "-"],
                   ["DATA UKOŃCZENIA", fmtDate(cert.issued_at)],
                   ...(active

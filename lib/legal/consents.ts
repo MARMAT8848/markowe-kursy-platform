@@ -52,7 +52,7 @@ export const CONSENTS: {
   {
     key: "terms_privacy",
     label:
-      "Akceptuję Regulamin platformy Markowe Kursy oraz zapoznałem/am się z Polityką prywatności.",
+      "Akceptuję Regulamin platformy Markowe Kursy oraz zapoznałem/am się z Polityką prywatności.",
     links: [
       { text: "Regulamin", href: "/regulamin" },
       { text: "Polityka prywatności", href: "/polityka-prywatnosci" },
@@ -61,9 +61,9 @@ export const CONSENTS: {
   {
     key: "refund_policy",
     label:
-      "Zapoznałem/am się z Polityką zwrotów, odstąpienia od umowy i reklamacji.",
+      "Zapoznałem/am się z Polityką zwrotów, odstąpienia od umowy i reklamacji.",
     links: [
-      { text: "Polityka zwrotów i reklamacji", href: "/zwroty-i-reklamacje" },
+      { text: "Polityka zwrotów i reklamacji", href: "/zwroty-i-reklamacje" },
     ],
   },
   {

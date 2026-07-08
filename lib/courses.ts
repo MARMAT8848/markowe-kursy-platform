@@ -62,7 +62,7 @@ export const COURSES: Course[] = [
     catKey: "izo",
     catLabel: "PODSTAWY IZOLACJI",
     title: "Podstawy izolacji przemysłowych",
-    desc: "Rodzaje izolacji technicznych, dobór materiału i zasady montażu zgodne z praktyką wykonawczą.",
+    desc: "Rodzaje izolacji technicznych, dobór materiału i zasady montażu zgodne z praktyką wykonawczą.",
     cardMeta: "12 LEKCJI · 3H 20MIN",
     cardPrice: "199 ZŁ",
     priceCents: 19900,
@@ -75,31 +75,31 @@ export const COURSES: Course[] = [
     thumbUrl: "/assets/thumb-izo101.png",
     thumbSize: "auto 151%",
     learnBullets: [
-      "Rodzaje izolacji technicznych i ich zastosowanie",
+      "Rodzaje izolacji technicznych i ich zastosowanie",
       "Dobór materiału izolacyjnego do warunków pracy instalacji",
-      "Zasady montażu zgodne z praktyką wykonawczą",
-      "Podstawowe zabezpieczenia przeciwkorozyjne i przeciwwilgociowe",
+      "Zasady montażu zgodne z praktyką wykonawczą",
+      "Podstawowe zabezpieczenia przeciwkorozyjne i przeciwwilgociowe",
     ],
     modules: [
       {
         title: "Moduł 1 - Rodzaje izolacji przemysłowych",
-        desc: "Izolacje termiczne, akustyczne i przeciwpożarowe stosowane w przemyśle.",
+        desc: "Izolacje termiczne, akustyczne i przeciwpożarowe stosowane w przemyśle.",
       },
       {
         title: "Moduł 2 - Dobór materiału izolacyjnego",
-        desc: "Kryteria doboru w zależności od temperatury pracy i warunków środowiskowych.",
+        desc: "Kryteria doboru w zależności od temperatury pracy i warunków środowiskowych.",
       },
       {
         title: "Moduł 3 - Zasady montażu",
-        desc: "Kolejność prac, mocowania i typowe błędy wykonawcze.",
+        desc: "Kolejność prac, mocowania i typowe błędy wykonawcze.",
       },
       {
         title: "Moduł 4 - Kontrola jakości wykonania",
-        desc: "Odbiór robót izolacyjnych i dokumentacja powykonawcza.",
+        desc: "Odbiór robót izolacyjnych i dokumentacja powykonawcza.",
       },
     ],
     forWhom:
-      "Dla monterów rozpoczynających pracę w branży izolacji przemysłowej oraz osób przygotowujących się do pierwszych samodzielnych realizacji.",
+      "Dla monterów rozpoczynających pracę w branży izolacji przemysłowej oraz osób przygotowujących się do pierwszych samodzielnych realizacji.",
   },
   {
     slug: "obm-210",
@@ -108,7 +108,7 @@ export const COURSES: Course[] = [
     catKey: "obmiar",
     catLabel: "OBMIAROWANIE",
     title: "Obmiarowanie izometryczne izolacji przemysłowych",
-    desc: "Metodyka obmiaru rurociągów, armatury i zbiorników na podstawie dokumentacji ISO i P&ID - od odczytu rysunku do gotowego zestawienia obmiarowego.",
+    desc: "Metodyka obmiaru rurociągów, armatury i zbiorników na podstawie dokumentacji ISO i P&ID - od odczytu rysunku do gotowego zestawienia obmiarowego.",
     cardMeta: "18 LEKCJI · 5H",
     cardPrice: "449 ZŁ",
     priceCents: 44900,
@@ -121,23 +121,23 @@ export const COURSES: Course[] = [
     thumbUrl: "/assets/thumb-obm210.jpg",
     thumbSize: "cover",
     learnBullets: [
-      "Czytanie rysunków izometrycznych i schematów P&ID",
-      "Obmiar rurociągów, armatury i zbiorników",
+      "Czytanie rysunków izometrycznych i schematów P&ID",
+      "Obmiar rurociągów, armatury i zbiorników",
       "Przygotowanie zestawienia obmiarowego",
       "Weryfikację obmiaru na etapie realizacji",
     ],
     modules: [
       {
-        title: "Moduł 1 - Podstawy dokumentacji ISO i P&ID",
-        desc: "Struktura rysunków izometrycznych i schematów procesowych, oznaczenia i skale stosowane w dokumentacji przemysłowej.",
+        title: "Moduł 1 - Podstawy dokumentacji ISO i P&ID",
+        desc: "Struktura rysunków izometrycznych i schematów procesowych, oznaczenia i skale stosowane w dokumentacji przemysłowej.",
       },
       {
         title: "Moduł 2 - Obmiar rurociągów",
-        desc: "Zasady liczenia długości, kolan, redukcji i armatury na podstawie izometrii.",
+        desc: "Zasady liczenia długości, kolan, redukcji i armatury na podstawie izometrii.",
       },
       {
-        title: "Moduł 3 - Obmiar zbiorników i aparatów",
-        desc: "Metody obmiaru powierzchni płaszczy, den i króćców na zbiornikach oraz aparatach.",
+        title: "Moduł 3 - Obmiar zbiorników i aparatów",
+        desc: "Metody obmiaru powierzchni płaszczy, den i króćców na zbiornikach oraz aparatach.",
       },
       {
         title: "Moduł 4 - Zestawienie obmiarowe",
@@ -145,7 +145,7 @@ export const COURSES: Course[] = [
       },
     ],
     forWhom:
-      "Dla obmiarowców, kosztorysantów, planistów i monterów izolacji, którzy chcą samodzielnie przygotowywać i weryfikować obmiary na podstawie dokumentacji technicznej.",
+      "Dla obmiarowców, kosztorysantów, planistów i monterów izolacji, którzy chcą samodzielnie przygotowywać i weryfikować obmiary na podstawie dokumentacji technicznej.",
   },
   {
     slug: "bla-110",
@@ -154,7 +154,7 @@ export const COURSES: Course[] = [
     catKey: "blacha",
     catLabel: "PREFABRYKACJA",
     title: "Rozwiązania blacharskie płaszczy ochronnych",
-    desc: "Wykonywanie rozwinięć blacharskich, kształtek i płaszczy ochronnych zgodnie z dokumentacją wykonawczą.",
+    desc: "Wykonywanie rozwinięć blacharskich, kształtek i płaszczy ochronnych zgodnie z dokumentacją wykonawczą.",
     cardMeta: "15 LEKCJI · 4H",
     cardPrice: "349 ZŁ",
     priceCents: 34900,
@@ -168,30 +168,30 @@ export const COURSES: Course[] = [
     thumbSize: "auto 115%",
     learnBullets: [
       "Wykonywanie rozwinięć blacharskich na typowych kształtkach",
-      "Dobór blachy i grubości płaszcza ochronnego",
-      "Łączenia i uszczelnienia płaszczy ochronnych",
+      "Dobór blachy i grubości płaszcza ochronnego",
+      "Łączenia i uszczelnienia płaszczy ochronnych",
       "Zabezpieczenia antykorozyjne blachy",
     ],
     modules: [
       {
         title: "Moduł 1 - Rozwinięcia blacharskie",
-        desc: "Metody rozwijania walców, stożków i kolan.",
+        desc: "Metody rozwijania walców, stożków i kolan.",
       },
       {
-        title: "Moduł 2 - Dobór blachy i grubości płaszcza",
-        desc: "Kryteria doboru materiału w zależności od średnicy i lokalizacji.",
+        title: "Moduł 2 - Dobór blachy i grubości płaszcza",
+        desc: "Kryteria doboru materiału w zależności od średnicy i lokalizacji.",
       },
       {
-        title: "Moduł 3 - Łączenia i uszczelnienia",
-        desc: "Zakłady, nity, wkręty i uszczelnienia płaszczy ochronnych.",
+        title: "Moduł 3 - Łączenia i uszczelnienia",
+        desc: "Zakłady, nity, wkręty i uszczelnienia płaszczy ochronnych.",
       },
       {
         title: "Moduł 4 - Zabezpieczenia antykorozyjne",
-        desc: "Dobór powłok i zabezpieczeń w środowiskach agresywnych.",
+        desc: "Dobór powłok i zabezpieczeń w środowiskach agresywnych.",
       },
     ],
     forWhom:
-      "Dla blacharzy izolacyjnych i monterów wykonujących płaszcze ochronne na rurociągach, zbiornikach i aparatach.",
+      "Dla blacharzy izolacyjnych i monterów wykonujących płaszcze ochronne na rurociągach, zbiornikach i aparatach.",
   },
   {
     slug: "izo-330",
@@ -200,7 +200,7 @@ export const COURSES: Course[] = [
     catKey: "obmiar",
     catLabel: "OBMIAROWANIE",
     title: "SketchUp dla obmiarowców izolacji przemysłowej",
-    desc: "Modelowanie 3D w SketchUp na potrzeby obmiaru izolacji przemysłowych - budowa modeli rurociągów i zbiorników do szybkiego i dokładnego wyliczania powierzchni.",
+    desc: "Modelowanie 3D w SketchUp na potrzeby obmiaru izolacji przemysłowych - budowa modeli rurociągów i zbiorników do szybkiego i dokładnego wyliczania powierzchni.",
     cardMeta: "10 LEKCJI · 2H 45MIN",
     cardPrice: "299 ZŁ",
     priceCents: 29900,
@@ -214,31 +214,31 @@ export const COURSES: Course[] = [
     thumbUrl: "/assets/thumb-izo330-sketchup.png",
     thumbSize: "auto 174%",
     learnBullets: [
-      "Budowa modeli 3D rurociągów i zbiorników w SketchUp",
+      "Budowa modeli 3D rurociągów i zbiorników w SketchUp",
       "Wykorzystanie wtyczek do automatycznego liczenia powierzchni izolacji",
-      "Eksport zestawień obmiarowych z modelu",
-      "Aktualizację modelu na podstawie zmian w dokumentacji",
+      "Eksport zestawień obmiarowych z modelu",
+      "Aktualizację modelu na podstawie zmian w dokumentacji",
     ],
     modules: [
       {
         title: "Moduł 1 - Podstawy SketchUp dla obmiaru",
-        desc: "Interfejs, narzędzia i organizacja modelu.",
+        desc: "Interfejs, narzędzia i organizacja modelu.",
       },
       {
-        title: "Moduł 2 - Modelowanie rurociągów i armatury",
+        title: "Moduł 2 - Modelowanie rurociągów i armatury",
         desc: "Budowa geometrii na podstawie izometrii.",
       },
       {
-        title: "Moduł 3 - Modelowanie zbiorników i aparatów",
-        desc: "Odwzorowanie płaszczy, den i króćców.",
+        title: "Moduł 3 - Modelowanie zbiorników i aparatów",
+        desc: "Odwzorowanie płaszczy, den i króćców.",
       },
       {
         title: "Moduł 4 - Obliczanie powierzchni izolacji",
-        desc: "Wtyczki obmiarowe i eksport wyników.",
+        desc: "Wtyczki obmiarowe i eksport wyników.",
       },
     ],
     forWhom:
-      "Dla obmiarowców i kosztorysantów, którzy chcą przyspieszyć obmiar dzięki modelowaniu 3D zamiast liczenia ręcznego z rysunków.",
+      "Dla obmiarowców i kosztorysantów, którzy chcą przyspieszyć obmiar dzięki modelowaniu 3D zamiast liczenia ręcznego z rysunków.",
   },
   {
     slug: "rys-110",
@@ -246,7 +246,7 @@ export const COURSES: Course[] = [
     status: "coming_soon",
     catKey: "dok",
     catLabel: "DOKUMENTACJA TECHNICZNA",
-    title: "Rysunki techniczne w izolacji przemysłowej (ISO, P&ID, GA)",
+    title: "Rysunki techniczne w izolacji przemysłowej (ISO, P&ID, GA)",
     desc: "Interpretacja rysunków izometrycznych, schematów P&ID oraz rysunków ogólnych (GA) stosowanych przy realizacji robót.",
     cardMeta: "11 LEKCJI · 3H",
     cardPrice: "249 ZŁ",
@@ -268,23 +268,23 @@ export const COURSES: Course[] = [
     modules: [
       {
         title: "Moduł 1 - Rysunki izometryczne (ISO)",
-        desc: "Oznaczenia, skale i odczyt tras rurociągów.",
+        desc: "Oznaczenia, skale i odczyt tras rurociągów.",
       },
       {
         title: "Moduł 2 - Schematy P&ID",
-        desc: "Symbole armatury, urządzeń i instrumentacji.",
+        desc: "Symbole armatury, urządzeń i instrumentacji.",
       },
       {
         title: "Moduł 3 - Rysunki ogólne (GA)",
-        desc: "Rozmieszczenie instalacji i powiązania międzybranżowe.",
+        desc: "Rozmieszczenie instalacji i powiązania międzybranżowe.",
       },
       {
         title: "Moduł 4 - Dokumentacja wykonawcza",
-        desc: "Weryfikacja zgodności rysunków z realizacją.",
+        desc: "Weryfikacja zgodności rysunków z realizacją.",
       },
     ],
     forWhom:
-      "Dla monterów, obmiarowców i planistów, którzy na co dzień pracują z dokumentacją techniczną projektów przemysłowych.",
+      "Dla monterów, obmiarowców i planistów, którzy na co dzień pracują z dokumentacją techniczną projektów przemysłowych.",
   },
 ];
 

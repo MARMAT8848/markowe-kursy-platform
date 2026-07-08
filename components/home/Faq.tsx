@@ -5,7 +5,7 @@ import { useState } from "react";
 const FAQS: { q: string; a: string }[] = [
   {
     q: "Czy kursy kończą się zaświadczeniem?",
-    a: "Tak - po ukończeniu kursu otrzymujesz zaświadczenie z numerem, potwierdzające zakres zrealizowanego szkolenia.",
+    a: "Tak - po ukończeniu kursu otrzymujesz zaświadczenie z numerem, potwierdzające zakres zrealizowanego szkolenia.",
   },
   {
     q: "Ile czasu mam na ukończenie kursu?",
@@ -13,11 +13,11 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Czy potrzebuję wcześniejszego doświadczenia?",
-    a: "Kursy podstawowe nie wymagają wcześniejszego przygotowania. Kursy średniozaawansowane i zaawansowane zakładają znajomość materiału z poziomu podstawowego.",
+    a: "Kursy podstawowe nie wymagają wcześniejszego przygotowania. Kursy średniozaawansowane i zaawansowane zakładają znajomość materiału z poziomu podstawowego.",
   },
   {
     q: "Czy wystawiacie faktury dla firm?",
-    a: "Tak. Wystawiamy faktury oraz przygotowujemy programy szkoleniowe dla zespołów i firm wykonawczych.",
+    a: "Tak. Wystawiamy faktury oraz przygotowujemy programy szkoleniowe dla zespołów i firm wykonawczych.",
   },
 ];
 

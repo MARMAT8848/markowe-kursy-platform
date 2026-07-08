@@ -144,8 +144,8 @@ export default async function CampaignDetailPage({
             maxWidth: 640,
           }}
         >
-          Test trafia wyłącznie na Twój adres (z dopiskiem [TEST] w temacie).
-          Wysyłka do subskrybentów obejmie tylko osoby z potwierdzonym zapisem
+          Test trafia wyłącznie na Twój adres (z dopiskiem [TEST] w temacie).
+          Wysyłka do subskrybentów obejmie tylko osoby z potwierdzonym zapisem
           (double opt-in) - każda wiadomość dostanie osobisty link wypisu.
         </p>
       )}

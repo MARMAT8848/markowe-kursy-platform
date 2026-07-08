@@ -22,6 +22,15 @@ export default async function SettingsPage() {
     .eq("id", user.id)
     .maybeSingle();
 
+  // Po wydaniu certyfikatu zmiana imienia i nazwiska tylko przez obsługę
+  // (regułę egzekwuje też trigger w bazie - to nie jest tylko UI).
+  const { count: certCount } = await supabase
+    .from("certificates")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .eq("status", "generated");
+  const nameLocked = (certCount ?? 0) > 0;
+
   return (
     <PanelShell>
       <PanelHeader
@@ -48,6 +57,7 @@ export default async function SettingsPage() {
           <ProfileSettings
             initialFullName={profile?.full_name ?? ""}
             email={user.email ?? ""}
+            nameLocked={nameLocked}
           />
         </div>
       </section>

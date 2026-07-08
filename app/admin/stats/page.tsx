@@ -29,7 +29,7 @@ export default async function AdminStatsPage() {
   const { admin } = await requireAdmin();
 
   // Server Component renderuje się raz na żądanie — odczyt bieżącego czasu
-  // jest tu zamierzony (spójnie z pozostałymi stronami panelu admina).
+  // jest tu zamierzony (spójnie z pozostałymi stronami panelu admina).
   const now = new Date().getTime();
   const nowIso = new Date(now).toISOString();
   const d7 = new Date(now - 7 * DAY).toISOString();
@@ -149,7 +149,7 @@ export default async function AdminStatsPage() {
   const attention: { label: string; count: number; status: string; href: string }[] =
     [
       {
-        label: "Dostępy wygasające w ciągu 30 dni",
+        label: "Dostępy wygasające w ciągu 30 dni",
         count: expiringSoon,
         status: "pending",
         href: "/admin/enrollments",
@@ -167,7 +167,7 @@ export default async function AdminStatsPage() {
         href: "/admin/orders",
       },
       {
-        label: "E-maile w kolejce (czekają na Resend)",
+        label: "E-maile w kolejce (czekają na Resend)",
         count: mailQueued,
         status: "pending",
         href: "/admin",
@@ -200,7 +200,7 @@ export default async function AdminStatsPage() {
           hint={
             revenueTotal === 0
               ? "Sprzedaż ruszy po podłączeniu Stripe (Faza 4)."
-              : `${zl(revenue30)} w ostatnich 30 dniach`
+              : `${zl(revenue30)} w ostatnich 30 dniach`
           }
         />
         <StatCard
@@ -223,7 +223,7 @@ export default async function AdminStatsPage() {
         <StatCard
           label="CERTYFIKATY"
           value={certsActive.length}
-          hint={`${certs30} w ostatnich 30 dniach`}
+          hint={`${certs30} w ostatnich 30 dniach`}
         />
       </div>
 
@@ -237,7 +237,7 @@ export default async function AdminStatsPage() {
         <StatCard
           label="LEKCJE UKOŃCZONE (7 DNI)"
           value={lessons7}
-          hint={`${lessons30} w ostatnich 30 dniach`}
+          hint={`${lessons30} w ostatnich 30 dniach`}
         />
         <StatCard
           label="PRZYCHÓD (30 DNI)"
@@ -270,7 +270,7 @@ export default async function AdminStatsPage() {
             fontWeight: 600,
           }}
         >
-          ✓ Wszystko w porządku - nic nie wymaga teraz Twojej uwagi.
+          ✓ Wszystko w porządku - nic nie wymaga teraz Twojej uwagi.
         </p>
       ) : (
         <div style={{ marginBottom: 30, maxWidth: 620 }}>
@@ -360,7 +360,7 @@ export default async function AdminStatsPage() {
           maxWidth: 640,
         }}
       >
-        Przychód liczony wyłącznie z zamówień o statusie „paid”. Wskaźnik
+        Przychód liczony wyłącznie z zamówień o statusie „paid”. Wskaźnik
         ukończenia to ukończone kursy względem wszystkich nadanych dostępów.
       </p>
     </>

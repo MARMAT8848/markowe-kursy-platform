@@ -50,7 +50,7 @@ export default function NewsletterSignup() {
           marginBottom: 4,
         }}
       >
-        Newsletter: nowe kursy, lekcje i promocje
+        Newsletter: nowe kursy, lekcje i promocje
       </div>
       {state === "done" ? (
         <p style={{ margin: "6px 0 0", fontSize: 12, color: "#9C9B98" }}>

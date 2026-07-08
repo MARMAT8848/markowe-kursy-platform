@@ -8,7 +8,7 @@ import { CONSENTS, type ConsentKey } from "@/lib/legal/consents";
  * Zgody prawne przy checkout — 4 osobne checkboxy, ŻADEN nie jest
  * domyślnie zaznaczony. Przycisk płatności jest zablokowany do czasu
  * zaznaczenia wszystkich. Walidacja jest DODATKOWO powtarzana
- * server-side w /api/checkout/create (nie ufamy frontendowi).
+ * server-side w /api/checkout/create (nie ufamy frontendowi).
  */
 export default function CheckoutConsents({
   courseSlug,

@@ -50,7 +50,7 @@ export default async function NewCampaignPage({
           }}
         >
           {error === "empty"
-            ? "Temat i treść są wymagane."
+            ? "Temat i treść są wymagane."
             : "Nie udało się zapisać kampanii. Spróbuj ponownie."}
         </p>
       )}
@@ -75,7 +75,7 @@ export default async function NewCampaignPage({
 
         <div>
           <label style={label} htmlFor="preheader">
-            Preheader (podgląd w skrzynce, opcjonalnie)
+            Preheader (podgląd w skrzynce, opcjonalnie)
           </label>
           <input
             id="preheader"
@@ -96,7 +96,7 @@ export default async function NewCampaignPage({
             required
             rows={12}
             placeholder={
-              "Pusta linia rozdziela akapity.\n\n## Linia zaczynająca się od ## to śródtytuł\n\nTreść jest zawsze osadzana w markowym szablonie z logo - o wygląd nie musisz dbać."
+              "Pusta linia rozdziela akapity.\n\n## Linia zaczynająca się od ## to śródtytuł\n\nTreść jest zawsze osadzana w markowym szablonie z logo - o wygląd nie musisz dbać."
             }
             style={{ ...field, resize: "vertical", lineHeight: 1.6 }}
           />
@@ -147,11 +147,11 @@ export default async function NewCampaignPage({
               cursor: "pointer",
             }}
           >
-            Zapisz szkic i przejdź do podglądu
+            Zapisz szkic i przejdź do podglądu
           </button>
           <p style={{ margin: "8px 0 0", fontSize: 11.5, color: "var(--muted)" }}>
-            Nic nie zostanie wysłane - wysyłkę uruchamiasz osobno z podglądu,
-            po obejrzeniu wiadomości i teście na własny adres.
+            Nic nie zostanie wysłane - wysyłkę uruchamiasz osobno z podglądu,
+            po obejrzeniu wiadomości i teście na własny adres.
           </p>
         </div>
       </form>

@@ -77,8 +77,11 @@ export async function GET(
     const style = `<style>
       @media(max-width:560px){ .hdr .mk-complete{display:none!important} }
       @media(min-width:561px){ .transport .mk-complete{display:none!important} }
-      .transport .mk-complete{border-color:#2E7D46;background:#2E7D46;color:#fff}
-      .transport .mk-complete.done{background:#EAF3EC;color:#2E7D46;border-color:#CDE6D3;pointer-events:none}
+      /* !important: lekcja w trybie ciemnym wymusza białe tła przycisków
+         (background-color:#fff!important) - bez tego zielony przycisk
+         miałby biały tekst na białym tle. */
+      .transport .mk-complete{border-color:#2E7D46!important;background:#2E7D46!important;color:#fff!important}
+      .transport .mk-complete.done{background:#EAF3EC!important;color:#2E7D46!important;border-color:#CDE6D3!important;pointer-events:none}
       @media(max-width:560px){ .transport .mk-complete{flex:1 1 auto} }
     </style>`;
 

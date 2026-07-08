@@ -82,7 +82,7 @@ export default async function AdminCertificatesPage() {
                     action={regenerateCertificateAction}
                     fields={{ certId: c.id as string }}
                     label="Wygeneruj ponownie"
-                    confirmMsg="Wygenerować certyfikat ponownie (z aktualnym imieniem i nazwiskiem)? Obecny zostanie unieważniony."
+                    confirmMsg="Wygenerować certyfikat ponownie (z aktualnym imieniem i nazwiskiem)? Obecny zostanie unieważniony."
                     subtle
                   />
                 </span>

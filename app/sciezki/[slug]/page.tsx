@@ -88,7 +88,7 @@ export default async function CareerPathPage({
           <div className="kurs-layout" style={{ paddingTop: 20 }}>
           {/* lista kursów w ścieżce */}
           <div>
-            <h2 className="kurs-h2">Kursy w tej ścieżce</h2>
+            <h2 className="kurs-h2">Kursy w tej ścieżce</h2>
             <div
               style={{ display: "flex", flexDirection: "column", gap: 12 }}
             >
@@ -210,7 +210,7 @@ export default async function CareerPathPage({
                 }}
               >
                 Do premiery pakietu możesz kupić dostępne kursy pojedynczo -
-                wybierz je z listy obok. Dostęp do każdego kursu: 12 miesięcy.
+                wybierz je z listy obok. Dostęp do każdego kursu: 12 miesięcy.
               </p>
               <div className="kurs-card-checks">
                 <span>

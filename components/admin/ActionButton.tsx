@@ -5,9 +5,9 @@ import { useState, useTransition } from "react";
 type ActionResult = { ok: boolean; error?: string };
 
 /**
- * Przycisk wywołujący akcję serwerową admina z ręcznie budowanym
- * FormData. Obsługuje potwierdzenie (confirm), stan oczekiwania i błąd.
- * Akcja i tak re-weryfikuje uprawnienia po stronie serwera.
+ * Przycisk wywołujący akcję serwerową admina z ręcznie budowanym
+ * FormData. Obsługuje potwierdzenie (confirm), stan oczekiwania i błąd.
+ * Akcja i tak re-weryfikuje uprawnienia po stronie serwera.
  */
 export default function ActionButton({
   action,

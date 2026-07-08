@@ -8,7 +8,7 @@ import SiteFooter from "@/components/SiteFooter";
 export const metadata: Metadata = {
   title: "Dla firm - MARKOWE KURSY",
   description:
-    "Grupowe licencje, programy dopasowane do realizowanych projektów i faktury VAT dla firm wykonawczych. Podnieś kompetencje całego zespołu.",
+    "Grupowe licencje, programy dopasowane do realizowanych projektów i faktury VAT dla firm wykonawczych. Podnieś kompetencje całego zespołu.",
 };
 
 export default function DlaFirmPage() {
@@ -21,7 +21,7 @@ export default function DlaFirmPage() {
         <img
           className="b2b-hero-bg"
           src="/assets/dla-firm-hero.jpg"
-          alt="Projekt techniczny i instalacja przemysłowa"
+          alt="Projekt techniczny i instalacja przemysłowa"
         />
         <div className="b2b-hero-scrim"></div>
         <div className="b2b-hero-inner">
@@ -34,15 +34,15 @@ export default function DlaFirmPage() {
             <p className="b2b-hero-para">
               <span className="d-only">
                 Grupowe licencje, programy dopasowane do realizowanych projektów
-                i faktury VAT dla firm wykonawczych.
+                i faktury VAT dla firm wykonawczych.
               </span>
               <span className="m-only">
-                Grupowe licencje i faktury VAT dla firm wykonawczych.
+                Grupowe licencje i faktury VAT dla firm wykonawczych.
               </span>
             </p>
             <div>
               <Link className="btn btn-primary-lg" href="/kontakt">
-                Zapytaj o ofertę
+                Zapytaj o ofertę
               </Link>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function DlaFirmPage() {
               <b>✔</b>Raportowanie postępów szkolenia dla kierownictwa
             </span>
             <span>
-              <b>✔</b>Faktury VAT i rozliczenia dla firm
+              <b>✔</b>Faktury VAT i rozliczenia dla firm
             </span>
             <span>
               <b>✔</b>Dedykowany opiekun kontraktu
@@ -92,26 +92,25 @@ export default function DlaFirmPage() {
           <div className="steps-grid">
             <div className="step-card">
               <div className="step-num">01</div>
-              <div className="step-title">Rozmowa o potrzebach</div>
+              <div className="step-title">Rozmowa o potrzebach</div>
               <div className="step-desc">
-                Ustalamy zakres prac zespołu i braki kompetencyjne do
+                Ustalamy zakres prac zespołu i braki kompetencyjne do
                 uzupełnienia.
               </div>
             </div>
             <div className="step-card">
               <div className="step-num">02</div>
-              <div className="step-title">Dobór programu i licencji</div>
+              <div className="step-title">Dobór programu i licencji</div>
               <div className="step-desc">
-                Przygotowujemy zestaw kursów i model rozliczenia dla całego
+                Przygotowujemy zestaw kursów i model rozliczenia dla całego
                 zespołu.
               </div>
             </div>
             <div className="step-card">
               <div className="step-num">03</div>
-              <div className="step-title">Szkolenie i raportowanie</div>
+              <div className="step-title">Szkolenie i raportowanie</div>
               <div className="step-desc">
-                Zespół realizuje kursy, a Ty otrzymujesz raport postępów i
-                certyfikaty.
+                Zespół realizuje kursy, a Ty otrzymujesz raport postępów i certyfikaty.
               </div>
             </div>
           </div>
@@ -122,11 +121,11 @@ export default function DlaFirmPage() {
       <section className="b2b-cta">
         <div className="b2b-cta-inner">
           <div>
-            <h2>Porozmawiajmy o Twoim zespole</h2>
-            <p>Odpowiadamy na zapytania firmowe w ciągu 1 dnia roboczego.</p>
+            <h2>Porozmawiajmy o Twoim zespole</h2>
+            <p>Odpowiadamy na zapytania firmowe w ciągu 1 dnia roboczego.</p>
           </div>
           <Link className="btn btn-primary-lg" href="/kontakt">
-            Zapytaj o ofertę
+            Zapytaj o ofertę
           </Link>
         </div>
       </section>

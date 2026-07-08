@@ -13,11 +13,11 @@ insert into public.courses (id, slug, status, default_language, level, category,
 on conflict (slug) do nothing;
 
 insert into public.course_translations (course_id, language, title, short_description) values
-  ('a1000000-0000-4000-8000-000000000001', 'pl', 'Podstawy izolacji przemysłowych', 'Rodzaje izolacji technicznych, dobór materiału i zasady montażu zgodne z praktyką wykonawczą.'),
-  ('a1000000-0000-4000-8000-000000000002', 'pl', 'Rysunki techniczne w izolacji przemysłowej (ISO, P&ID, GA)', 'Interpretacja rysunków izometrycznych, schematów P&ID oraz rysunków ogólnych (GA) stosowanych przy realizacji robót.'),
-  ('a1000000-0000-4000-8000-000000000003', 'pl', 'SketchUp dla obmiarowców izolacji przemysłowej', 'Modelowanie 3D w SketchUp na potrzeby obmiaru izolacji przemysłowych.'),
-  ('a1000000-0000-4000-8000-000000000004', 'pl', 'Rozwiązania blacharskie płaszczy ochronnych', 'Wykonywanie rozwinięć blacharskich, kształtek i płaszczy ochronnych zgodnie z dokumentacją wykonawczą.'),
-  ('a1000000-0000-4000-8000-000000000005', 'pl', 'Obmiarowanie izometryczne izolacji przemysłowych', 'Metodyka obmiaru rurociągów, armatury i zbiorników na podstawie dokumentacji ISO i P&ID.')
+  ('a1000000-0000-4000-8000-000000000001', 'pl', 'Podstawy izolacji przemysłowych', 'Rodzaje izolacji technicznych, dobór materiału i zasady montażu zgodne z praktyką wykonawczą.'),
+  ('a1000000-0000-4000-8000-000000000002', 'pl', 'Rysunki techniczne w izolacji przemysłowej (ISO, P&ID, GA)', 'Interpretacja rysunków izometrycznych, schematów P&ID oraz rysunków ogólnych (GA) stosowanych przy realizacji robót.'),
+  ('a1000000-0000-4000-8000-000000000003', 'pl', 'SketchUp dla obmiarowców izolacji przemysłowej', 'Modelowanie 3D w SketchUp na potrzeby obmiaru izolacji przemysłowych.'),
+  ('a1000000-0000-4000-8000-000000000004', 'pl', 'Rozwiązania blacharskie płaszczy ochronnych', 'Wykonywanie rozwinięć blacharskich, kształtek i płaszczy ochronnych zgodnie z dokumentacją wykonawczą.'),
+  ('a1000000-0000-4000-8000-000000000005', 'pl', 'Obmiarowanie izometryczne izolacji przemysłowych', 'Metodyka obmiaru rurociągów, armatury i zbiorników na podstawie dokumentacji ISO i P&ID.')
 on conflict (course_id, language) do nothing;
 
 -- ceny brutto PLN (grosze) — cennik 2026-07
@@ -45,11 +45,11 @@ insert into public.bundles (id, slug, status, level, sort_order) values
 on conflict (slug) do nothing;
 
 insert into public.bundle_translations (bundle_id, language, name, teaser) values
-  ('b1000000-0000-4000-8000-000000000001', 'pl', 'Izoler',         'Pewny start w zawodzie — podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż.'),
-  ('b1000000-0000-4000-8000-000000000002', 'pl', 'Warsztatowiec',  'Prefabrykacja i płaszcze ochronne — czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista.'),
-  ('b1000000-0000-4000-8000-000000000003', 'pl', 'Obmiarowiec',    'Przygotowanie do roli Insulation Surveyor — izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej.'),
+  ('b1000000-0000-4000-8000-000000000001', 'pl', 'Izoler',         'Pewny start w zawodzie — podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż.'),
+  ('b1000000-0000-4000-8000-000000000002', 'pl', 'Warsztatowiec',  'Prefabrykacja i płaszcze ochronne — czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista.'),
+  ('b1000000-0000-4000-8000-000000000003', 'pl', 'Obmiarowiec',    'Przygotowanie do roli Insulation Surveyor — izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej.'),
   ('b1000000-0000-4000-8000-000000000004', 'pl', 'Brygadzista',    'Kompetencje do nadzorowania robót — od dokumentacji ISO/P&ID, przez blacharkę, po kontrolę obmiaru wykonawczego.'),
-  ('b1000000-0000-4000-8000-000000000005', 'pl', 'Pełna Akademia', 'Cała wiedza ekspercka w jednym pakiecie — najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego.')
+  ('b1000000-0000-4000-8000-000000000005', 'pl', 'Pełna Akademia', 'Cała wiedza ekspercka w jednym pakiecie — najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego.')
 on conflict (bundle_id, language) do nothing;
 
 insert into public.bundle_courses (bundle_id, course_id) values
@@ -101,7 +101,7 @@ insert into public.module_translations (module_id, language, title) values
   ('d1000000-0000-4000-8000-000000000001', 'pl', 'Kolana'),
   ('d1000000-0000-4000-8000-000000000002', 'pl', 'Trójniki'),
   ('d1000000-0000-4000-8000-000000000003', 'pl', 'Redukcje'),
-  ('d1000000-0000-4000-8000-000000000004', 'pl', 'Przejście koła w kwadrat'),
+  ('d1000000-0000-4000-8000-000000000004', 'pl', 'Przejście koła w kwadrat'),
   ('d1000000-0000-4000-8000-000000000005', 'pl', 'Dekle'),
   ('d1000000-0000-4000-8000-000000000006', 'pl', 'Kaptury'),
   ('d1000000-0000-4000-8000-000000000007', 'pl', 'Proste sekcje rurociągów'),
@@ -131,13 +131,13 @@ on conflict (course_id, slug) do nothing;
 insert into public.lesson_translations (lesson_id, language, title) values
   ('e1000000-0000-4000-8000-000000000001', 'pl', 'Kolano 90°'),
   ('e1000000-0000-4000-8000-000000000002', 'pl', 'Kolano 45°'),
-  ('e1000000-0000-4000-8000-000000000003', 'pl', 'Trójnik prosty dla rurociągów o tych samych średnicach'),
-  ('e1000000-0000-4000-8000-000000000004', 'pl', 'Trójnik prosty dla rurociągów o różnych średnicach'),
+  ('e1000000-0000-4000-8000-000000000003', 'pl', 'Trójnik prosty dla rurociągów o tych samych średnicach'),
+  ('e1000000-0000-4000-8000-000000000004', 'pl', 'Trójnik prosty dla rurociągów o różnych średnicach'),
   ('e1000000-0000-4000-8000-000000000005', 'pl', 'Trójnik skośny'),
   ('e1000000-0000-4000-8000-000000000006', 'pl', 'Trójnik przesunięty osiowo'),
   ('e1000000-0000-4000-8000-000000000007', 'pl', 'Redukcja koncentryczna'),
   ('e1000000-0000-4000-8000-000000000008', 'pl', 'Redukcja przesunięta osiowo'),
-  ('e1000000-0000-4000-8000-000000000009', 'pl', 'Przejście koła w kwadrat'),
+  ('e1000000-0000-4000-8000-000000000009', 'pl', 'Przejście koła w kwadrat'),
   ('e1000000-0000-4000-8000-000000000010', 'pl', 'Dekiel pełny'),
   ('e1000000-0000-4000-8000-000000000011', 'pl', 'Dekiel redukcyjny'),
   ('e1000000-0000-4000-8000-000000000012', 'pl', 'Kaptur zaworowy'),

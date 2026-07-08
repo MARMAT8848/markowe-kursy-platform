@@ -37,7 +37,7 @@ export const CAREER_PATHS: CareerPath[] = [
     imageUrl: "/assets/path-izoler.jpg",
     levelLabel: "POZIOM PODSTAWOWY",
     teaser:
-      "Pewny start w zawodzie - podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż.",
+      "Pewny start w zawodzie - podstawy izolacji przemysłowych, od doboru materiału po poprawny montaż.",
     courseSlugs: ["izo-101"],
     priceCents: 19900,
     priceLabel: "199 zł",
@@ -49,7 +49,7 @@ export const CAREER_PATHS: CareerPath[] = [
     imageUrl: "/assets/path-warsztatowiec.jpg",
     levelLabel: "POZIOM ŚREDNIO ZAAWANSOWANY",
     teaser:
-      "Prefabrykacja i płaszcze ochronne - czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista.",
+      "Prefabrykacja i płaszcze ochronne - czytasz rysunki techniczne i wykonujesz rozwinięcia blacharskie jak specjalista.",
     courseSlugs: ["izo-101", "rys-110", "bla-110"],
     priceCents: 59900,
     priceLabel: "599 zł",
@@ -64,7 +64,7 @@ export const CAREER_PATHS: CareerPath[] = [
     imageUrl: "/assets/path-obmiarowiec.jpg",
     levelLabel: "POZIOM ZAAWANSOWANY",
     teaser:
-      "Przygotowanie do roli Insulation Surveyor - izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej.",
+      "Przygotowanie do roli Insulation Surveyor - izometria, SketchUp i obmiar, czyli kompetencje, na których zarabia się najlepiej.",
     courseSlugs: ["rys-110", "izo-330", "obm-210"],
     priceCents: 74900,
     priceLabel: "749 zł",
@@ -95,7 +95,7 @@ export const CAREER_PATHS: CareerPath[] = [
     imageUrl: "/assets/path-pelna-akademia.jpg",
     levelLabel: "KOMPLET",
     teaser:
-      "Cała wiedza ekspercka w jednym pakiecie - najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego.",
+      "Cała wiedza ekspercka w jednym pakiecie - najlepszy wybór, jeśli chcesz mieć dostęp do wszystkiego.",
     courseSlugs: ["izo-101", "rys-110", "izo-330", "bla-110", "obm-210"],
     priceCents: 109900,
     priceLabel: "1099 zł",

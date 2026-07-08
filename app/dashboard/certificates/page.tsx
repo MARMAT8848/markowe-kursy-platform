@@ -77,7 +77,7 @@ export default async function CertificatesPage() {
             >
               Nie masz jeszcze żadnego certyfikatu. Certyfikat generuje się
               automatycznie po ukończeniu wszystkich lekcji kursu - znajdziesz
-              go tutaj i pobierzesz jako PDF.
+              go tutaj i pobierzesz jako PDF.
             </p>
           ) : (
             <div className="module-lessons" style={{ maxWidth: 860 }}>

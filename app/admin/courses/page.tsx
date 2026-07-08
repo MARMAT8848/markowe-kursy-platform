@@ -18,7 +18,7 @@ export default async function AdminCoursesPage() {
     .select("id, slug, status, category")
     .order("slug");
 
-  // liczba lekcji z treścią / wszystkich (podpowiedź gotowości do publikacji)
+  // liczba lekcji z treścią / wszystkich (podpowiedź gotowości do publikacji)
   const { data: lessons } = await admin
     .from("lessons")
     .select("course_id, content_path, status");
@@ -36,7 +36,7 @@ export default async function AdminCoursesPage() {
       <AdminH1>Kursy</AdminH1>
       <p style={{ margin: "0 0 20px", fontSize: 13.5, color: "var(--sub)", maxWidth: 640 }}>
         Publikuj kurs dopiero, gdy ma gotową treść - status „publikowany”
-        oznacza, że kurs jest widoczny w katalogu i kupowalny.
+        oznacza, że kurs jest widoczny w katalogu i kupowalny.
       </p>
       <Table head={["Kod", "Kurs", "Lekcje (gotowe/wsz.)", "Status", "Akcja"]}>
         {(courses ?? []).map((c) => {
@@ -57,8 +57,8 @@ export default async function AdminCoursesPage() {
                   label={c.status === "published" ? "Ukryj (wkrótce)" : "Publikuj"}
                   confirmMsg={
                     c.status === "published"
-                      ? "Ukryć kurs? Zniknie z katalogu i nie będzie kupowalny."
-                      : "Opublikować kurs? Będzie widoczny i kupowalny."
+                      ? "Ukryć kurs? Zniknie z katalogu i nie będzie kupowalny."
+                      : "Opublikować kurs? Będzie widoczny i kupowalny."
                   }
                   subtle
                 />

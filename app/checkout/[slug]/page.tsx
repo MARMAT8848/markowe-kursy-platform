@@ -62,9 +62,9 @@ export default async function CheckoutPage({
               maxWidth: 560,
             }}
           >
-            Kupujesz treść cyfrową z natychmiastowym dostępem. Przepisy
+            Kupujesz treść cyfrową z natychmiastowym dostępem. Przepisy
             wymagają, abyś przed płatnością świadomie zaakceptował/a poniższe
-            oświadczenia - żadne nie jest zaznaczone z góry.
+            oświadczenia - żadne nie jest zaznaczone z góry.
           </p>
         </div>
       </section>

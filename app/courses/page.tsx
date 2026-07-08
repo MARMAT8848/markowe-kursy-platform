@@ -7,7 +7,7 @@ import { getUserCourseStates } from "@/lib/enrollment-state";
 export const metadata: Metadata = {
   title: "Katalog szkoleń - MARKOWE KURSY",
   description:
-    "Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru, prefabrykacji płaszczy ochronnych oraz dokumentacji technicznej.",
+    "Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru, prefabrykacji płaszczy ochronnych oraz dokumentacji technicznej.",
 };
 
 export default async function CoursesPage() {
@@ -25,14 +25,14 @@ export default async function CoursesPage() {
             <h1>Kursy dla specjalistów izolacji przemysłowych</h1>
             <p>
               <span className="d-only">
-                Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru,
+                Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru,
                 prefabrykacji płaszczy ochronnych oraz dokumentacji technicznej.
                 Programy opracowane przez praktyków dla monterów, obmiarowców,
-                planistów, brygadzistów i inżynierów realizujących projekty
+                planistów, brygadzistów i inżynierów realizujących projekty
                 przemysłowe.
               </span>
               <span className="m-only">
-                Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru,
+                Kompleksowe szkolenia z zakresu izolacji przemysłowych, obmiaru,
                 prefabrykacji płaszczy ochronnych oraz dokumentacji technicznej.
               </span>
             </p>

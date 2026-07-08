@@ -243,7 +243,7 @@ export function HeroFigure({
 }
 
 /**
- * Meter — proporcja względem odniesienia. Wypełnienie w akcencie,
+ * Meter — proporcja względem odniesienia. Wypełnienie w akcencie,
  * tor to jaśniejszy stopień tej samej rampy (nie szarość), więc stan
  * czyta się przez całą szerokość paska.
  */

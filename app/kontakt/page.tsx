@@ -8,7 +8,7 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Kontakt - MARKOWE KURSY",
   description:
-    "Napisz w sprawie kursu indywidualnego, oferty dla firmy lub współpracy. Odpowiadamy w ciągu 1 dnia roboczego.",
+    "Napisz w sprawie kursu indywidualnego, oferty dla firmy lub współpracy. Odpowiadamy w ciągu 1 dnia roboczego.",
 };
 
 export default function KontaktPage() {
@@ -22,15 +22,15 @@ export default function KontaktPage() {
             <span className="kicker-line"></span>
             <span className="kicker">KONTAKT</span>
           </div>
-          <h1>Porozmawiajmy o Twoim rozwoju</h1>
+          <h1>Porozmawiajmy o Twoim rozwoju</h1>
           <p>
             <span className="d-only">
-              Napisz w sprawie kursu indywidualnego, oferty dla firmy lub
-              współpracy. Odpowiadamy w ciągu 1 dnia roboczego.
+              Napisz w sprawie kursu indywidualnego, oferty dla firmy lub
+              współpracy. Odpowiadamy w ciągu 1 dnia roboczego.
             </span>
             <span className="m-only">
-              Napisz w sprawie kursu, oferty dla firmy lub współpracy.
-              Odpowiadamy w ciągu 1 dnia roboczego.
+              Napisz w sprawie kursu, oferty dla firmy lub współpracy.
+              Odpowiadamy w ciągu 1 dnia roboczego.
             </span>
           </p>
         </div>

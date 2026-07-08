@@ -62,7 +62,7 @@ export default function SiteFooter() {
             { label: "Regulamin", href: "/regulamin" },
             { label: "Polityka prywatności", href: "/polityka-prywatnosci" },
             { label: "Polityka cookies", href: "/polityka-cookies" },
-            { label: "Zwroty i reklamacje", href: "/zwroty-i-reklamacje" },
+            { label: "Zwroty i reklamacje", href: "/zwroty-i-reklamacje" },
             { label: "Kontakt", href: "/kontakt" },
           ].map((l) => (
             <Link

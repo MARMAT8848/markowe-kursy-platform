@@ -45,8 +45,8 @@ export default async function NewsletterConfirmedPage({
             }}
           >
             {ok
-              ? "Od teraz będziesz otrzymywać informacje o nowych kursach, lekcjach i promocjach. Z newslettera możesz wypisać się w każdej chwili - link znajdziesz w stopce każdej wiadomości."
-              : "Link potwierdzający jest niekompletny lub nieaktualny. Zapisz się ponownie w stopce strony - wyślemy nowy."}
+              ? "Od teraz będziesz otrzymywać informacje o nowych kursach, lekcjach i promocjach. Z newslettera możesz wypisać się w każdej chwili - link znajdziesz w stopce każdej wiadomości."
+              : "Link potwierdzający jest niekompletny lub nieaktualny. Zapisz się ponownie w stopce strony - wyślemy nowy."}
           </p>
         </div>
       </section>

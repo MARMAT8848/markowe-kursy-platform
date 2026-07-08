@@ -65,7 +65,7 @@ export default async function AdminNewsletterPage() {
         <StatCard
           label="OCZEKUJĄCY NA POTWIERDZENIE"
           value={pending}
-          hint="double opt-in - czekają na klik w e-mailu"
+          hint="double opt-in - czekają na klik w e-mailu"
         />
         <StatCard label="WYPISANI" value={unsubscribed} />
       </div>
@@ -107,7 +107,7 @@ export default async function AdminNewsletterPage() {
       </h2>
       {(recentSubs ?? []).length === 0 ? (
         <p style={{ margin: 0, fontSize: 13.5, color: "var(--sub)" }}>
-          Jeszcze nikt się nie zapisał. Formularz jest w stopce każdej strony.
+          Jeszcze nikt się nie zapisał. Formularz jest w stopce każdej strony.
         </p>
       ) : (
         <div style={{ maxWidth: 620 }}>

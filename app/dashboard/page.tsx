@@ -175,7 +175,7 @@ export default async function DashboardPage() {
                   color: "var(--sub)",
                 }}
               >
-                Nie masz jeszcze żadnego kursu. Wybierz szkolenie z katalogu -
+                Nie masz jeszcze żadnego kursu. Wybierz szkolenie z katalogu -
                 dostęp aktywuje się automatycznie po opłaceniu.
               </p>
               <Link className="btn btn-primary" href="/courses">
@@ -232,7 +232,7 @@ export default async function DashboardPage() {
                         <span className="lrow-kicker">
                           UKOŃCZONY
                           {r.activeNow ? ` · DOSTĘP DO ${r.end}` : ""} ·
-                          CERTYFIKAT W ZAKŁADCE CERTYFIKATY
+                          CERTYFIKAT W ZAKŁADCE CERTYFIKATY
                         </span>
                         <span className="lrow-title">{r.title}</span>
                       </span>

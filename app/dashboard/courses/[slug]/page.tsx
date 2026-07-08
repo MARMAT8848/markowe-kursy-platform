@@ -93,10 +93,10 @@ export default async function CoursePanelPage({
   const completed = allLessons.filter((l) => done.has(l.id)).length;
   const firstAvailable = allLessons.find((l) => l.content_path);
   // globalna numeracja lekcji (bez mutacji podczas renderu)
-  const lessonNumById = new Map(allLessons.map((l, i) => [l.id, i + 1]));
+  const lessonNumById = new Map(allLessons.map((l, i) => [l.id, i + 1]));
 
   // procent ze źródła prawdy (API complete utrzymuje course_progress);
-  // fallback: wyliczenie z lekcji
+  // fallback: wyliczenie z lekcji
   const { data: courseProgress } = await supabase
     .from("course_progress")
     .select("progress_percent, status")
@@ -109,7 +109,7 @@ export default async function CoursePanelPage({
         ? Math.round((completed / total) * 100)
         : 0;
 
-  // certyfikat (jeśli już wygenerowany) — link w karcie postępu
+  // certyfikat (jeśli już wygenerowany) — link w karcie postępu
   const { data: certificate } = await supabase
     .from("certificates")
     .select("id")
@@ -178,7 +178,7 @@ export default async function CoursePanelPage({
             <div className="progress-text">
               {completed === 0
                 ? "Nie rozpoczęto - zacznij od pierwszej lekcji."
-                : `${completed} z ${total} lekcji ukończonych`}
+                : `${completed} z ${total} lekcji ukończonych`}
             </div>
             <a
               className="progress-cta"

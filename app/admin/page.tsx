@@ -62,13 +62,13 @@ export default async function AdminOverviewPage() {
             <Link href="/admin/stats" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Statystyki
             </Link>{" "}
-            - przychód, wzrost, wyniki kursów i sprawy wymagające uwagi.
+            - przychód, wzrost, wyniki kursów i sprawy wymagające uwagi.
           </li>
           <li>
             <Link href="/admin/enrollments" style={{ color: "var(--accent)", fontWeight: 600 }}>
               Dostępy
             </Link>{" "}
-            - nadaj, przedłuż o 12 miesięcy lub cofnij dostęp do kursu.
+            - nadaj, przedłuż o 12 miesięcy lub cofnij dostęp do kursu.
           </li>
           <li>
             <Link href="/admin/users" style={{ color: "var(--accent)", fontWeight: 600 }}>

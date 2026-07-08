@@ -5,7 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 /* eslint-disable @next/next/no-img-element */
 
 export const metadata: Metadata = {
-  title: "O nas - MARKOWE KURSY",
+  title: "O nas - MARKOWE KURSY",
   description:
     "Akademia techniczna zbudowana przez praktyków branży izolacyjnej. Programy szkoleniowe powstają na bazie realnych projektów przemysłowych.",
 };
@@ -28,13 +28,13 @@ export default function ONasPage() {
           <p>
             <span className="d-only">
               Programy szkoleniowe MARKOWE KURSY powstają na bazie realnych
-              projektów przemysłowych - nie teorii z podręcznika. Uczymy tego,
-              co faktycznie przyda się na budowie, w biurze technicznym i przy
+              projektów przemysłowych - nie teorii z podręcznika. Uczymy tego,
+              co faktycznie przyda się na budowie, w biurze technicznym i przy
               kosztorysie.
             </span>
             <span className="m-only">
               Programy szkoleniowe MARKOWE KURSY powstają na bazie realnych
-              projektów przemysłowych, nie teorii z podręcznika.
+              projektów przemysłowych, nie teorii z podręcznika.
             </span>
           </p>
         </div>
@@ -53,15 +53,13 @@ export default function ONasPage() {
               <p className="onas-misja-text">
                 <span className="d-only">
                   Rynek izolacji przemysłowej zmienia się szybciej niż programy
-                  nauczania. Dlatego inspektorzy FROSIO, obmiarowcy z
-                  wieloletnim stażem, brygadziści i kierownicy realizacji
-                  projektują treści kursów - a materiały aktualizujemy wraz ze
-                  zmianami norm i technologii.
+                  nauczania. Dlatego inspektorzy FROSIO, obmiarowcy z wieloletnim stażem, brygadziści i kierownicy realizacji
+                  projektują treści kursów - a materiały aktualizujemy wraz ze
+                  zmianami norm i technologii.
                 </span>
                 <span className="m-only">
                   Rynek izolacji przemysłowej zmienia się szybciej niż programy
-                  nauczania. Dlatego inspektorzy FROSIO, obmiarowcy z
-                  wieloletnim stażem, brygadziści i kierownicy realizacji
+                  nauczania. Dlatego inspektorzy FROSIO, obmiarowcy z wieloletnim stażem, brygadziści i kierownicy realizacji
                   projektują treści kursów.
                 </span>
               </p>
@@ -74,7 +72,7 @@ export default function ONasPage() {
                     Programy tworzone przez praktyków
                   </div>
                   <div className="onas-point-sub">
-                    Inspektorzy FROSIO i kierownicy realizacji projektują treści
+                    Inspektorzy FROSIO i kierownicy realizacji projektują treści
                     kursów.
                   </div>
                 </div>
@@ -83,10 +81,10 @@ export default function ONasPage() {
                 <span className="onas-point-tile">✔</span>
                 <div>
                   <div className="onas-point-title">
-                    Materiały z realnych projektów
+                    Materiały z realnych projektów
                   </div>
                   <div className="onas-point-sub">
-                    Dokumentacja, rysunki i procedury pochodzą z rzeczywistych
+                    Dokumentacja, rysunki i procedury pochodzą z rzeczywistych
                     realizacji.
                   </div>
                 </div>
@@ -98,7 +96,7 @@ export default function ONasPage() {
                     Regularna aktualizacja treści
                   </div>
                   <div className="onas-point-sub">
-                    Kursy nadążają za zmianami norm, materiałów i technologii
+                    Kursy nadążają za zmianami norm, materiałów i technologii
                     montażu.
                   </div>
                 </div>
@@ -113,20 +111,20 @@ export default function ONasPage() {
         <img
           className="statband-bg"
           src="/assets/separator-band.jpg"
-          alt="Instalacja przemysłowa i rysunek techniczny"
+          alt="Instalacja przemysłowa i rysunek techniczny"
         />
         <div className="statband-scrim"></div>
         <div className="statband-inner">
           <div className="statband-cell">
             <div className="statband-num accent">+20 lat</div>
             <div className="statband-caption">
-              doświadczenia w branży izolacji przemysłowej
+              doświadczenia w branży izolacji przemysłowej
             </div>
           </div>
           <div className="statband-cell">
             <div className="statband-num">Eksperci</div>
             <div className="statband-caption">
-              branżowi i inspektorzy FROSIO tworzą programy kursów
+              branżowi i inspektorzy FROSIO tworzą programy kursów
             </div>
           </div>
           <div className="statband-cell">

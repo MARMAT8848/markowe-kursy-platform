@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
 
-/** Ustawienie nowego hasła po kliknięciu linku z e-maila. Wymaga
+/** Ustawienie nowego hasła po kliknięciu linku z e-maila. Wymaga
  *  sesji recovery (ustawianej przez /auth/callback). */
 export default function ResetPasswordCard() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function ResetPasswordCard() {
       setNotice(
         error.message.toLowerCase().includes("should be at least")
           ? "Hasło musi mieć co najmniej 8 znaków."
-          : "Nie udało się zmienić hasła. Link mógł wygasnąć - poproś o nowy."
+          : "Nie udało się zmienić hasła. Link mógł wygasnąć - poproś o nowy."
       );
       return;
     }
@@ -67,7 +67,7 @@ export default function ResetPasswordCard() {
             <a href="/forgot-password" style={{ color: "var(--accent)", fontWeight: 600 }}>
               resetu hasła
             </a>{" "}
-            i poproś o nowy.
+            i poproś o nowy.
           </div>
         ) : done ? (
           <div className="form-confirm">

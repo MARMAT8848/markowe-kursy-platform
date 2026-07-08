@@ -4,8 +4,8 @@ import { useState } from "react";
 import type { ProgramModule } from "@/lib/course-program";
 
 /**
- * Akordeon programu kursu oparty na rzeczywistej strukturze z bazy:
- * moduł → lista lekcji (z czasem). Pierwszy moduł otwarty.
+ * Akordeon programu kursu oparty na rzeczywistej strukturze z bazy:
+ * moduł → lista lekcji (z czasem). Pierwszy moduł otwarty.
  * Lekcje bez gotowej treści oznaczone jako „wkrótce".
  */
 export default function ProgramAccordion({

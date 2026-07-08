@@ -45,7 +45,7 @@ export default async function NewsletterUnsubscribedPage({
             }}
           >
             {ok
-              ? "Nie będziemy już wysyłać newslettera na ten adres. Jeśli zmienisz zdanie, możesz zapisać się ponownie w stopce strony."
+              ? "Nie będziemy już wysyłać newslettera na ten adres. Jeśli zmienisz zdanie, możesz zapisać się ponownie w stopce strony."
               : "Link wypisu jest niekompletny lub nieaktualny. Jeśli chcesz się wypisać, użyj linku ze stopki najnowszej wiadomości."}
           </p>
         </div>

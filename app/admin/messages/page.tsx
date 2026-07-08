@@ -30,7 +30,7 @@ export default async function AdminMessagesPage() {
 
   return (
     <>
-      <AdminH1>Wiadomości z formularza</AdminH1>
+      <AdminH1>Wiadomości z formularza</AdminH1>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 14, margin: "6px 0 28px" }}>
         <StatCard label="DO OBSŁUŻENIA" value={open.length} />

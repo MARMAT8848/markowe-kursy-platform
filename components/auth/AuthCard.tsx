@@ -7,8 +7,8 @@ import { createSupabaseBrowser } from "@/lib/supabase/client";
 
 /**
  * Logowanie / rejestracja — Supabase Auth (na żywo).
- * Rejestracja wymaga imienia i nazwiska (potrzebne do certyfikatu)
- * i potwierdzenia adresu e-mail (link aktywacyjny).
+ * Rejestracja wymaga imienia i nazwiska (potrzebne do certyfikatu)
+ * i potwierdzenia adresu e-mail (link aktywacyjny).
  */
 export default function AuthCard({ mode }: { mode: "login" | "register" }) {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function AuthCard({ mode }: { mode: "login" | "register" }) {
         error.message.includes("Invalid login credentials")
           ? "Nieprawidłowy e-mail lub hasło."
           : error.message.includes("Email not confirmed")
-            ? "Konto nie zostało jeszcze potwierdzone - kliknij link z e-maila."
+            ? "Konto nie zostało jeszcze potwierdzone - kliknij link z e-maila."
             : "Nie udało się zalogować. Spróbuj ponownie."
       );
       setBusy(false);
@@ -66,7 +66,7 @@ export default function AuthCard({ mode }: { mode: "login" | "register" }) {
     if (error) {
       setNotice(
         error.message.includes("already registered")
-          ? "Konto z tym adresem już istnieje - zaloguj się."
+          ? "Konto z tym adresem już istnieje - zaloguj się."
           : error.message.toLowerCase().includes("password")
             ? "Hasło musi mieć co najmniej 8 znaków."
             : "Nie udało się założyć konta. Spróbuj ponownie."
@@ -74,7 +74,7 @@ export default function AuthCard({ mode }: { mode: "login" | "register" }) {
       return;
     }
     setNotice(
-      "Konto utworzone. Sprawdź skrzynkę e-mail i kliknij link potwierdzający, aby dokończyć rejestrację."
+      "Konto utworzone. Sprawdź skrzynkę e-mail i kliknij link potwierdzający, aby dokończyć rejestrację."
     );
   }
 
@@ -132,7 +132,7 @@ export default function AuthCard({ mode }: { mode: "login" | "register" }) {
         ) : (
           <form className="login-form" onSubmit={onRegister}>
             <label className="field-label">
-              Imię i nazwisko
+              Imię i nazwisko
               <input
                 className="field"
                 type="text"

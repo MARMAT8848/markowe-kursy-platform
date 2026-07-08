@@ -36,8 +36,7 @@ export default function CheckoutCancelPage() {
               maxWidth: 560,
             }}
           >
-            Nic nie zostało pobrane z Twojego konta. Możesz wrócić do kursu i
-            spróbować ponownie w dowolnym momencie.
+            Nic nie zostało pobrane z Twojego konta. Możesz wrócić do kursu i spróbować ponownie w dowolnym momencie.
           </p>
         </div>
       </section>

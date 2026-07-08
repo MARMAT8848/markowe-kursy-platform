@@ -8,8 +8,8 @@ import {
 /**
  * Sekcja „Ścieżki kariery" — główny blok ofertowy strony głównej
  * (strategia: 5 ścieżek stanowiskowych). Każda karta prowadzi do
- * dedykowanej strony ścieżki (/sciezki/[slug]) z kursami dla danego
- * stanowiska i wyceną. Komunikat o oszczędności eksponowany.
+ * dedykowanej strony ścieżki (/sciezki/[slug]) z kursami dla danego
+ * stanowiska i wyceną. Komunikat o oszczędności eksponowany.
  */
 export default function CareerPaths() {
   return (
@@ -42,7 +42,7 @@ export default function CareerPaths() {
                 maxWidth: 560,
               }}
             >
-              Ścieżka to zestaw kursów dla konkretnego stanowiska w jednej,
+              Ścieżka to zestaw kursów dla konkretnego stanowiska w jednej,
               niższej cenie - oszczędzasz nawet {maxSavingsLabel()} względem
               kupowania kursów osobno.
             </p>

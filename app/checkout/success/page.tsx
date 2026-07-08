@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Strona powrotu z płatności. Celowo NIE aktywuje dostępu do kursu —
+ * Strona powrotu z płatności. Celowo NIE aktywuje dostępu do kursu —
  * dostęp nadaje wyłącznie zweryfikowany webhook operatora płatności.
  */
 export default function CheckoutSuccessPage() {
@@ -42,7 +42,7 @@ export default function CheckoutSuccessPage() {
           >
             Płatność jest przetwarzana. Dostęp do kursu pojawi się na Twoim
             koncie automatycznie po potwierdzeniu płatności przez operatora -
-            zwykle w ciągu kilku minut. Potwierdzenie zakupu wraz ze złożonymi
+            zwykle w ciągu kilku minut. Potwierdzenie zakupu wraz ze złożonymi
             zgodami wyślemy na Twój adres e-mail.
           </p>
         </div>

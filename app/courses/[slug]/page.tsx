@@ -29,7 +29,7 @@ export async function generateMetadata({
  * - kurs coming_soon → „Wkrótce dostępny" (nieklikalne),
  * - aktywny dostęp → „Przejdź do kursu" (nie da się kupić ponownie),
  * - dostęp wygasł → „Odnów dostęp" → checkout,
- * - w pozostałych → „Kup kurs" → /checkout/[slug] (zgody prawne).
+ * - w pozostałych → „Kup kurs" → /checkout/[slug] (zgody prawne).
  */
 function BuyButton({
   slug,
@@ -127,7 +127,7 @@ export default async function CoursePage({
                   color: "#2E7D46",
                 }}
               >
-                Masz aktywny dostęp do tego kursu. Przejdź do niego w panelu
+                Masz aktywny dostęp do tego kursu. Przejdź do niego w panelu
                 kursanta.
               </div>
             )}
@@ -223,9 +223,8 @@ export default async function CoursePage({
                     color: "var(--sub)",
                   }}
                 >
-                  Poznajesz terminologię polską i angielską stosowaną w
-                  dokumentacji technicznej na projektach norweskich - te same
-                  pojęcia, którymi posługują się inżynier, brygadzista i dział
+                  Poznajesz terminologię polską i angielską stosowaną w dokumentacji technicznej na projektach norweskich - te same
+                  pojęcia, którymi posługują się inżynier, brygadzista i dział
                   QA.
                 </p>
               </div>
@@ -249,12 +248,11 @@ export default async function CoursePage({
                     color: "var(--sub)",
                   }}
                 >
-                  Kurs jest w 100% online, więc możesz uczyć się z dowolnego
-                  miejsca. Wystarczy telefon, tablet lub komputer z dostępem
+                  Kurs jest w 100% online, więc możesz uczyć się z dowolnego
+                  miejsca. Wystarczy telefon, tablet lub komputer z dostępem
                   do internetu. Otrzymujesz 12 miesięcy dostępu do
                   materiałów, dzięki czemu uczysz się we własnym tempie - bez
-                  sztywnych terminów i konieczności uczestniczenia w
-                  zjazdach.
+                  sztywnych terminów i konieczności uczestniczenia w zjazdach.
                 </p>
               </div>
             </div>

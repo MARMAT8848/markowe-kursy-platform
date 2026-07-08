@@ -12,11 +12,11 @@ export const POLITYKA_COOKIES: LegalDocument = {
   body: `
 ## 1. Informacje ogólne
 
-Niniejsza Polityka cookies opisuje zasady wykorzystywania plików cookies i podobnych technologii na platformie Markowe Kursy dostępnej pod adresem markowekursy.pl.
+Niniejsza Polityka cookies opisuje zasady wykorzystywania plików cookies i podobnych technologii na platformie Markowe Kursy dostępnej pod adresem markowekursy.pl.
 
 Właścicielem platformy jest:
 
-[PEŁNA NAZWA FIRMY / IMIĘ I NAZWISKO PRZEDSIĘBIORCY]
+[PEŁNA NAZWA FIRMY / IMIĘ I NAZWISKO PRZEDSIĘBIORCY]
 [ADRES SIEDZIBY / ADRES DZIAŁALNOŚCI]
 NIP: [NIP]
 E-mail: [ADRES E-MAIL]
@@ -43,7 +43,7 @@ Cookies niezbędne mogą być stosowane bez dodatkowej zgody użytkownika, ponie
 
 ### 3.2. Cookies analityczne
 
-Pomagają zrozumieć, w jaki sposób użytkownicy korzystają ze strony, które treści są najczęściej odwiedzane oraz jak można poprawić działanie platformy.
+Pomagają zrozumieć, w jaki sposób użytkownicy korzystają ze strony, które treści są najczęściej odwiedzane oraz jak można poprawić działanie platformy.
 
 Cookies analityczne powinny być stosowane po uzyskaniu zgody użytkownika, jeżeli wymagają tego przepisy prawa lub konfiguracja narzędzia.
 
@@ -63,19 +63,19 @@ Pozwalają zapamiętać ustawienia użytkownika, takie jak preferowany język lu
 
 2. Użytkownik powinien mieć możliwość zaakceptowania, odrzucenia lub dostosowania zgód na cookies inne niż niezbędne.
 
-3. Zgoda na cookies analityczne i marketingowe nie może być wymuszana, jeżeli nie jest konieczna do działania platformy.
+3. Zgoda na cookies analityczne i marketingowe nie może być wymuszana, jeżeli nie jest konieczna do działania platformy.
 
-4. Użytkownik powinien mieć możliwość zmiany zgód w dowolnym momencie.
+4. Użytkownik powinien mieć możliwość zmiany zgód w dowolnym momencie.
 
-## 5. Zarządzanie cookies w przeglądarce
+## 5. Zarządzanie cookies w przeglądarce
 
-Użytkownik może zarządzać plikami cookies także z poziomu ustawień swojej przeglądarki internetowej. Ograniczenie lub wyłączenie cookies niezbędnych może jednak spowodować, że niektóre funkcje platformy, w tym logowanie, zakup kursu lub dostęp do panelu kursanta, nie będą działały prawidłowo.
+Użytkownik może zarządzać plikami cookies także z poziomu ustawień swojej przeglądarki internetowej. Ograniczenie lub wyłączenie cookies niezbędnych może jednak spowodować, że niektóre funkcje platformy, w tym logowanie, zakup kursu lub dostęp do panelu kursanta, nie będą działały prawidłowo.
 
 ## 6. Narzędzia zewnętrzne
 
-Platforma może korzystać z narzędzi dostawców zewnętrznych, takich jak:
+Platforma może korzystać z narzędzi dostawców zewnętrznych, takich jak:
 
-a. Supabase - autoryzacja i działanie konta,
+a. Supabase - autoryzacja i działanie konta,
 b. Stripe - obsługa płatności,
 c. Vercel - hosting,
 d. Resend lub podobny dostawca - e-maile transakcyjne,
@@ -85,7 +85,7 @@ Aktualna lista narzędzi powinna odpowiadać faktycznej konfiguracji platformy.
 
 ## 7. Zmiany Polityki cookies
 
-Administrator może aktualizować niniejszą Politykę cookies, w szczególności w przypadku zmiany narzędzi wykorzystywanych na platformie lub zmiany przepisów prawa.
+Administrator może aktualizować niniejszą Politykę cookies, w szczególności w przypadku zmiany narzędzi wykorzystywanych na platformie lub zmiany przepisów prawa.
 
 Aktualna wersja Polityki cookies będzie dostępna na stronie markowekursy.pl.
 `,

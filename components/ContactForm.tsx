@@ -34,7 +34,7 @@ export default function ContactForm() {
     return (
       <div className="form-confirm">
         Dziękujemy - wiadomość dotarła. Odpowiemy na podany adres e-mail,
-        zwykle w ciągu 1-2 dni roboczych.
+        zwykle w ciągu 1-2 dni roboczych.
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default function ContactForm() {
       />
       <div className="form-row">
         <label className="field-label">
-          Imię i nazwisko
+          Imię i nazwisko
           <input
             className="field"
             type="text"
@@ -90,7 +90,7 @@ export default function ContactForm() {
           rows={5}
           required
           maxLength={5000}
-          placeholder="Opisz, w czym możemy pomóc"
+          placeholder="Opisz, w czym możemy pomóc"
         ></textarea>
       </label>
       <div>

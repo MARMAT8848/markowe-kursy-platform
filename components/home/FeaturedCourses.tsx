@@ -5,8 +5,8 @@ import { useState } from "react";
 import { CATEGORIES, COURSES, type CatKey } from "@/lib/courses";
 
 /**
- * „Polecane szkolenia" — kursy pojedyncze z filtrem kategorii.
- * Dane z lib/courses.ts (jedno źródło cen); w Fazie 2 → Supabase.
+ * „Polecane szkolenia" — kursy pojedyncze z filtrem kategorii.
+ * Dane z lib/courses.ts (jedno źródło cen); w Fazie 2 → Supabase.
  */
 export default function FeaturedCourses() {
   const [filter, setFilter] = useState<CatKey | "all">("all");

@@ -53,7 +53,7 @@ export default function ErrorPage({
           }}
         >
           Spróbuj ponownie - jeśli problem będzie się powtarzał, napisz do nas
-          przez stronę kontaktową, a szybko się tym zajmiemy.
+          przez stronę kontaktową, a szybko się tym zajmiemy.
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
           <button className="btn btn-primary" onClick={() => reset()}>

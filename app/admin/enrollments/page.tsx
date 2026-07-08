@@ -38,7 +38,7 @@ export default async function AdminEnrollmentsPage() {
         }}
       >
         Nadawanie dostępu odbywa się automatycznie po opłaceniu (webhook) lub
-        ręcznie w zakładce Użytkownicy. Tutaj przedłużasz o kolejne 12 miesięcy
+        ręcznie w zakładce Użytkownicy. Tutaj przedłużasz o kolejne 12 miesięcy
         lub cofasz dostęp.
       </p>
 
