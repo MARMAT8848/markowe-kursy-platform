@@ -60,7 +60,7 @@ export default function LearnAnywhere() {
               color: "var(--ink)",
             }}
           >
-            Rotacja, delegacja czy dom - Ty decydujesz, kiedy i skąd się
+            W pracy, podróży, w domu - Ty decydujesz, kiedy i skąd się
             uczysz
           </h2>
 
