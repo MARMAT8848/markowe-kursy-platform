@@ -13,7 +13,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Czy potrzebuję wcześniejszego doświadczenia?",
-    a: "Kursy podstawowe nie wymagają wcześniejszego przygotowania. Kursy średniozaawansowane i zaawansowane zakładają znajomość materiału z poziomu podstawowego.",
+    a: "Kursy podstawowe nie wymagają wcześniejszego przygotowania. Kursy średniozaawansowane i zaawansowane są skierowane do osób, które posiadają już doświadczenie w zawodzie oraz opanowały materiał na poziomie podstawowym.",
   },
   {
     q: "Czy wystawiacie faktury dla firm?",
