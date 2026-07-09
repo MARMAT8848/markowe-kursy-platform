@@ -19,7 +19,15 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   // Bramka na poziomie layoutu (dodatkowo każda strona re-weryfikuje).
-  const { email } = await requireAdmin();
+  const { email, admin } = await requireAdmin();
+
+  // Liczba nieobsłużonych wiadomości z formularza → czerwony badge przy
+  // pozycji „Wiadomości". Zapytanie działa przy każdym wejściu do panelu
+  // (layout renderuje się dynamicznie, bo requireAdmin czyta ciasteczka).
+  const { count: unreadMessages } = await admin
+    .from("contact_messages")
+    .select("*", { count: "exact", head: true })
+    .is("handled_at", null);
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
@@ -67,15 +75,47 @@ export default async function AdminLayout({
             font: "500 13px var(--sans)",
           }}
         >
-          {NAV.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              style={{ color: "#D8D6D4", textDecoration: "none" }}
-            >
-              {n.label}
-            </Link>
-          ))}
+          {NAV.map((n) => {
+            const badge =
+              n.href === "/admin/messages" && (unreadMessages ?? 0) > 0
+                ? unreadMessages
+                : null;
+            return (
+              <Link
+                key={n.href}
+                href={n.href}
+                style={{
+                  color: "#D8D6D4",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+                {n.label}
+                {badge != null && (
+                  <span
+                    aria-label={`${badge} nieprzeczytanych wiadomości`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      minWidth: 17,
+                      height: 17,
+                      padding: "0 5px",
+                      borderRadius: 999,
+                      background: "var(--accent)",
+                      color: "#fff",
+                      font: "700 10.5px var(--mono)",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {badge}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
         </nav>
         <div style={{ flex: 1 }}></div>
         <span

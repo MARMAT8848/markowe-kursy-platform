@@ -20,7 +20,8 @@ export async function toggleHandledAction(
     .eq("id", id);
   if (error) return { ok: false, error: "Nie udało się zapisać." };
 
-  revalidatePath("/admin/messages");
+  // "layout" odświeża też nagłówek panelu → badge z liczbą nieprzeczytanych.
+  revalidatePath("/admin", "layout");
   return { ok: true };
 }
 
@@ -35,6 +36,7 @@ export async function deleteMessageAction(
   const { error } = await admin.from("contact_messages").delete().eq("id", id);
   if (error) return { ok: false, error: "Nie udało się usunąć." };
 
-  revalidatePath("/admin/messages");
+  // "layout" odświeża też nagłówek panelu → badge z liczbą nieprzeczytanych.
+  revalidatePath("/admin", "layout");
   return { ok: true };
 }
