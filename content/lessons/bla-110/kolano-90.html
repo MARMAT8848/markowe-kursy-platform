@@ -112,7 +112,7 @@
   .topbar{display:none}
 
   @media(max-width:980px){
-    .brand b{display:none}
+    .brand b{font-size:13px}
     .capbar{margin:0 10px 8px;padding:11px 16px}
     .bwrap{padding:10px}.board{inset:10px}
     .hdrstep{display:none}
@@ -127,12 +127,16 @@
     .kbd{display:none}
   }
   @media(max-width:560px){
-    .hdr{gap:10px;padding:9px 12px}
-    /* marka kurczy się zamiast wypływać pod przyciski: jedna linia + „…" */
+    .hdr{gap:10px;padding:10px 12px}
+    /* marka zajmuje wolną przestrzeń; obie linie (kurs + tytuł lekcji)
+       widoczne, każda w jednej linii z „…" zamiast wypływania pod przyciski */
     .brand{flex:1 1 0;min-width:0}
     .brand>div{min-width:0;overflow:hidden}
-    .brand img{height:34px}
-    .brand .bk{font-size:9.5px;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand img{height:36px}
+    /* pełna nazwa kursu widoczna: swobodne zawijanie, nic nie ucinamy */
+    .brand>div{min-width:0;overflow:visible}
+    .brand .bk{font-size:9px;letter-spacing:.03em;line-height:1.3;white-space:normal;overflow:visible}
+    .brand b{font-size:14px;margin-top:2px}
     /* przyciski tylko z ikoną - tekst tytułu odzyskuje miejsce */
     #helpBtn{font-size:0;gap:0;padding:0 9px}
     #helpBtn .qm{font:700 11px var(--font)}
