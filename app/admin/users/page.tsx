@@ -26,11 +26,12 @@ export default async function AdminUsersPage() {
       admin.from("courses").select("id, slug").order("slug"),
       admin
         .from("enrollments")
-        .select("user_id, status, access_expires_at, courses(slug)"),
+        .select("user_id, course_id, status, access_expires_at, courses(slug)"),
     ]);
 
   const nowIso = new Date().toISOString();
   const activeByUser = new Map<string, string[]>();
+  const ownedCourseIdsByUser = new Map<string, Set<string>>();
   for (const e of enrollments ?? []) {
     const activeNow =
       e.status === "active" &&
@@ -42,6 +43,9 @@ export default async function AdminUsersPage() {
     const arr = activeByUser.get(e.user_id as string) ?? [];
     arr.push(title);
     activeByUser.set(e.user_id as string, arr);
+    const owned = ownedCourseIdsByUser.get(e.user_id as string) ?? new Set();
+    owned.add(e.course_id as string);
+    ownedCourseIdsByUser.set(e.user_id as string, owned);
   }
 
   const courseOptions = (courses ?? []).map((c) => ({
@@ -72,7 +76,12 @@ export default async function AdminUsersPage() {
                 <GrantAccess
                   action={grantAccessAction}
                   userId={p.id as string}
-                  courses={courseOptions}
+                  courses={courseOptions.filter(
+                    (c) =>
+                      !(ownedCourseIdsByUser.get(p.id as string) ?? new Set()).has(
+                        c.id
+                      )
+                  )}
                 />
               </Td>
             </tr>

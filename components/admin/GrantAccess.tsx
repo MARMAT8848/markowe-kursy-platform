@@ -30,6 +30,15 @@ export default function GrantAccess({
     });
   }
 
+  // Użytkownik ma już wszystkie kursy → nie ma czego nadawać.
+  if (courses.length === 0) {
+    return (
+      <span style={{ fontSize: 12, color: "var(--muted)", fontStyle: "italic" }}>
+        Ma dostęp do wszystkich kursów
+      </span>
+    );
+  }
+
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
       <select
