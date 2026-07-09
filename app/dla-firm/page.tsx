@@ -122,7 +122,7 @@ export default function DlaFirmPage() {
         <div className="b2b-cta-inner">
           <div>
             <h2>Porozmawiajmy o Twoim zespole</h2>
-            <p>Odpowiadamy na zapytania firmowe w ciągu 1 dnia roboczego.</p>
+            <p>Odpowiadamy na zapytania firmowe zwykle w ciągu 1-2 dni roboczych.</p>
           </div>
           <Link className="btn btn-primary-lg" href="/kontakt">
             Zapytaj o ofertę
