@@ -1771,19 +1771,9 @@ body.panel-page {
 }
 
 /* --- nagłówek panelu (bez nawigacji głównej) --- */
-.panel-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  padding: 12px 34px;
-  background: #fff;
-  border-bottom: 1px solid var(--border);
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/* Panel kursanta używa tego samego, PEŁNOSZEROKIEGO paska co strona
+   główna (.site-header) z wyśrodkowaną treścią (.header-inner). Klasa
+   .panel-header nie dokłada już własnej szerokości ani tła. */
 .account-chip {
   display: flex;
   align-items: center;
@@ -2038,13 +2028,11 @@ body.panel-page {
 
 /* --- panel: responsywność (≤760px) --- */
 @media (max-width: 760px) {
-  .panel-header {
-    gap: 10px;
-    padding: 10px 16px;
-  }
-  .panel-header .logo-img { height: 34px; }
-  .panel-header .wordmark { font-size: 14px; }
   .account-chip { display: none; }
+  /* skrót „Panel admina" chowamy na telefonie — rzadki, admin działa na
+     desktopie; dzięki temu nagłówek panelu mieści logo + wordmark + wyjście
+     bez przewijania, tak jak nagłówek strony głównej */
+  .admin-quicklink { display: none; }
   .leave-course {
     margin-left: auto;
     padding: 8px 13px;

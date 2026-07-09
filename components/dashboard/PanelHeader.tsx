@@ -28,38 +28,54 @@ export default function PanelHeader({
       .join("") || "MK";
 
   return (
-    <header className="panel-header">
-      <Link className="logo-link" href="/">
-        <img
-          className="logo-img"
-          src="/assets/logo-header.png"
-          alt="MARKOWE KURSY"
-        />
-      </Link>
-      <Link className="wordmark" href="/">
-        MARKOWE <span>KURSY</span>
-      </Link>
-      <div className="header-spacer"></div>
-      {isAdmin && (
-        <Link
-          href="/admin"
-          className="leave-course"
-          style={{ borderColor: "var(--ink)" }}
-        >
-          Panel admina
+    <header className="site-header panel-header">
+      <div className="header-inner">
+        <Link className="logo-link" href="/">
+          <img
+            className="logo-img"
+            src="/assets/logo.png"
+            alt="MARKOWE KURSY"
+          />
         </Link>
-      )}
-      <span className="account-chip">
-        <span className="account-avatar">{initials}</span>
-        <span className="account-name">{fullName || "Moje konto"}</span>
-      </span>
-      {showSignOut ? (
-        <form action="/auth/signout" method="post">
-          <button
-            className="leave-course"
-            type="submit"
-            style={{ cursor: "pointer", font: "600 13px var(--sans)" }}
+        <Link className="wordmark" href="/">
+          MARKOWE <span>KURSY</span>
+        </Link>
+        <div className="header-spacer"></div>
+        {isAdmin && (
+          <Link
+            href="/admin"
+            className="leave-course admin-quicklink"
+            style={{ borderColor: "var(--ink)" }}
           >
+            Panel admina
+          </Link>
+        )}
+        <span className="account-chip">
+          <span className="account-avatar">{initials}</span>
+          <span className="account-name">{fullName || "Moje konto"}</span>
+        </span>
+        {showSignOut ? (
+          <form action="/auth/signout" method="post">
+            <button
+              className="leave-course"
+              type="submit"
+              style={{ cursor: "pointer", font: "600 13px var(--sans)" }}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.6"
+              >
+                <path d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+              Wyloguj
+            </button>
+          </form>
+        ) : (
+          <Link className="leave-course" href={leaveHref}>
             <svg
               viewBox="0 0 24 24"
               width="13"
@@ -70,24 +86,10 @@ export default function PanelHeader({
             >
               <path d="M18 6L6 18M6 6l12 12"></path>
             </svg>
-            Wyloguj
-          </button>
-        </form>
-      ) : (
-        <Link className="leave-course" href={leaveHref}>
-          <svg
-            viewBox="0 0 24 24"
-            width="13"
-            height="13"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.6"
-          >
-            <path d="M18 6L6 18M6 6l12 12"></path>
-          </svg>
-          {leaveLabel}
-        </Link>
-      )}
+            {leaveLabel}
+          </Link>
+        )}
+      </div>
     </header>
   );
 }
