@@ -15,7 +15,10 @@ export function addMonths(base: Date, months: number): Date {
   return d;
 }
 
-/** Nadaj/odnów aktywny dostęp na `months` miesięcy (domyślnie 12). */
+/** Nadaj/odnów aktywny dostęp na `months` miesięcy (domyślnie 12).
+ *  Idempotentne: jeśli kursant MA już aktywny dostęp do tego kursu,
+ *  przedłużamy go zamiast tworzyć duplikat (jeden aktywny na user+kurs;
+ *  DB dodatkowo pilnuje tego unikatowym indeksem uq_enrollments_one_active). */
 export async function grantAccess(
   admin: SupabaseClient,
   userId: string,
@@ -23,6 +26,20 @@ export async function grantAccess(
   opts: { months?: number; orderId?: string | null; startAt?: Date } = {}
 ): Promise<{ ok: boolean; error?: string }> {
   const months = opts.months ?? 12;
+
+  // Istniejący aktywny dostęp → przedłuż (nie duplikuj).
+  const { data: existing } = await admin
+    .from("enrollments")
+    .select("id")
+    .eq("user_id", userId)
+    .eq("course_id", courseId)
+    .eq("status", "active")
+    .limit(1)
+    .maybeSingle();
+  if (existing) {
+    return extendAccess(admin, existing.id as string, months);
+  }
+
   const start = opts.startAt ?? new Date();
   const expires = addMonths(start, months);
 
