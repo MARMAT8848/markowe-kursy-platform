@@ -38,6 +38,11 @@ const run = async () => {
        name text primary key, applied_at timestamptz not null default now()
      )`
   );
+  // Rejestr NIE może być wystawiony przez PostgREST: RLS bez polityk =
+  // deny-by-default dla anon/authenticated. Ten skrypt łączy się jako
+  // postgres (omija RLS), więc działa niezależnie. Idempotentne.
+  await client.query("alter table public._migrations enable row level security");
+  await client.query("revoke all on public._migrations from anon, authenticated");
   // starsze wdrożenie: 0001 wgrana zanim istniał rejestr
   const { rows: legacy } = await client.query(
     "select to_regclass('public.profiles') as t"
