@@ -45,20 +45,41 @@ export default async function AdminNewsletterPage() {
         }}
       >
         <AdminH1>Newsletter</AdminH1>
-        <Link
-          href="/admin/newsletter/new"
-          style={{
-            padding: "10px 18px",
-            borderRadius: 9,
-            background: "var(--accent)",
-            color: "#fff",
-            font: "600 13px var(--sans)",
-            textDecoration: "none",
-          }}
-        >
-          + Nowa kampania
-        </Link>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <Link
+            href="/admin/newsletter/sequences"
+            style={{
+              padding: "10px 18px",
+              borderRadius: 9,
+              background: "#fff",
+              border: "1px solid var(--ink)",
+              color: "var(--ink)",
+              font: "600 13px var(--sans)",
+              textDecoration: "none",
+            }}
+          >
+            Lejki sprzedażowe
+          </Link>
+          <Link
+            href="/admin/newsletter/new"
+            style={{
+              padding: "10px 18px",
+              borderRadius: 9,
+              background: "var(--accent)",
+              color: "#fff",
+              font: "600 13px var(--sans)",
+              textDecoration: "none",
+            }}
+          >
+            + Nowa kampania
+          </Link>
+        </div>
       </div>
+      <p style={{ margin: "2px 0 0", fontSize: 13, lineHeight: 1.55, color: "var(--sub)", maxWidth: 720 }}>
+        <strong>Kampania</strong> to jednorazowa wiadomość do wszystkich
+        subskrybentów. <strong>Lejek sprzedażowy</strong> to automatyczna seria
+        prowadząca nowego subskrybenta od zapisu do zakupu kursu.
+      </p>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 14, margin: "6px 0 28px" }}>
         <StatCard label="SUBSKRYBENCI (POTWIERDZENI)" value={subscribed} />

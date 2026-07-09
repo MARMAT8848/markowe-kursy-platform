@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { stopSequencesForSubscriber } from "@/lib/newsletter-funnel";
 
 /**
  * Wypis z newslettera — jednoklikowy, bez logowania, skuteczny
@@ -27,6 +28,8 @@ async function unsubscribe(req: Request) {
         unsubscribed_at: new Date().toISOString(),
       })
       .eq("id", sub.id);
+    // wypis zatrzymuje wszystkie lejki tej osoby
+    await stopSequencesForSubscriber(sub.id, "unsubscribed");
   }
 
   return NextResponse.redirect(
