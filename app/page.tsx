@@ -82,7 +82,7 @@ export default function HomePage() {
       <section className="separator">
         <img
           className="separator-bg"
-          src="/assets/separator-technologia.png"
+          src="/assets/separator-technologia.jpg"
           alt="Projekt techniczny i instalacja przemysłowa"
         />
         <div className="separator-scrim"></div>
