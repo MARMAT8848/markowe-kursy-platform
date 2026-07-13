@@ -138,7 +138,7 @@ export default async function CoursePanelPage({
       <section className="panel-hero">
         <img
           className="panel-hero-bg"
-          src="/assets/separator-technologia.jpg"
+          src="/assets/panel-hero.jpg"
           alt="Prefabrykacja blacharska"
         />
         <div className="panel-hero-scrim"></div>
