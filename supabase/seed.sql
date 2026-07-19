@@ -108,12 +108,12 @@ insert into public.module_translations (module_id, language, title) values
   ('d1000000-0000-4000-8000-000000000008', 'pl', 'Dennice')
 on conflict (module_id, language) do nothing;
 
--- Lekcje: tylko 01 ma treść (content_path); pozostałe = WKRÓTCE (null).
+-- Lekcje: 01 i 03 mają treść (content_path); pozostałe = WKRÓTCE (null).
 insert into public.lessons
   (id, course_id, module_id, slug, sort_order, status, is_preview, is_required, estimated_minutes, content_source, content_path, thumbnail_url) values
   ('e1000000-0000-4000-8000-000000000001', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000001', 'kolano-90', 1, 'published', false, true, 25, 'static_html', 'lessons/bla-110/kolano-90.html', '/assets/thumb-kolano-90.png'),
   ('e1000000-0000-4000-8000-000000000002', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000001', 'kolano-45', 2, 'published', false, true, 20, 'static_html', null, '/assets/thumb-kolano-45.png'),
-  ('e1000000-0000-4000-8000-000000000003', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000002', 'trojnik-prosty-te-same-srednice', 3, 'published', false, true, 24, 'static_html', null, '/assets/thumb-trojnik.png'),
+  ('e1000000-0000-4000-8000-000000000003', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000002', 'trojnik-prosty-te-same-srednice', 3, 'published', false, true, 24, 'static_html', 'lessons/bla-110/trojnik-prosty-te-same-srednice.html', '/assets/thumb-trojnik.png'),
   ('e1000000-0000-4000-8000-000000000004', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000002', 'trojnik-prosty-rozne-srednice', 4, 'published', false, true, 22, 'static_html', null, null),
   ('e1000000-0000-4000-8000-000000000005', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000002', 'trojnik-skosny', 5, 'published', false, true, 23, 'static_html', null, '/assets/thumb-trojnik-skosny.png'),
   ('e1000000-0000-4000-8000-000000000006', 'a1000000-0000-4000-8000-000000000004', 'd1000000-0000-4000-8000-000000000002', 'trojnik-przesuniety-osiowo', 6, 'published', false, true, 22, 'static_html', null, null),
