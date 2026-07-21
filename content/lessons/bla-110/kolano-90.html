@@ -1065,6 +1065,51 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='infocard'){drawInfoCard(s,e
     thinAxis(cutLineTop(),cl(e));
     return;
   }
+  if(s.kind==='roll3d'){
+    const p0=PX(S3.x-8,S3.y-8),pp1=PX(S3.x+S3.w+8,S3.y+S3.h+8);
+    ctx.save();ctx.shadowColor='rgba(30,30,20,.12)';ctx.shadowBlur=16;ctx.shadowOffsetY=6;ctx.fillStyle='#FFFFFF';ctx.fillRect(p0.x,p0.y,pp1.x-p0.x,pp1.y-p0.y);ctx.restore();
+    ctx.fillStyle='rgba(110,114,100,.80)';ctx.font='700 '+Math.round(Math.max(11,Math.min(30,W*0.0333)))+'px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('SKŁADAMY - GOTOWE KOLANO 90°',p0.x+5,PX(S3.x,S3.y).y-6);
+    const m=cl(e/0.55),phi=cl((e-0.55)/0.45)*Math.PI*2;
+    const ANG=[0,11.25,33.75,56.25,78.75,90].map(d=>d*Math.PI/180);
+    const SCL=1.6,cx3=S3.x+S3.w/2,by3=S3.y+S3.h*0.55,CTR=BEND_R*Math.SQRT1_2;
+    const rot3=(x,z)=>({x:x*Math.cos(phi)+z*Math.sin(phi),z:-x*Math.sin(phi)+z*Math.cos(phi)});
+    const prj=(X,Y,Z)=>{const q=rot3(X-CTR,Z);return{x:cx3+q.x*SCL,y:by3-((Y-CTR)*0.92-q.z*0.30)*SCL,d:q.z};};
+    const NT=48,th=(u)=>(90+30*u)*Math.PI/180;          // stacja u -> kąt wokół rury (szew z przodu)
+    function flatY(j,u){const ki=Math.max(0,Math.min(11,Math.floor(u))),fr=u-ki;return boundY(j,ki)+(boundY(j,ki+1)-boundY(j,ki))*fr;}
+    function P3E(j,u){const t=th(u),rr=BEND_R+PIPE_r*Math.cos(t);
+      const w=prj(rr*Math.cos(ANG[j]),rr*Math.sin(ANG[j]),PIPE_r*Math.sin(t));
+      const fx=S3.x+(u/12)*S3.w,fy=flatY(j,u);
+      return{x:fx+(w.x-fx)*m,y:fy+(w.y-fy)*m,d:w.d};}
+    const RINGS=[];for(let j=0;j<6;j++){const arr=[];for(let q=0;q<=NT;q++)arr.push(P3E(j,q/NT*12));RINGS.push(arr);}
+    ctx.save();ctx.lineJoin='round';ctx.lineCap='round';
+    // podkład pełnej sylwetki każdego segmentu (nieprzezroczystość mimo szczelin AA)
+    for(let j=0;j<5;j++){ctx.beginPath();RINGS[j].forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});for(let q=NT;q>=0;q--){const c=PX(RINGS[j+1][q].x,RINGS[j+1][q].y);ctx.lineTo(c.x,c.y);}ctx.closePath();ctx.fillStyle='#B4BAC4';ctx.fill();}
+    // pasy wszystkich segmentów sortowane głębokościowo
+    const quads=[];for(let j=0;j<5;j++)for(let q=0;q<NT;q++){const A=RINGS[j][q],B=RINGS[j][q+1],Cq=RINGS[j+1][q+1],D=RINGS[j+1][q];
+      quads.push({pts:[A,B,Cq,D],d:(A.d+B.d+Cq.d+D.d)/4});}
+    quads.sort((A,B)=>A.d-B.d);
+    quads.forEach(qd=>{const sh=cl(0.5+0.5*(qd.d/(BEND_R+PIPE_r))*2),col=Math.round(140+58*sh);
+      ctx.beginPath();qd.pts.forEach((p,k)=>{const c=PX(p.x,p.y);k?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.closePath();
+      ctx.fillStyle='rgb('+(col-10)+','+(col-4)+','+(col+4)+')';ctx.fill();});
+    // otwór końcowy (widoczny zależnie od obrotu) + otwór początkowy
+    if(m>0.9){
+      if(Math.sin(phi)>0.05){ctx.beginPath();RINGS[5].forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.closePath();ctx.fillStyle='#D2D7DE';ctx.fill();ctx.strokeStyle=C.navy;ctx.lineWidth=2;ctx.stroke();}
+    }
+    // kontury pierścieni: otwory końcowe w całości, styki segmentów tylko od strony widza
+    ctx.strokeStyle=C.navy;ctx.lineWidth=2;
+    RINGS.forEach((arr,j)=>{
+      if(j===0||j===5||m<0.85){ctx.beginPath();arr.forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.stroke();return;}
+      let open=false;ctx.beginPath();
+      for(let q=0;q<=NT;q++){const t=th(q/NT*12);
+        const nz=-Math.cos(t)*Math.cos(ANG[j])*Math.sin(phi)+Math.sin(t)*Math.cos(phi);
+        const c=PX(arr[q].x,arr[q].y);
+        if(nz>-0.05){if(open)ctx.lineTo(c.x,c.y);else{ctx.moveTo(c.x,c.y);open=true;}}
+        else open=false;}
+      ctx.stroke();});
+    for(let j=0;j<5;j++){const ea=PX(RINGS[j][0].x,RINGS[j][0].y),eb=PX(RINGS[j+1][0].x,RINGS[j+1][0].y);ctx.beginPath();ctx.moveTo(ea.x,ea.y);ctx.lineTo(eb.x,eb.y);ctx.stroke();}
+    ctx.restore();
+    return;
+  }
   if(s.kind==='a4final'){
     // wytnij i ROZDZIEL wszystkie sekcje (przesuń o 15 mm) - tło znika, zostają segmenty
     const pT=PX(S3.x,S3.y);ctx.fillStyle='rgba(110,114,100,.80)';ctx.font=fitFontToWidth('ETAP 4 · WYTNIJ SEGMENTY',Math.max(60,W-(pT.x+10)),'700 '+Math.round(Math.max(11,Math.min(30,W*0.0333)))+'px monospace');ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('ETAP 4 · WYTNIJ SEGMENTY',pT.x+5,pT.y-6);
@@ -1349,6 +1394,7 @@ function build(){steps=[];
   add({stage:3,kind:'a4endaxis',tool:'straight',dur:0.7,frame:'s3',title:'Zaznacz oś symetrii końcowego segmentu, a następnie dodaj od niej poziomą oś (jak przy początku).'});
   add({stage:3,kind:'a4cutline',tool:'straight',dur:0.6,frame:'s3',title:'Do osi początku i końcówki kolana dodaj naddatek, który określi ich końcowe długości, następnie przymiarem wytrasuj linię cięcia.'});
   add({stage:3,kind:'a4final',tool:'shears',dur:0.9,frame:'s3',title:'Wytnij wszystkie segmenty za pomocą nożyc do blachy.'});
+  add({stage:3,kind:'roll3d',dur:2.6,frame:'s3',transient:false,title:'Złóż wycięte segmenty naprzemiennie w całość - powstaje trójwymiarowe kolano segmentowe 90°.'});
   let t=0;for(const s of steps){s._start=t;t+=s.dur+0.18;}total=t;
   stg2Start=steps.find(s=>s.stage===2)._start;}
 
@@ -1376,15 +1422,15 @@ function render(){
   if(!viewInit){view={...tgt};viewInit=true;}
   if(playing){view.cx+=(tgt.cx-view.cx)*0.13;view.cy+=(tgt.cy-view.cy)*0.13;view.hw+=(tgt.hw-view.hw)*0.13;}else view={...tgt};
   if(act&&act.stage===3){
-    if(act.kind!=='a4cut'&&act.kind!=='a4final')drawPaper(S3,'ETAP 4 · TRASOWANIE SEGMENTÓW KOLANA');
+    if(act.kind!=='a4cut'&&act.kind!=='a4final'&&act.kind!=='roll3d')drawPaper(S3,'ETAP 4 · TRASOWANIE SEGMENTÓW KOLANA');
   } else if(!act||act.stage>0){
     drawPaper(S1,'ETAP 2 · ROZWIĄZANIE');
     if(view.hw>S1.w*0.7||act.stage===2)drawPaper(S2,'ETAP 3 · ROZWINIĘCIE');
   }
   let activeStep=null,activeP=0;
   const inE4=act&&act.stage===3;
-  const onlyFinal=inE4&&act.kind==='a4final';
-  for(const s of steps){const p=cl((playhead-s._start)/s.dur);if(p<=0)continue;if(inE4&&s.stage!==3)continue;if(onlyFinal&&s.kind!=='a4final')continue;drawStepStatic(s,p);if(p<1){activeStep=s;activeP=p;}}
+  const onlyFinal=inE4&&(act.kind==='a4final'||act.kind==='roll3d');
+  for(const s of steps){const p=cl((playhead-s._start)/s.dur);if(p<=0)continue;if(inE4&&s.stage!==3)continue;if(onlyFinal&&s.kind!==act.kind)continue;drawStepStatic(s,p);if(p<1){activeStep=s;activeP=p;}}
   if(activeStep)drawActiveTool(activeStep,activeP);
   
   const cur=stepAt(playhead);

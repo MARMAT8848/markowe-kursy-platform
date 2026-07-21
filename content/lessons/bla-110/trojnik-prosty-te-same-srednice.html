@@ -962,6 +962,57 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='introSlide'){drawIntroSlide
     const pts=[[vx(0),baseY-HOLE_OFF[0]],[vx(0),baseY-HOLE_OFF[1]],[vx(12),baseY-HOLE_OFF[0]],[vx(12),baseY-HOLE_OFF[1]]];
     pts.forEach((h,i)=>{if(i>=e*4)return;const cp=PX(h[0],h[1]);ctx.strokeStyle=C.navy;ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(cp.x,cp.y,SC(2),0,7);ctx.stroke();});
   }
+  else if(s.kind==='roll3d'){
+    const p0=PX(S2.x-8,S2.y-8),pp1=PX(S2.x+S2.w+8,S2.y+S2.h+8);
+    ctx.save();ctx.shadowColor='rgba(30,30,20,.12)';ctx.shadowBlur=16;ctx.shadowOffsetY=6;ctx.fillStyle='#FFFFFF';ctx.fillRect(p0.x,p0.y,pp1.x-p0.x,pp1.y-p0.y);ctx.restore();
+    ctx.fillStyle='rgba(110,114,100,.80)';ctx.font='700 '+Math.round(Math.max(11,Math.min(30,W*0.0333)))+'px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('ZWIJAMY - GOTOWY TRÓJNIK',p0.x+5,PX(S2.x,S2.y).y-6);
+    const m=cl(e/0.55),phi=cl((e-0.55)/0.45)*Math.PI*2,mp=cl((e-0.5)/0.22);
+    const R3=PIPE_r,TH=H_TOP,SCL=0.7,LM=300;
+    const cx3=S2.x+S2.w/2,by3=S2.y+S2.h-96;
+    const rot3=(x,z)=>({x:x*Math.cos(phi)+z*Math.sin(phi),z:-x*Math.sin(phi)+z*Math.cos(phi)});
+    const prj=(x,y3,z)=>{const q=rot3(x,z);return{x:cx3+q.x*SCL,y:by3-(y3*0.92-q.z*0.30)*SCL,d:q.z};};
+    function P3(u,top){
+      const a=Math.PI/2+u*Math.PI/6;                     // szew (nr 4) od strony widza
+      const bx=PIPE_r*Math.cos(a),bz=PIPE_r*Math.sin(a);
+      const w=top?prj(bx,TH,bz):prj(bx,Math.sqrt(Math.max(0,R3*R3-bz*bz)),bz);
+      const fx=S2.x+TAB+u*DIV,fy=top?baseY:devY(u);
+      return{x:fx+(w.x-fx)*m,y:fy+(w.y-fy)*m,d:w.d};}
+    const NN=96,BOT=[],TOP=[];for(let q=0;q<=NN;q++){const u=q/NN*12;BOT.push(P3(u,false));TOP.push(P3(u,true));}
+    ctx.save();ctx.lineJoin='round';ctx.lineCap='round';
+    // podkład sylwetki odgałęzienia (nieprzezroczystość mimo szczelin AA)
+    ctx.beginPath();BOT.forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});for(let q=NN;q>=0;q--){const c=PX(TOP[q].x,TOP[q].y);ctx.lineTo(c.x,c.y);}ctx.closePath();ctx.fillStyle='#B4BAC4';ctx.fill();
+    // pasy odgałęzienia + rurociągu głównego we WSPÓLNEJ liście sortowanej głębią
+    const items=[];
+    for(let q=0;q<NN;q++){const sh=0.5+0.5*((BOT[q].d+TOP[q].d)/2/PIPE_r),col=Math.round(140+58*Math.max(0,Math.min(1,sh)));
+      items.push({pts:[BOT[q],BOT[q+1],TOP[q+1],TOP[q]],d:(BOT[q].d+BOT[q+1].d+TOP[q].d+TOP[q+1].d)/4,fill:'rgb('+(col-10)+','+(col-4)+','+(col+4)+')',al:1});}
+    if(mp>0){
+      const NA=40;
+      for(let q=0;q<NA;q++){const p1=Math.PI*2*q/NA,p2=Math.PI*2*(q+1)/NA;
+        const A=prj(-LM,R3*Math.cos(p1),R3*Math.sin(p1)),B=prj(LM,R3*Math.cos(p1),R3*Math.sin(p1)),Cq=prj(LM,R3*Math.cos(p2),R3*Math.sin(p2)),D=prj(-LM,R3*Math.cos(p2),R3*Math.sin(p2));
+        const sh=0.5+0.5*(Math.cos(p1)+Math.cos(p2))/2,col=Math.round(150+52*sh);
+        items.push({pts:[A,B,Cq,D],d:(A.d+B.d+Cq.d+D.d)/4,fill:'rgb('+(col-10)+','+(col-4)+','+(col+4)+')',al:mp});}
+      const cap=(sx)=>{const pts=[];for(let q=0;q<=NA;q++){const ps=q/NA*2*Math.PI;pts.push(prj(sx,R3*Math.cos(ps),R3*Math.sin(ps)));}return pts;};
+      [[-LM,'#C8CDD5'],[LM,'#D2D7DE']].forEach(cc=>{const pts=cap(cc[0]);
+        items.push({pts,d:rot3(cc[0],0).z,fill:cc[1],al:mp,stroke:true});});}
+    items.sort((A,B)=>A.d-B.d);
+    items.forEach(it=>{ctx.globalAlpha=it.al;
+      ctx.beginPath();it.pts.forEach((p,k)=>{const c=PX(p.x,p.y);k?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.closePath();
+      ctx.fillStyle=it.fill;ctx.fill();
+      if(it.stroke){ctx.strokeStyle=C.navy;ctx.lineWidth=1.6;ctx.stroke();}});
+    ctx.globalAlpha=1;
+    // sylwetka górna/dolna rurociągu głównego
+    if(mp>0){ctx.globalAlpha=mp;ctx.strokeStyle=C.navy;ctx.lineWidth=1.8;
+      [1,-1].forEach(sg=>{const A=prj(-LM,sg*R3,0),B=prj(LM,sg*R3,0),a2=PX(A.x,A.y),b2=PX(B.x,B.y);ctx.beginPath();ctx.moveTo(a2.x,a2.y);ctx.lineTo(b2.x,b2.y);ctx.stroke();});
+      ctx.globalAlpha=1;}
+    // otwór górny po zwinięciu
+    if(m>0.9){ctx.beginPath();TOP.forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.closePath();ctx.fillStyle='#D2D7DE';ctx.fill();ctx.strokeStyle=C.navy;ctx.lineWidth=2;ctx.stroke();}
+    // kontury: siodło, otwór górny, szew z przodu
+    ctx.strokeStyle=C.navy;ctx.lineWidth=2.4;
+    ctx.beginPath();BOT.forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.stroke();
+    ctx.beginPath();TOP.forEach((p,q)=>{const c=PX(p.x,p.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});ctx.stroke();
+    ctx.strokeStyle=C.navy;ctx.lineWidth=2;
+    [0,NN].forEach(idx=>{const ea=PX(BOT[idx].x,BOT[idx].y),eb=PX(TOP[idx].x,TOP[idx].y);ctx.beginPath();ctx.moveTo(ea.x,ea.y);ctx.lineTo(eb.x,eb.y);ctx.stroke();});
+    ctx.restore();}
   else if(s.kind==='finalCut3'){
     const xl=S2.x,xr=S2.x+S2.w,yb=S2.y+S2.h;
     const sL=(tickY(0)-tickY(1))/(vx(0)-vx(1)),yL=tickY(0)+sL*(xl-vx(0));
@@ -1092,6 +1143,7 @@ function build(){steps=[];
   add({stage:2,kind:'round3',tool:'scriber',role:'final',dur:1.2,frame:'s2',title:'Pomiędzy polami 3-2-1-2-3 zaokrąglij linię cięcia - cięcie przechodzi przez wyznaczone punkty, a pomiędzy nimi jest płynnie zaokrąglone.'});
   add({stage:2,kind:'holes3',tool:'compass',dur:1.0,frame:'s2',title:'Cyrklem wyznacz 4 otwory montażowe na liniach zakładek.'});
   add({stage:2,kind:'finalCut3',tool:'shears',dur:1.0,frame:'s2',title:'Wytnij gotowe rozwinięcie trójnika nożycami do blachy.'});
+  add({stage:2,kind:'roll3d',dur:2.6,frame:'s2',transient:false,title:'Zwiń rozwinięcie łącząc krawędzie szwu i osadź płaszcz na rurociągu głównym - powstaje trójwymiarowy trójnik.'});
   let t=0;for(const s of steps){s._start=t;t+=s.dur+0.18;}total=t;
   stg2Start=steps.find(s=>s.stage===2)._start;}
 
@@ -1118,13 +1170,13 @@ function render(){
   const tgt=FRAMES[fk]();
   if(!viewInit){view={...tgt};viewInit=true;}
   if(playing){view.cx+=(tgt.cx-view.cx)*0.13;view.cy+=(tgt.cy-view.cy)*0.13;view.hw+=(tgt.hw-view.hw)*0.13;}else view={...tgt};
-  const inFinal=act&&act.kind==='finalCut3';
+  const inFinal=act&&(act.kind==='finalCut3'||act.kind==='roll3d');
   if(!inFinal&&(!act||act.stage>0)){
     drawPaper(S1,'ETAP 2 · ROZWIĄZANIE');
     if(view.hw>S1.w*0.7||act.stage===2)drawPaper(S2,'ETAP 3 · ROZWINIĘCIE');
   }
   let activeStep=null,activeP=0;
-  for(const s of steps){const p=cl((playhead-s._start)/s.dur);if(p<=0)continue;if(inFinal&&s.kind!=='finalCut3')continue;drawStepStatic(s,p);if(p<1){activeStep=s;activeP=p;}}
+  for(const s of steps){const p=cl((playhead-s._start)/s.dur);if(p<=0)continue;if(inFinal&&s.kind!==act.kind)continue;drawStepStatic(s,p);if(p<1){activeStep=s;activeP=p;}}
   if(activeStep)drawActiveTool(activeStep,activeP);
   
   const cur=stepAt(playhead);
