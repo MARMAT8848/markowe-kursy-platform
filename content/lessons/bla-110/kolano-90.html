@@ -1071,9 +1071,9 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='infocard'){drawInfoCard(s,e
     ctx.save();ctx.shadowColor='rgba(30,30,20,.12)';ctx.shadowBlur=16;ctx.shadowOffsetY=6;ctx.fillStyle='#FFFFFF';ctx.fillRect(p0.x,p0.y,pp1.x-p0.x,pp1.y-p0.y);ctx.restore();
     ctx.fillStyle='rgba(110,114,100,.80)';ctx.font='700 '+Math.round(Math.max(11,Math.min(30,W*0.0333)))+'px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('SKŁADAMY - GOTOWE KOLANO 90°',p0.x+5,PX(S3.x,S3.y).y-6);
     // fazy: A 0-0.06 segmenty | B1 0.06-0.16 rozsunięcie | B2 0.16-0.30 obrót 2 i 4
-    //       C 0.30-0.52 zwijanie w rurki | D 0.52-0.97 montaż kolejno od dołu
-    const eSp=cl((e-0.06)/0.10),eRot=cl((e-0.16)/0.14),eC=cl((e-0.30)/0.22),eD=cl((e-0.52)/0.45);
-    const NT=36,cxc=S3.x+S3.w/2,GAP=15,PITCH=128;
+    //       C 0.30-0.55 walcowanie w rurki | D 0.55-0.97 montaż (przechył+dosunięcie)
+    const eSp=cl((e-0.06)/0.10),eRot=cl((e-0.16)/0.14),eC=cl((e-0.30)/0.25),eD=cl((e-0.55)/0.42);
+    const NT=36,cxc=S3.x+S3.w/2,GAP=15,PITCH=128,LARC=628;
     const th=(u)=>(90+30*u)*Math.PI/180;
     const ANG=[0,11.25,33.75,56.25,78.75,90].map(d=>d*Math.PI/180);
     const SCL=1.6,cx3=cxc,by3=S3.y+S3.h*0.55,CTR=BEND_R*Math.SQRT1_2;
@@ -1082,10 +1082,9 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='infocard'){drawInfoCard(s,e
     const a3xu=(u)=>S3.x+(u/12)*S3.w;
     function origP(sg,b,u){return{x:a3xu(u),y:seI(b,u)-sg*GAP};}
     function segCY(sg){let a=0;for(let k=0;k<=12;k+=3)a+=(sectionEdge(sg,k)+sectionEdge(sg+1,k))/2;return a/5-sg*GAP;}
-    const cySp=(sg)=>segCY(0)-sg*PITCH;                       // pozycje po rozsunięciu
-    const cyNow=(sg)=>segCY(sg)+(cySp(sg)-segCY(sg))*eIO(eSp); // środek segmentu w trakcie rozsuwania
-    // płaski punkt: O = punkt oryginalny odpowiadający (side,u) po pełnym obrocie;
-    // spread przesuwa pionowo, odd obraca o beta wokół własnego środka
+    const cySp=(sg)=>segCY(0)-sg*PITCH;
+    const cyNow=(sg)=>segCY(sg)+(cySp(sg)-segCY(sg))*eIO(eSp);
+    // płaski punkt: rozsunięcie + obrót 2 i 4 o 180 stopni wokół własnego środka
     function flatP(sg,side,u){
       const odd=sg%2===1;
       const O=odd?(side===0?origP(sg,sg+1,12-u):origP(sg,sg,12-u)):(side===0?origP(sg,sg,u):origP(sg,sg+1,u));
@@ -1095,43 +1094,53 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='infocard'){drawInfoCard(s,e
         if(beta>0){const cy=cyNow(sg),cb=Math.cos(beta),sb=Math.sin(beta);
           const ox=x-cxc,oy=y-cy;x=cxc+ox*cb-oy*sb;y=cy+ox*sb+oy*cb;}}
       return{x,y};}
-    // ring przypisany granicy: even: dół->s, góra->s+1; odd(po obrocie): dół->s+1, góra->s
-    const ringOf=(sg,side)=>(sg%2===1)?(side===0?sg+1:sg):(side===0?sg:sg+1);
-    // punkt KOŃCOWY na kolanie (świat W)
+    // WALCOWANIE: arkusz wygina się w łuk; kąt łuku rośnie 0->360, promień maleje do PIPE_r.
+    // Środek arkusza z tyłu, końce (szew) schodzą się z przodu. Przy t=1 kąt stacji = th(u).
+    function curlP(sg,side,u,t){
+      const f=flatP(sg,side,u);
+      if(t<=0.02)return{x:f.x,y:f.y,d:0};
+      const r=LARC/(2*Math.PI*t);
+      const al=1.5*Math.PI+((u-6)/12*LARC)/r;         // kąt stacji na łuku
+      let x=cxc+r*Math.cos(al);
+      let z=r*(Math.sin(al)+1)-PIPE_r*t;
+      // korekta szerokości arkusza (678) vs obwód (628) - zanika w trakcie zwijania
+      const x0=cxc+(u-6)/12*LARC;
+      x+=(f.x-x0)*(1-t);
+      return{x:x,y:f.y-z*0.30,d:z};}
+    // pierścienie: dla WSZYSTKICH segmentów dół->s, góra->s+1 (rurki po obrocie są identyczne)
+    const ringOf=(sg,side)=>side===0?sg:sg+1;
     function elbW(sg,side,u){const j=ringOf(sg,side),t=th(u),rr=BEND_R+PIPE_r*Math.cos(t);
       return{X:rr*Math.cos(ANG[j]),Y:rr*Math.sin(ANG[j]),Z:PIPE_r*Math.sin(t)};}
-    // sztywna rama segmentu: środek Cf, kąt osi gammaF, oś startowa pion (even: +Y, odd: -Y)
+    // rama segmentu: oś startowa pionowa (+Y), końcowa = cięciwa łuku; gamma = mały przechył
     function frame(sg){
       const Fa=ANG[sg],Fb=ANG[sg+1];
       const Ba={x:BEND_R*Math.cos(Fa),y:BEND_R*Math.sin(Fa)},Bb={x:BEND_R*Math.cos(Fb),y:BEND_R*Math.sin(Fb)};
       const Cf={X:(Ba.x+Bb.x)/2,Y:(Ba.y+Bb.y)/2};
-      const aF=Math.atan2(Bb.y-Ba.y,Bb.x-Ba.x);
-      const a0=(sg%2===1)?-Math.PI/2:Math.PI/2;
-      let g=aF-a0;while(g>Math.PI)g-=2*Math.PI;while(g<-Math.PI)g+=2*Math.PI;
-      // środek rurki w świecie W tak, by rzut wypadł w (cxc, cySp(sg))
+      let g=Math.atan2(Bb.y-Ba.y,Bb.x-Ba.x)-Math.PI/2;
+      while(g>Math.PI)g-=2*Math.PI;while(g<-Math.PI)g+=2*Math.PI;
       const Ct={X:CTR,Y:CTR+(by3-cySp(sg))/(0.92*SCL)};
       return{Cf,g,Ct};}
-    // lokalne współrzędne punktu względem ramy końcowej (rotacja -g wokół Z)
+    // montaż: SZTYWNY przechył o gamma + translacja + dojście skali; ciągłość z walcowaniem
     function P(sg,side,u,fr2){
       if(eC<=0){const f=flatP(sg,side,u);return{x:f.x,y:f.y,d:0};}
+      const tau=eIO(cl((eD-0.13*sg)/(1-0.13*4)));
+      if(tau<=0)return curlP(sg,side,u,eIO(eC));
       const ew=elbW(sg,side,u);
       const cg=Math.cos(-fr2.g),sg2=Math.sin(-fr2.g);
       const dx=ew.X-fr2.Cf.X,dy=ew.Y-fr2.Cf.Y;
-      const lX=dx*cg-dy*sg2,lY=dx*sg2+dy*cg,lZ=ew.Z;   // lokalnie: rurka pionowa
-      // pozycja rurki (tau=0): skala 1/SCL w świecie => skala 1:1 na ekranie
-      const tau=eIO(cl((eD-0.13*sg)/(1-0.13*4)));
-      const k=(1/SCL)+(1-1/SCL)*tau;
-      const gg=fr2.g*tau,cg3=Math.cos(gg),sg3=Math.sin(gg);
-      const rX=(lX*cg3-lY*sg3)*k,rY=(lX*sg3+lY*cg3)*k,rZ=lZ*k;
-      const CX=fr2.Ct.X+(fr2.Cf.X-fr2.Ct.X)*tau,CY=fr2.Ct.Y+(fr2.Cf.Y-fr2.Ct.Y)*tau;
-      const w=prjW(CX+rX,CY+rY,rZ);
-      if(eC<1&&tau<=0){ // zwijanie: morf z płaskiego do rurki
-        const f=flatP(sg,side,u),t2=eIO(eC);
-        return{x:f.x+(w.x-f.x)*t2,y:f.y+(w.y-f.y)*t2,d:w.d*t2};}
+      const lX=dx*cg-dy*sg2,lY=dx*sg2+dy*cg,lZ=ew.Z;
+      const D0=(tt)=>{const k=(1/SCL)+(1-1/SCL)*tt;
+        const gg=fr2.g*tt,c3=Math.cos(gg),s3=Math.sin(gg);
+        const rX=(lX*c3-lY*s3)*k,rY=(lX*s3+lY*c3)*k;
+        const CX=fr2.Ct.X+(fr2.Cf.X-fr2.Ct.X)*tt,CY=fr2.Ct.Y+(fr2.Cf.Y-fr2.Ct.Y)*tt;
+        return prjW(CX+rX,CY+rY,lZ*k);};
+      const w=D0(tau);
+      if(tau<1){const c1=curlP(sg,side,u,1),d00=D0(0);
+        w.x+=(c1.x-d00.x)*(1-tau);w.y+=(c1.y-d00.y)*(1-tau);w.d+=(c1.d-d00.d)*(1-tau);}
       return w;}
     ctx.save();ctx.lineJoin='round';ctx.lineCap='round';
     if(eC<=0){
-      // FAZY A/B: białe wycięte segmenty; rozsunięcie, potem obrót 2 i 4
+      // FAZY A/B: białe wycięte segmenty
       for(let sg=0;sg<=NMIT;sg++){
         const lo=[],hi=[];for(let q=0;q<=NT;q++){const u=q/NT*12;lo.push(flatP(sg,0,u));hi.push(flatP(sg,1,u));}
         ctx.beginPath();lo.forEach((pt,q)=>{const c=PX(pt.x,pt.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});
@@ -1140,13 +1149,12 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='infocard'){drawInfoCard(s,e
         ctx.shadowColor='rgba(30,30,20,.12)';ctx.shadowBlur=8;ctx.shadowOffsetY=3;ctx.fillStyle='#FFFFFF';ctx.fill();
         ctx.shadowColor='transparent';ctx.strokeStyle=C.navy;ctx.lineWidth=1.5;ctx.stroke();}
     } else {
-      // FAZY C/D: rurki i montaż - pasy sortowane głębią globalnie
+      // FAZY C/D: walcowanie i montaż - pasy sortowane głębią globalnie
       const frames=[];for(let sg=0;sg<=NMIT;sg++)frames.push(frame(sg));
       const rows=[];
       for(let sg=0;sg<=NMIT;sg++){
         const lo=[],hi=[];for(let q=0;q<=NT;q++){const u=q/NT*12;lo.push(P(sg,0,u,frames[sg]));hi.push(P(sg,1,u,frames[sg]));}
         rows.push({lo,hi});}
-      // podkład sylwetek (nieprzezroczystość mimo szczelin AA)
       rows.forEach(r=>{ctx.beginPath();r.lo.forEach((pt,q)=>{const c=PX(pt.x,pt.y);q?ctx.lineTo(c.x,c.y):ctx.moveTo(c.x,c.y);});
         for(let q=NT;q>=0;q--){const c=PX(r.hi[q].x,r.hi[q].y);ctx.lineTo(c.x,c.y);}
         ctx.closePath();ctx.fillStyle='#B4BAC4';ctx.fill();});
