@@ -58,7 +58,10 @@ export async function GET(
   );
   // Względne ścieżki zasobów (assets/...) → absolutne (/assets/...),
   // bo lekcja jest serwowana spod /learn/[kurs]/[lekcja].
+  // Obie formy: atrybuty HTML (src="assets/...") oraz obrazki ładowane
+  // z JS (IMG_X.src='assets/...').
   html = html.replaceAll('src="assets/', 'src="/assets/');
+  html = html.replaceAll(".src='assets/", ".src='/assets/");
 
   // Ukończenie lekcji (zalogowani z enrollmentem; nie w preview).
   // Karta „koniec lekcji" pojawia się WYŚRODKOWANA, gdy nagranie dobiegnie
