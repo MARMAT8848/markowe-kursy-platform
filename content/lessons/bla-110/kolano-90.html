@@ -1072,7 +1072,7 @@ function drawComplex(s,p){const e=cl(p);if(s.kind==='infocard'){drawInfoCard(s,e
     ctx.save();ctx.shadowColor='rgba(30,30,20,.12)';ctx.shadowBlur=16;ctx.shadowOffsetY=6;ctx.fillStyle='#FFFFFF';ctx.fillRect(p0.x,p0.y,pp1.x-p0.x,pp1.y-p0.y);ctx.restore();
     ctx.fillStyle='rgba(110,114,100,.80)';ctx.font='700 '+Math.round(Math.max(11,Math.min(30,W*0.0333)))+'px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('MONTAŻ - KIERUNEK SPŁYWU WODY (A/B/C/D)',p0.x+5,PX(S3.x,S3.y).y-6);
     if(IMG_ABCD&&IMG_ABCD.complete&&IMG_ABCD.naturalWidth>0){
-      const bx=p0.x,by=p0.y,bw=pp1.x-p0.x,bh=pp1.y-p0.y,pad=Math.min(bw,bh)*0.05;
+      const bx=p0.x,by=p0.y,bw=pp1.x-p0.x,bh=pp1.y-p0.y,pad=Math.min(bw,bh)*0.015;
       const ar=IMG_ABCD.naturalWidth/IMG_ABCD.naturalHeight;
       let iw=bw-2*pad,ih=iw/ar;if(ih>bh-2*pad){ih=bh-2*pad;iw=ih*ar;}
       ctx.drawImage(IMG_ABCD,bx+(bw-iw)/2,by+(bh-ih)/2,iw,ih);
