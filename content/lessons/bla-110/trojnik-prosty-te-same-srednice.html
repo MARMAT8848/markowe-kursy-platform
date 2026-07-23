@@ -1185,7 +1185,7 @@ function render(){
   capTl.textContent=cur.tool?'narzędzie: '+(tnames[cur.tool]||cur.tool):'';
   hiLadder(steps.indexOf(cur));
   hiEtap(cur.stage);
-  const STAGE_LABELS=['OBLICZENIA','ROZWIĄZANIE','ROZWINIĘCIE'];
+  const STAGE_LABELS=['WPROWADZENIE','ROZWIĄZANIE','ROZWINIĘCIE'];
   document.querySelectorAll('#tlLabels span').forEach(sp=>sp.classList.toggle('on',+sp.dataset.stage===cur.stage));
   const _pc=document.getElementById('posCur'),_pt=document.getElementById('posTot');
   const _vis=steps.filter(x=>x.title);
@@ -1291,7 +1291,7 @@ build();buildLadder();resize();setPlayBtn(false);render();
     const d=document.createElement('span');d.style.left='calc('+(s._start/total*100).toFixed(2)+'% - 1px)';tm.appendChild(d);});}
   const tlLabelsEl=document.getElementById('tlLabels');
   if(tlLabelsEl){
-    const LBL=['OBLICZENIA','ROZWIĄZANIE','ROZWINIĘCIE'];
+    const LBL=['WPROWADZENIE','ROZWIĄZANIE','ROZWINIĘCIE'];
     const bounds=[0,1,2].map(st=>{const s0=steps.find(x=>x.stage===st);return s0?s0._start:0;});
     bounds.push(total);
     tlLabelsEl.innerHTML='';
@@ -1332,7 +1332,7 @@ build();buildLadder();resize();setPlayBtn(false);render();
     {sel:'#play',title:'Odtwarzaj',text:'Uruchamia lekcję płynnie, krok po kroku. Klawisz spacja pauzuje i wznawia animację.'},
     {sel:'#stepOnce',title:'Kolejny krok',text:'Wykonuje tylko jeden krok naraz - idealne, gdy chcesz uczyć się we własnym tempie.'},
     {sel:'#restart',title:'Od początku',text:'Wraca do pierwszego kroku i pozwala obejrzeć całą lekcję od nowa.'},
-    {sel:'.tl-col',title:'Pasek postępu',text:'Pokazuje trzy etapy: obliczenia, rozwiązanie i rozwinięcie. Możesz go przewijać.'},
+    {sel:'.tl-col',title:'Pasek postępu',text:'Pokazuje trzy etapy: wprowadzenie, rozwiązanie i rozwinięcie. Możesz go przewijać.'},
     {sel:function(){return mob()?'#navToggle':'#nav';},title:'Menu lekcji',text:'Parametry lekcji oraz lista wszystkich kroków. Kliknij dowolny krok, aby od razu do niego przejść.'}
   ];
   let cur=0,open=false;
