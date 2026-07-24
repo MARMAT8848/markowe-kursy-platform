@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import PanelHeader from "@/components/dashboard/PanelHeader";
 import PanelShell from "@/components/dashboard/PanelShell";
 import { createSupabaseServer } from "@/lib/supabase/server";
+import { courseCompletion } from "@/lib/certificates/eligibility";
 import { getCourse } from "@/lib/courses";
 
 export const metadata: Metadata = {
@@ -24,22 +25,35 @@ export default async function CertificatesPage() {
 
   const { data: certs } = await supabase
     .from("certificates")
-    .select("id, certificate_number, status, issued_at, verification_slug, courses(slug)")
+    .select(
+      "id, course_id, certificate_number, status, issued_at, verification_slug, courses(slug)"
+    )
     .order("issued_at", { ascending: false });
 
-  const rows = (certs ?? []).map((c) => {
-    const slug = (c.courses as unknown as { slug: string } | null)?.slug ?? "";
-    return {
-      id: c.id as string,
-      number: c.certificate_number as string,
-      active: c.status === "generated",
-      issued: c.issued_at
-        ? new Date(c.issued_at).toLocaleDateString("pl-PL")
-        : "-",
-      title: getCourse(slug)?.title ?? slug.toUpperCase(),
-      verifySlug: c.verification_slug as string,
-    };
-  });
+  // Pobranie oferujemy tylko, gdy kurs jest ukończony TERAZ — certyfikat mógł
+  // zostać wydany, zanim do kursu doszły nowe lekcje. Trasa pobierania
+  // sprawdza to samo po stronie serwera.
+  const rows = await Promise.all(
+    (certs ?? []).map(async (c) => {
+      const slug = (c.courses as unknown as { slug: string } | null)?.slug ?? "";
+      const active = c.status === "generated";
+      const completion = active
+        ? await courseCompletion(supabase, user.id, c.course_id as string)
+        : null;
+      return {
+        id: c.id as string,
+        number: c.certificate_number as string,
+        active,
+        downloadable: active && completion!.completed,
+        missing: completion ? completion.total - completion.done : 0,
+        issued: c.issued_at
+          ? new Date(c.issued_at).toLocaleDateString("pl-PL")
+          : "-",
+        title: getCourse(slug)?.title ?? slug.toUpperCase(),
+        verifySlug: c.verification_slug as string,
+      };
+    })
+  );
 
   return (
     <PanelShell>
@@ -102,14 +116,28 @@ export default async function CertificatesPage() {
                   >
                     Weryfikacja →
                   </Link>
-                  {r.active && (
+                  {r.downloadable ? (
                     <a
                       className="lrow-cta"
                       href={`/api/certificates/${r.id}/download`}
                     >
                       <span className="lrow-cta-lbl">Pobierz PDF</span>
                     </a>
-                  )}
+                  ) : r.active ? (
+                    <span
+                      title={`Do kursu doszły nowe lekcje. Pozostało do ukończenia: ${r.missing}.`}
+                      style={{
+                        flex: "none",
+                        padding: "8px 14px",
+                        fontFamily: "var(--mono)",
+                        fontSize: 11,
+                        letterSpacing: ".06em",
+                        color: "#B0AFAB",
+                      }}
+                    >
+                      DOKOŃCZ KURS
+                    </span>
+                  ) : null}
                 </div>
               ))}
             </div>

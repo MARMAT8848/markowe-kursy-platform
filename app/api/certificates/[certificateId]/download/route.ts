@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { courseCompletion } from "@/lib/certificates/eligibility";
 
 const BUCKET = process.env.CERTIFICATE_STORAGE_BUCKET || "certificates";
 
@@ -10,6 +11,11 @@ const BUCKET = process.env.CERTIFICATE_STORAGE_BUCKET || "certificates";
  * Autoryzowane pobranie PDF z prywatnego bucketa. Tylko właściciel
  * certyfikatu (lub admin). Działa także PO wygaśnięciu dostępu do kursu
  * (wymóg biznesowy) — ale nie dla certyfikatów unieważnionych.
+ *
+ * Dodatkowo sprawdza, czy kurs jest ukończony W TEJ CHWILI. Certyfikat
+ * wydany, gdy kurs miał mniej lekcji, nie może być pobierany po dodaniu
+ * nowego materiału — dopiero po jego zaliczeniu wraca do pobrania.
+ * Admin pobiera zawsze (obsługa zgłoszeń).
  */
 export async function GET(
   _req: Request,
@@ -28,7 +34,7 @@ export async function GET(
   const admin = createSupabaseAdmin();
   const { data: cert } = await admin
     .from("certificates")
-    .select("id, user_id, status, certificate_number, pdf_storage_path")
+    .select("id, user_id, course_id, status, certificate_number, pdf_storage_path")
     .eq("id", certificateId)
     .maybeSingle();
 
@@ -41,6 +47,26 @@ export async function GET(
       { error: "REVOKED", message: "Certyfikat został unieważniony." },
       { status: 410 }
     );
+  }
+
+  // Kurs musi być ukończony W TEJ CHWILI (admin pomijany — obsługa).
+  if (isAdmin !== true) {
+    const progress = await courseCompletion(
+      admin,
+      cert.user_id as string,
+      cert.course_id as string
+    );
+    if (!progress.completed) {
+      return NextResponse.json(
+        {
+          error: "COURSE_NOT_COMPLETED",
+          message:
+            `Certyfikat będzie dostępny po ukończeniu wszystkich lekcji kursu ` +
+            `(ukończono ${progress.done} z ${progress.total}).`,
+        },
+        { status: 409 }
+      );
+    }
   }
 
   const { data: file, error } = await admin.storage

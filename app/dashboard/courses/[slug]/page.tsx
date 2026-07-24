@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import PanelHeader from "@/components/dashboard/PanelHeader";
 import { canAccessCourse } from "@/lib/access";
+import { courseCompletion } from "@/lib/certificates/eligibility";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { getCourse, CAT_BREADCRUMB } from "@/lib/courses";
 
@@ -116,6 +117,15 @@ export default async function CoursePanelPage({
     .eq("course_id", access.courseId)
     .eq("status", "generated")
     .maybeSingle();
+  // Sam wiersz certyfikatu nie wystarcza: mógł zostać wydany, zanim do kursu
+  // doszły nowe lekcje. Link pokazujemy dopiero, gdy kurs jest ukończony
+  // TERAZ. Trasa pobierania sprawdza dokładnie to samo po stronie serwera.
+  const completion = await courseCompletion(
+    supabase,
+    access.userId!,
+    access.courseId!
+  );
+  const certificateReady = certificate != null && completion.completed;
 
   const tTitle = (
     tr: { title: string; language: string }[] | undefined,
@@ -193,9 +203,9 @@ export default async function CoursePanelPage({
               </svg>
               {completed === 0 ? "Rozpocznij naukę" : "Kontynuuj naukę"}
             </a>
-            {certificate && (
+            {certificateReady && (
               <a
-                href={`/api/certificates/${certificate.id}/download`}
+                href={`/api/certificates/${certificate!.id}/download`}
                 style={{
                   display: "block",
                   marginTop: 12,

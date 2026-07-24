@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { generateCertificate } from "@/lib/certificates/generate";
+import { courseCompletion } from "@/lib/certificates/eligibility";
 import { queueAndSend } from "@/lib/emails";
 
 /**
@@ -82,27 +83,12 @@ export async function POST(
   // Ukończenie = WSZYSTKIE wymagane opublikowane lekcje (także te bez
   // treści — kurs nie może być "ukończony", dopóki treść nie istnieje;
   // chroni to przed wydaniem certyfikatu za niekompletny kurs).
-  const { data: required } = await admin
-    .from("lessons")
-    .select("id")
-    .eq("course_id", lesson.course_id)
-    .eq("status", "published")
-    .eq("is_required", true);
-  const requiredIds = new Set((required ?? []).map((l) => l.id as string));
-
-  const { data: doneRows } = await admin
-    .from("lesson_progress")
-    .select("lesson_id")
-    .eq("user_id", user.id)
-    .eq("course_id", lesson.course_id)
-    .eq("status", "completed");
-  const doneRequired = (doneRows ?? []).filter((r) =>
-    requiredIds.has(r.lesson_id as string)
-  ).length;
-
-  const total = requiredIds.size;
-  const percent = total ? Math.round((doneRequired / total) * 100) : 0;
-  const courseCompleted = total > 0 && doneRequired >= total;
+  // Wspólna funkcja z trasą pobierania certyfikatu — jedno źródło prawdy.
+  const { percent, completed: courseCompleted } = await courseCompletion(
+    admin,
+    user.id,
+    lesson.course_id as string
+  );
 
   await admin.from("course_progress").upsert(
     {
